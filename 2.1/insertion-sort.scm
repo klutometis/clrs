@@ -1,0 +1,16 @@
+(define (insertion-sort-general sortienda comparator)
+  (define (insert inserendum inserta)
+    (let ((precedes (lambda (procedens)
+                      (lambda (procedendum)
+                        (comparator procedendum procedens)))))
+      (receive (fore aft)
+               (break (precedes inserendum) inserta)
+               (append fore (cons inserendum aft)))))
+  (define (iter sortita fortuita)
+    (if (null? fortuita)
+        sortita
+        (iter (insert (car fortuita) sortita) (cdr fortuita))))
+  (iter '() sortienda))
+
+(define (insertion-sort sortienda)
+  (insertion-sort-general sortienda >))

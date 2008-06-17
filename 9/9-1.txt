@@ -1,0 +1,8 @@
+a. heapsort in Theta(n lg n); list in Theta(i) for Theta(n lg n + i) =
+   Theta(n lg n).
+
+b. build-max-heap in Theta(n); extract-max in Theta(lg n) i times for
+   Theta(n + i lg n).
+
+c. partition! around i in Theta(n); sort i largest in Theta(i lg i)
+   for Theta(n + i lg i).

@@ -1,0 +1,2 @@
+Stability is an artifact of the terminal reversal: later repetitions
+in A, namely, will lay claim to higher enumeration-indices in C.

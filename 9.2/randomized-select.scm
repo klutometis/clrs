@@ -1,0 +1,23 @@
+(define (generalized-select A p r i partition)
+  (call-with-current-continuation
+   (lambda (return)
+     (if (= p r) (return (vector-ref A p)))
+     (let* ((q (partition A p r))
+            (k (+ (- q p) 1)))
+       (cond ((< i k) (generalized-select A p (- q 1) i partition))
+             ((> i k) (generalized-select A (+ q 1) r (- i k) partition))
+             (else (vector-ref A q)))))))
+
+(define (randomized-select A p r i)
+  (generalized-select A p r i randomized-partition!))
+
+(define (randomized-select-iter A p r i)
+  (loop continue ((with p p)
+                  (with r r)
+                  (with i i))
+        (let* ((q (randomized-partition! A p r))
+               (k (+ (- q p) 1)))
+          (cond ((< i k) (continue (=> r (- q 1))))
+                ((> i k) (continue (=> p (+ q 1))
+                                   (=> i (- i k))))
+                (else (vector-ref A q))))))

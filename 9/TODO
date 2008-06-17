@@ -1,0 +1,4 @@
+* weighted-median-with-select is showing indeterminacy.
+
+* 9.3 involves calling select for statistics above n/2 and a complex
+  compare-and-exchange thereunder.

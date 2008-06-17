@@ -1,0 +1,20 @@
+(define (tail-quicksort! vector p r)
+  (let loop ()
+    (if (< p r)
+        (let ((q (partition! vector p r)))
+          (tail-quicksort! vector p (- q 1))
+          (set! p (+ q 1))
+          (loop)))))
+ 
+(define (tail-log-quicksort! vector p r)
+  (let loop ()
+    (if (< p r)
+        (let ((q (partition! vector p r)))
+          (if (> (- q p) (- r q))
+              (begin
+                (tail-log-quicksort! vector (+ q 1) r)
+                (set! r (- q 1)))
+              (begin
+                (tail-log-quicksort! vector p (- q 1))
+                (set! p (+ q 1))))
+          (loop)))))

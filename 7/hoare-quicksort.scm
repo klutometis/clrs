@@ -1,0 +1,23 @@
+(define (hoare-partition! vector p r)
+  (let ((x (vector-ref vector p))
+        (i p)
+        (j r))
+    (call-with-current-continuation
+     (lambda (return)
+       (let loop ()
+         (let loop ((j-ref (vector-ref vector j)))
+           (if (> j-ref x)
+               (begin (set! j (- j 1))
+                      (loop (vector-ref vector j)))))
+         (let loop ((i-ref (vector-ref vector i)))
+           (if (< i-ref x)
+               (begin (set! i (+ i 1))
+                      (loop (vector-ref vector i)))))
+         (if (< i j)
+             (begin
+               (vector-swap! vector i j)
+               (loop))
+             (return j)))))))
+
+(define (hoare-quicksort! vector p r)
+  (quicksort-general! vector p r hoare-partition!))

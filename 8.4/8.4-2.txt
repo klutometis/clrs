@@ -1,0 +1,1 @@
+Swap out insertion sort for, say, merge sort (or any O(n lg n) sort).

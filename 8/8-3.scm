@@ -1,0 +1,11 @@
+(require-extension syntax-case check vector-lib)
+(require '../8/chapter)
+(import chapter-8)
+(let ((data (vector 200 20 0 10 100)))
+  (check (radix-sort data) => '#(0 10 20 100 200)))
+(let ((data (vector-map (lambda (i x) (word x))
+                        (vector "b" "abc" "ab" "a"))))
+  (radix-sort! data 0 0 3)
+  (check
+   (vector-map (lambda (i x) (word->string x 3)) data)
+   => '#("a" "ab" "abc" "b")))

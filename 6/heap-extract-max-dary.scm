@@ -1,0 +1,55 @@
+(define (children index d)
+  (iota d (+ (* index d) 1)))
+
+(define (parent index d)
+  (floor (- index (/ d))))
+
+(define (max-heapify-dary heap index d)
+  (let* ((indices (filter (cut < <> (heap-size heap))
+                          (cons index (children index d))))
+         (keys (map (cut heap-ref heap <>) indices)))
+    (let ((key-index (zip keys indices)))
+      (let* ((max-key (apply max keys))
+             (max-index (cadr (assq max-key key-index))))
+        (if (equal? max-index index)
+            heap
+            (begin
+              (heap-swap! heap index max-index)
+              (max-heapify-dary heap max-index d)))))))
+
+(define (heap-extract-max-dary heap d)
+  (if (negative? (heap-size heap))
+      (error "Heap underflow -- HEAP-EXTRACT-MAX" (heap-size heap))
+      (let ((max (heap-maximum heap))
+            (heap-size (- (heap-size heap) 1)))
+        (heap-set! heap 0 (heap-ref heap heap-size))
+        (heap-drop-right! heap 1)
+        (set-heap-size! heap heap-size)
+        (max-heapify-dary heap 0 d)
+        max)))
+
+(define (heap-increase-key-dary heap index key d)
+  (if (< key (heap-ref heap index))
+      (error "New key incomparate -- HEAP-CREASE-KEY" key)
+      (begin
+        (heap-set! heap index key)
+        (let iter ((index index)
+                   (parent-index (parent index d)))
+          (if (not (and (positive? index)
+                        (< index (heap-size heap))
+                        (< parent-index (heap-size heap))
+                        (< (heap-ref heap parent-index)
+                           (heap-ref heap index))))
+              heap
+              (begin
+                (heap-swap! heap index parent-index)
+                (iter parent-index (parent parent-index d))))))))
+
+(define (max-heap-insert-dary heap key d)
+  (let ((heap-size (+ (heap-size heap) 1)))
+    (set-heap-size! heap heap-size)
+    (if (heap-null? heap)
+        (set-heap-data! heap (list -inf.0))
+        (heap-append! heap -inf.0))
+    (heap-increase-key-dary heap (- heap-size 1) key d)
+    heap))

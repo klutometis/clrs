@@ -1,0 +1,6 @@
+(require-extension check)
+(require '../6.4/section)
+(import section-6.4)
+(let ((sortiendum (list 5 13 2 25 7 17 20 8 4)))
+  (check (heapsort sortiendum)
+         => '(2 4 5 7 8 13 17 20 25)))

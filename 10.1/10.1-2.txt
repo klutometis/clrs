@@ -1,0 +1,3 @@
+A double-stack type with left and right heads; the right stacks starts
+from the end and pushes inward, and left-/right-push checks whether
+left-head = right-head, signaling an overflow.

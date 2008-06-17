@@ -1,0 +1,10 @@
+(define (insertion-quicksort! vector p r k)
+  (quicksort-k! vector p r k)
+  (insertion-sort (vector->list vector)))
+
+(define (quicksort-k! vector p r k)
+  (if (and (< p r)
+           (> k (- r p)))
+      (let ((q (partition! vector p r)))
+        (quicksort-k! vector p (- q 1))
+        (quicksort-k! vector (+ q 1) r))))

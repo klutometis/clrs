@@ -1,0 +1,6 @@
+(define (build-max-heap-prime heap)
+  (let ((data (heap-data heap)))
+    (let ((heap (make-heap '() 0)))
+      (for-each (lambda (datum) (max-heap-insert heap datum))
+                data)
+      heap)))

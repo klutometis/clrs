@@ -1,0 +1,6 @@
+East and west positions are irrelevant; choose the median of the north
+and south positions since the median is "central point which minimizes
+the average of the absolute deviations."*
+
+-----------
+* http://en.wikipedia.org/wiki/Median#An_optimality_property

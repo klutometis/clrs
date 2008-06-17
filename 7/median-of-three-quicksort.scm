@@ -1,0 +1,11 @@
+(define (median-of-three-partition! vector p r)
+  (define (random-index)
+    (+ p (random-integer (- r p))))
+  (let ((i (random-index))
+        (j (random-index))
+        (k (random-index)))
+    (let ((median (second (insertion-sort (list i j k)))))
+      (partition-general! vector p r <= i))))
+
+(define (median-of-three-quicksort! vector p r)
+  (quicksort-general! vector p r median-of-three-partition!))

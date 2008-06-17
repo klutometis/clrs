@@ -1,0 +1,23 @@
+(define (quicksort-general! vector p r partition!)
+  (if (< p r)
+      (let ((q (partition! vector p r)))
+        (quicksort-general! vector p (- q 1) partition!)
+        (quicksort-general! vector (+ q 1) r partition!))))
+
+(define (quicksort! vector p r)
+  (quicksort-general! vector p r partition!))
+
+(define (partition-general! vector p r comparator pivot-index)
+  (if (not (= pivot-index r))
+      (vector-swap! vector pivot-index r))
+  (let ((pivot (vector-ref vector r)))
+    (loop continue ((for x i (in-vector vector p r))
+                    (with j p))
+          => (begin (vector-swap! vector j r) j)
+          (if (comparator x pivot)
+              (begin (vector-swap! vector i j)
+                     (continue (=> j (+ j 1))))
+              (continue)))))
+
+(define (partition! vector p r)
+  (partition-general! vector p r <= r))

@@ -1,0 +1,3 @@
+w_i = 1/n satisfies w_{k>m} = (n - n/2)/n = 1/2 above the median and
+w_{k<m} = (n - n/2 - 1)/n < 1/2 below the median, though w_i = 1/n is
+not a unique solution.

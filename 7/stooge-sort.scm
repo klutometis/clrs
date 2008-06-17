@@ -1,0 +1,16 @@
+(define k 0)
+
+(define (stooge-sort! vector i j)
+  (call-with-current-continuation
+   (lambda (return)
+     (set! k (+ k 1))
+     (format #t "i: ~A; j: ~A; k: ~A~%" i j k)
+     (if (> (vector-ref vector i)
+            (vector-ref vector j))
+         (vector-swap! vector i j))
+     (if (>= (+ i 1) j)
+         (return vector))
+     (let ((k (exact-floor (/ (+ (- j i) 1) 3))))
+       (stooge-sort! vector i (- j k))
+       (stooge-sort! vector (+ i k) j)
+       (stooge-sort! vector i (- j k))))))
