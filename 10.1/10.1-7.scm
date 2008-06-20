@@ -5,6 +5,8 @@
          queue-data
          queue-push!
          queue-pop!)
+;;; queue-push! is Theta(2n), where n is the length of the stack;
+;;; while queue-pop! is Theta(3n) because of the extra vector-fill!
 (let ((queue (make-queue (make-vector 6 #f) 0 0)))
   (queue-push! queue 4)
   (queue-push! queue 1)

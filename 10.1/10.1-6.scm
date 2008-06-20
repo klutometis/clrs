@@ -5,8 +5,9 @@
          stack-dequeue!
          stack-data
          make-stack)
-;;; Each queue operation is Theta(2n), where n is the length of the
-;;; queue.
+;;; stack-enqueue! is Theta(2n), where n is the length of the queue;
+;;; while stack-dequeue! is Theta(3n) because of the extra
+;;; vector-fill!
 (let ((stack (make-stack (make-vector 6 #f) -1)))
   (stack-enqueue! stack 4)
   (stack-enqueue! stack 1)
