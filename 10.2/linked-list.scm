@@ -69,3 +69,20 @@
 
 (define (slist-find/default predicate slist default)
   (slist-find predicate slist (lambda () default)))
+
+(define-record-type :slist-queue
+  (make-slist-queue slist tail)
+  slist-queue?
+  (slist slist-queue-slist)
+  (tail slist-queue-tail set-slist-queue-tail!))
+
+(define (slist-enqueue! queue x)
+  (let ((slink (make-slink x #f))
+        (tail (slist-queue-tail queue))
+        (sentinel (slist-nil (slist-queue-slist queue))))
+    (set-slink-next! tail slink)
+    (set-slist-queue-tail! queue slink)
+    (set-slink-next! slink sentinel)))
+
+(define (slist-dequeue! queue)
+  (slist-pop! (slist-queue-slist queue)))

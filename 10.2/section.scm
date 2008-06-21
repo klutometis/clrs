@@ -15,5 +15,8 @@
   slink->string
   slink-key
   slist-display
-  slist-map)
+  slist-map
+  slist-enqueue!
+  slist-dequeue!
+  make-slist-queue)
  (include "../10.2/linked-list.scm"))
