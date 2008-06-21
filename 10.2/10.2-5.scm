@@ -3,7 +3,8 @@
  check)
 (require '../10.2/section)
 (import section-10.2)
-;;; O(1), Theta(n), Theta(n) for insert, delete, search; respectively.
+;;; O(1), Theta(n), Theta(n) for insert, delete, search;
+;;; respectively. `slists' are circular on account of the sentinel.
 (let ((slist (make-slist (make-sentinel)))
       (a (make-slink 'a #f))
       (b (make-slink 'b #f))
