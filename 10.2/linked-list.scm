@@ -86,3 +86,12 @@
 
 (define (slist-dequeue! queue)
   (slist-pop! (slist-queue-slist queue)))
+
+;;; Thanks, manas;
+;;; http://coe02.proboards39.com/index.cgi?board=algos&action=display&thread=166
+(define (slist-find-sans-nil-test slist k)
+  (let ((sentinel (slist-nil slist)))
+    (set-slink-key! sentinel k)
+    (loop ((with slink (slink-next sentinel) (slink-next slink))
+           (until (equal? (slink-key slink) k)))
+          => slink)))

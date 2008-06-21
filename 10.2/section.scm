@@ -16,7 +16,9 @@
   slink-key
   slist-display
   slist-map
+  slist-nil
   slist-enqueue!
   slist-dequeue!
-  make-slist-queue)
+  make-slist-queue
+  slist-find-sans-nil-test)
  (include "../10.2/linked-list.scm"))
