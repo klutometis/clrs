@@ -20,5 +20,6 @@
   slist-enqueue!
   slist-dequeue!
   make-slist-queue
-  slist-find-sans-nil-test)
+  slist-find-sans-nil-test
+  slist-find/default)
  (include "../10.2/linked-list.scm"))
