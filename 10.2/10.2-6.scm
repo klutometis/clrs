@@ -1,0 +1,15 @@
+(require-extension
+ syntax-case
+ check)
+(require '../10.2/section)
+(import section-10.2)
+(let ((d1 (make-dlist (make-dlink-sentinel)))
+      (d2 (make-dlist (make-dlink-sentinel))))
+  (dlist-insert! d1 (make-dlink 1 #f #f))
+  (dlist-insert! d1 (make-dlink 2 #f #f))
+  (dlist-insert! d1 (make-dlink 3 #f #f))
+  (dlist-insert! d2 (make-dlink 4 #f #f))
+  (dlist-insert! d2 (make-dlink 5 #f #f))
+  (dlist-insert! d2 (make-dlink 6 #f #f))
+  (check (dlist-map dlink-key (dlist-union! d1 d2))
+         => '(3 2 1 6 5 4)))

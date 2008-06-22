@@ -1,7 +1,7 @@
 (require-extension
  syntax-case
  foof-loop
- (srfi 9 26))
+ (srfi 9 11 26))
 (module
  section-10.2
  (slist-insert!
@@ -21,5 +21,14 @@
   slist-dequeue!
   make-slist-queue
   slist-find-sans-nil-test
-  slist-find/default)
+  slist-find/default
+  make-dlist
+  dlist-insert!
+  dlist-union!
+  dlist-map
+  make-dlink-sentinel
+  make-dlink
+  dlink-key
+  dlink-next
+  dlink-prev)
  (include "../10.2/linked-list.scm"))

@@ -95,3 +95,58 @@
     (loop ((with slink (slink-next sentinel) (slink-next slink))
            (until (equal? (slink-key slink) k)))
           => slink)))
+
+(define-record-type :dlist
+  (make-dlist nil)
+  dlist?
+  (nil dlist-nil))
+
+(define-record-type :dlink
+  (make-dlink key prev next)
+  dlink?
+  (key dlink-key set-dlink-key!)
+  (prev dlink-prev set-dlink-prev!)
+  (next dlink-next set-dlink-next!))
+
+(define (dlink! l1 l2)
+  (set-dlink-next! l1 l2)
+  (set-dlink-prev! l2 l1))
+
+(define (make-dlink-sentinel)
+  (let ((sentinel (make-dlink '*sentinel* #f #f)))
+    (dlink! sentinel sentinel)
+    sentinel))
+
+(define (dlist-insert! dlist dlink)
+  (let* ((sentinel (dlist-nil dlist))
+         (next (dlink-next sentinel)))
+    (dlink! sentinel dlink)
+    (dlink! dlink next)))
+
+(define (dlist-empty? dlist)
+  (let ((sentinel (dlist-nil dlist)))
+    (eq? sentinel (dlink-next sentinel))))
+
+(define (dlist-sentinel-first-last dlist)
+  (let ((sentinel (dlist-nil dlist)))
+    (let ((first (dlink-next sentinel))
+          (last (dlink-prev sentinel)))
+      (values sentinel first last))))
+
+(define (dlist-union! d1 d2)
+  (cond ((dlist-empty? d1) d2)
+        ((dlist-empty? d2) d1)
+        (else (let-values (((d1-sentinel d1-first d1-last)
+                            (dlist-sentinel-first-last d1))
+                           ((d2-sentinel d2-first d2-last)
+                            (dlist-sentinel-first-last d2)))
+                (dlink! d1-last d2-first)
+                (dlink! d2-last d1-sentinel)
+                d1))))
+
+(define (dlist-map proc dlist)
+  (let ((sentinel (dlist-nil dlist)))
+    (loop ((with dlink (dlink-next sentinel) (dlink-next dlink))
+           (for mapping (listing (proc dlink)))
+           (until (eq? sentinel dlink)))
+          => mapping)))
