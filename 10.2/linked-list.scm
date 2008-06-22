@@ -96,6 +96,20 @@
            (until (equal? (slink-key slink) k)))
           => slink)))
 
+(define (slist-reverse! slist)
+  (let ((sentinel (slist-nil slist))
+        (reverse (make-slist (make-sentinel))))
+    (loop continue ((with slink (slink-next sentinel))
+                    (until (eq? sentinel slink)))
+          (let ((next (slink-next slink)))
+            (slist-delete! slist slink)
+            (slist-insert! reverse slink)
+            (continue (=> slink next))))
+    reverse))
+
+(define (slist-keys slist)
+  (slist-map slink-key slist))
+
 (define-record-type :dlist
   (make-dlist nil)
   dlist?

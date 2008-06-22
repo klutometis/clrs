@@ -1,7 +1,7 @@
 (require-extension
  syntax-case
  foof-loop
- (srfi 9 11 26))
+ (srfi 1 9 11 26))
 (module
  section-10.2
  (slist-insert!
@@ -30,5 +30,7 @@
   make-dlink
   dlink-key
   dlink-next
-  dlink-prev)
+  dlink-prev
+  slist-reverse!
+  slist-keys)
  (include "../10.2/linked-list.scm"))
