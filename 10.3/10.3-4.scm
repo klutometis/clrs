@@ -1,0 +1,15 @@
+(require-extension syntax-case check)
+(require '../10.3/section)
+(import section-10.3)
+(let* ((key (make-vector 6 #f))
+       (prev (make-vector 6 #f))
+       (next (make-vector 6 #f)))
+  (let ((marray (make-marray key prev next 0 -1)))
+    (marray-insert! marray 1)
+    (marray-insert! marray 2)
+    (marray-insert! marray 3)
+    (marray-delete! marray 0)
+    ;; Last `3' is not zeroed; but the free-stack's head does indeed
+    ;; point at 2.
+    (check (marray-key marray) => '#(3 2 3 #f #f #f))
+    (check (marray-free marray) => 1)))
