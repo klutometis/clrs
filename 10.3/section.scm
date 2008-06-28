@@ -1,5 +1,6 @@
 (require-extension
  syntax-case
+ foof-loop
  (srfi 9))
 (module
  section-10.3
@@ -10,11 +11,13 @@
   sarray-head
   sarray-free
   make-marray
-  marray-allocate!
-  marray-free!
   marray-insert!
   marray-delete!
   marray-key
-  marray-free)
+  marray-next
+  marray-prev
+  marray-free
+  marray-head
+  marray-compactify!)
  (include "../10.3/array-list.scm")
  (include "../10.3/marray-list.scm"))

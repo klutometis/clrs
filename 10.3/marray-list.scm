@@ -82,3 +82,45 @@
     (if next
         (marray-prev-set! marray next prev)))
   (marray-free! marray i))
+
+(define (marray-swap! marray list free)
+  (let ((list-next (marray-next-ref marray list))
+        (list-prev (marray-prev-ref marray list))
+        (free-next (marray-next-ref marray free))
+        (free-prev (marray-prev-ref marray free)))
+    (format #t "list ~A; free ~A; list-next ~A; list-prev ~A; free-next ~A; free-prev ~A~%"
+            list free list-next list-prev free-next free-prev)
+    (if free-prev
+        (marray-next-set! marray free-prev list))
+    (if free-next
+        (marray-prev-set! marray free-next list))
+    (marray-next-set! marray list free-next)
+    (marray-prev-set! marray list free-prev)
+    (if list-prev
+        (marray-next-set! marray list-prev free))
+    (if list-next
+        (marray-prev-set! marray list-next free))
+    (marray-next-set! marray free list-next)
+    (marray-prev-set! marray free list-prev)
+    (marray-key-set! marray free (marray-key-ref marray list))
+    (let ((marray-head (marray-head marray))
+          (marray-free (marray-free marray)))
+      (if (= marray-free free)
+          (set-marray-free! marray list))
+      (if (= marray-head list)
+          (set-marray-head! marray free)))))
+
+;;; Miss some on the way?
+(define (marray-compactify! marray)
+  (loop continue ((with list (marray-head marray))
+                  (with free (marray-free marray))
+                  (while (and list free)))
+        (let ((next-list (marray-next-ref marray list))
+              (next-free (marray-next-ref marray free)))
+          (format #t "list ~A; free ~A; next-list ~A; next-free ~A~%"
+                  list free next-list next-free)
+          (if (< free list)
+              (begin (marray-swap! marray list free)
+                     (continue (=> list next-list)
+                               (=> free next-free)))
+              (continue (=> free next-free))))))
