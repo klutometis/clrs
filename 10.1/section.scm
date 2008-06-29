@@ -7,6 +7,7 @@
  section-10.1
  (make-stack
   stack-data
+  stack-empty?
   push!
   pop!
   make-queue
