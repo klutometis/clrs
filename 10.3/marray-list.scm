@@ -49,8 +49,6 @@
       (tail-key (marray-key-ref marray free))
       (tail-prev (marray-prev-ref marray free))
       (tail-next (marray-next-ref marray free)))
-  (format #t "ref-key: ~A; ref-prev ~A; ref-next ~A; tail-key ~A; tail-prev ~A; tail-next ~%"
-          ref-key ref-prev ref-next tail-key tail-prev tail-next)
   (if tail-prev
       (marray-next-set! marray tail-prev i))
   (marray-prev-set! marray i tail-prev)
@@ -88,8 +86,6 @@
         (list-prev (marray-prev-ref marray list))
         (free-next (marray-next-ref marray free))
         (free-prev (marray-prev-ref marray free)))
-    (format #t "list ~A; free ~A; list-next ~A; list-prev ~A; free-next ~A; free-prev ~A~%"
-            list free list-next list-prev free-next free-prev)
     (if free-prev
         (marray-next-set! marray free-prev list))
     (if free-next
@@ -117,8 +113,6 @@
                   (while (and list free)))
         (let ((next-list (marray-next-ref marray list))
               (next-free (marray-next-ref marray free)))
-          (format #t "list ~A; free ~A; next-list ~A; next-free ~A~%"
-                  list free next-list next-free)
           (if (< free list)
               (begin (marray-swap! marray list free)
                      (continue (=> list next-list)
