@@ -40,6 +40,7 @@
         (set-marray-free! marray next-free))
     next-free))
 
+;;; Thanks, Joseph JaJa.
 (define (marray-free! marray i)
   (let* ((free (marray-free marray))
          (prev-free (- free 1)))

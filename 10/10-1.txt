@@ -1,0 +1,8 @@
+            US   SS   UD   SD
+search      T(n) T(n) T(n) T(n)
+insert      O(1) O(1) O(1) O(1)
+delete      T(n) T(n) O(1) O(1)
+successor   O(1) O(1) O(1) O(1)
+predecessor T(n) T(n) O(1) O(1)
+minimum     T(n) O(1) T(n) O(1)
+maximum     T(n) T(n) T(n) O(1)
