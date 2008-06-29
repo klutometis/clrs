@@ -1,0 +1,5 @@
+(require-extension syntax-case check)
+(require '../10.4/section)
+(import section-10.4)
+(check (unbounded-tree-map tree-node-key figure-10.10)
+       => '(10 3 9 13 12 8 7 6 2 11 5 4 1 0))

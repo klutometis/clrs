@@ -5,10 +5,12 @@
 (require '../10.1/section)
 (module
  section-10.4
- (10.4-1
+ (exercise-10.4-1
+  figure-10.10
   tree-node-key
   tree-map
-  tree-map/iter)
+  tree-map/iter
+  unbounded-tree-map)
  (import* section-10.1
           make-stack
           stack-empty?

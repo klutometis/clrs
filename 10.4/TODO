@@ -1,2 +1,3 @@
 10.4-2: Wasn't there a tree-map from SICP sans mutation? Similarly for
-        tree-map/iter, with the exception of push!, pop!.
+        tree-map/iter, with the exception of push!, pop!;
+        unbounded-tree-map, for that matter.
