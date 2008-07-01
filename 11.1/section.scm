@@ -6,5 +6,9 @@
  (make-da-table
   make-da-element
   da-insert!
-  da-max)
- (include "../11.1/direct-address.scm"))
+  da-max
+  bv-insert
+  bv-delete
+  bv-search)
+ (include "../11.1/direct-address.scm")
+ (include "../11.1/bit-vector.scm"))
