@@ -1,0 +1,2 @@
+Theta(n) -> O(lg n), Theta(n) -> O(lg n), O(1) -> Theta(lg n), O(1) ->
+Theta(lg n).
