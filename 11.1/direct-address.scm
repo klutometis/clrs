@@ -30,3 +30,24 @@
 
 (define (da-max table)
   (apply max (da-elements table)))
+
+(define (make-mda-table length)
+  (vector-unfold (lambda (i) (make-dlist (make-dlink-sentinel)))
+                 length))
+
+(define (mda-search table key)
+  (let ((slot (vector-ref table key)))
+    (if (dlist-empty? slot)
+        #f
+        slot)))
+
+(define (mda-insert! table element)
+  (dlist-insert! (vector-ref table (da-element-key element))
+                 (da-element-datum element)))
+
+(define (mda-delete! table element)
+  (dlist-delete! (vector-ref table (da-element-key element))
+                 (da-element-datum element)))
+
+(define (mda->vector table)
+  (vector-map (lambda (i dlist) (dlist-map dlink-key dlist)) table))

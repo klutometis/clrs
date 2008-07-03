@@ -24,8 +24,10 @@
   slist-find/default
   make-dlist
   dlist-insert!
+  dlist-delete!
   dlist-union!
   dlist-map
+  dlist-empty?
   make-dlink-sentinel
   make-dlink
   dlink-key

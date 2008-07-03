@@ -137,6 +137,12 @@
     (dlink! sentinel dlink)
     (dlink! dlink next)))
 
+(define (dlist-delete! dlist dlink)
+  (let ((next (dlink-next dlink))
+        (prev (dlink-prev dlink)))
+    (dlink! prev next)
+    (dlink! next prev)))
+
 (define (dlist-empty? dlist)
   (let ((sentinel (dlist-nil dlist)))
     (eq? sentinel (dlink-next sentinel))))
