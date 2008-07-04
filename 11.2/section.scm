@@ -14,6 +14,7 @@
   ch->vector
   identity-hash
   modulo-9-hash
+  modulo-3-hash
   make-lh-table
   lh-table-map
   lh-slot-flag
@@ -21,6 +22,8 @@
   lh-slot-p2
   lh-slot->string
   lh-table-insert!
+  lh-table-delete!
+  lh-table-search
   make-lh-element
   lh-table-key-data)
  (import* section-10.2
