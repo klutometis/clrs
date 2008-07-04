@@ -9,6 +9,7 @@
   slist-push!
   slist-pop!
   slist-for-each
+  slist-empty?
   make-sentinel
   make-slist
   make-slink

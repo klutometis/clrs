@@ -14,6 +14,10 @@
     (set-slink-next! sentinel sentinel)
     sentinel))
 
+(define (slist-empty? slist)
+  (let ((sentinel (slist-nil slist)))
+    (eq? sentinel (slink-next sentinel))))
+
 (define (slist-insert! slist slink)
   (let ((sentinel (slist-nil slist)))
     (set-slink-next! slink (slink-next sentinel))
