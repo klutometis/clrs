@@ -1,7 +1,35 @@
-Facienda
+Facienda (things to do)
 
-8.3: radix-sort needs generalizing to other bases, cardinalities.
+  Facienda are incomplete.
 
-Facta
+  8.3: radix-sort needs generalizing to other bases, cardinalities.
 
-Standardize on chapter sections, not problems.
+  9: weighted-median-with-select is showing indeterminacy.
+
+  9.2: randomized-select-iter is defective.
+
+  9.3-3: Since fixing partition-median!, balanced-quicksort! is
+         defective.
+
+  9-3: involves calling select for statistics above n/2 and a complex
+       compare-and-exchange thereunder.
+
+  10.3-5: solution needs a correctness-argument; I suspect it's flawed.
+
+  10.4-2: Wasn't there a tree-map from SICP sans mutation? Similarly for
+          tree-map/iter, with the exception of push!, pop!;
+          unbounded-tree-map, for that matter.
+
+  10-2,3
+
+  11.2-5
+
+  11.3-3,5,6
+
+  11.4-3,5
+
+  11.5-1
+
+Facta (things done)
+
+  Standardize on chapter sections, not problems.
