@@ -35,9 +35,8 @@ digraph G {
                 c16 [label="16"]
                 c17 [label="17"]
                 c21 [label="21"]
-                c10 -> c4
-                c10 -> c17 -> c16 -> c5 -> c1
-                c17 -> c21
+                c5 -> c4 -> c1
+                c5 -> c10 -> c16 -> c17 -> c21
         }
         subgraph cluster_5 {
                 label=5
@@ -48,8 +47,8 @@ digraph G {
                 d16 [label="16"]
                 d17 [label="17"]
                 d21 [label="21"]
-                d10 -> d17 -> d16 -> d4 -> d5 -> d1
-                d17 -> d21
+                d4 -> d1
+                d4 -> d5 -> d10 -> d16 -> d17 -> d21
         }
         subgraph cluster_6 {
                 label=6
@@ -60,6 +59,6 @@ digraph G {
                 e16 [label="16"]
                 e17 [label="17"]
                 e21 [label="21"]
-                e10 -> e17 -> e16 -> e21 -> e4 -> e5 -> e1
+                e1 -> e4 -> e5 -> e10 -> e16 -> e17 -> e21
         }
 }
