@@ -2,6 +2,8 @@ Facienda (things to do)
 
   Facienda are incomplete.
 
+  Facta belong in ChangeLog.
+
   8.3: radix-sort needs generalizing to other bases, cardinalities.
 
   9: weighted-median-with-select is showing indeterminacy.
