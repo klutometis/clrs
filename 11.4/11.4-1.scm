@@ -1,0 +1,21 @@
+(require-extension syntax-case check)
+(require '../11.4/section)
+(import section-11.4)
+(let ((keys '(10 22 31 4 15 28 17 88 59))
+      (m 11))
+  (let ((hash1 (lambda (k) (modulo k m)))
+        (hash2 (lambda (k) (+ 1 (modulo k (- m 1))))))
+    (let ((linear-table (make-oa-table m (linear-probe hash1 m)))
+          (quadratic-table (make-oa-table m (quadratic-probe hash1 1 3 m)))
+          (double-hash-table (make-oa-table m (double-hash hash1 hash2 m))))
+      (let ((tables (list linear-table quadratic-table double-hash-table)))
+        (for-each (lambda (table)
+                    (for-each (lambda (key) (oa-insert! table key))
+                              keys))
+                  tables)
+        (check (oa-table linear-table) =>
+               '#(22 88 #f #f 4 15 28 17 59 31 10))
+        (check (oa-table quadratic-table) =>
+               '#(22 #f 88 17 4 #f 28 59 15 31 10))
+        (check (oa-table double-hash-table) =>
+               '#(22 #f 59 17 4 15 28 88 #f 31 10))))))
