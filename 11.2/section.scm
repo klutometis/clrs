@@ -12,6 +12,7 @@
   ch-insert!
   ch-delete!
   ch->vector
+  ch->list
   identity-hash
   modulo-9-hash
   modulo-3-hash

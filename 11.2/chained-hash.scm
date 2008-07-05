@@ -43,15 +43,32 @@
         (slist-delete! slist slink)
         (error "No such element -- DELETE!"))))
 
+(define (ch-element->pair element)
+  (cons (ch-element-key element)
+        (ch-element-datum element)))
+
 (define (ch->vector table)
   (vector-map (lambda (i slist)
                 (cons i
                       (slist-map
                        (lambda (slink)
                          (let ((element (slink-key slink)))
-                           (cons (ch-element-key element)
-                                 (ch-element-datum element)))) slist)))
+                           (ch-element->pair element))) slist)))
               (ch-table table)))
+
+(define (ch->list table)
+  (loop ((for slist hash (in-vector (ch-table table)))
+         (for list
+              (appending
+               (if (slist-empty? slist)
+                   '()
+                   (list (cons hash
+                               (slist-map
+                                (lambda (slink)
+                                  (let ((element (slink-key slink)))
+                                    (ch-element->pair element)))
+                                slist)))))))
+        => list))
 
 (define identity-hash (lambda (key) key))
 
