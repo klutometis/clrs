@@ -1,0 +1,5 @@
+Min-heap property demands that both children be less than their
+parent; whereas binary tree demands one >=, one <= its parent.
+
+Since A[1] cannot be guaranteed to be either min or max in a binary
+tree, successive extract-{min,max} will not extract in sorted order.
