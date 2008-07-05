@@ -7,6 +7,8 @@
  (make-oa-table
   oa-table
   oa-insert!
+  oa-delete!
+  oa-search
   linear-probe
   quadratic-probe
   double-hash)

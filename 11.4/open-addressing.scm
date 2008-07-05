@@ -4,8 +4,17 @@
   (table oa-table)
   (hash oa-table-hash))
 
+(define oa-nil #f)
+
+;;; Assumption: keys are natural numbers
+(define oa-deleted -1)
+
+(define (oa-nil? ref) (not ref))
+
+(define (oa-deleted? ref) (eq? ref oa-deleted))
+
 (define (make-oa-table length hash)
-  (let ((table (make-vector length #f)))
+  (let ((table (make-vector length oa-nil)))
     (make-oa-table/internal table hash)))
 
 (define (oa-table-length table)
@@ -22,12 +31,31 @@
         (hash (oa-table-hash table)))
     (call-with-current-continuation
      (lambda (return)
-       (loop ((for i (up-from 0 (to m))))
-             (let ((j (hash key i)))
-               (if (not (oa-table-ref table j))
+       (loop ((for i (up-from 0 (to m)))
+              (with j (hash key 0) (hash key i)))
+             (let ((ref (oa-table-ref table j)))
+               (if (or (oa-nil? ref) (oa-deleted? ref))
                    (begin (oa-table-set! table j key)
                           (return j)))))
        (error "Overflow -- INSERT!")))))
+
+(define (oa-delete! table key)
+  (let ((i (oa-search table key)))
+    (if i
+        (oa-table-set! table i oa-deleted)
+        (error "Key existeth nought -- DELETE!"))))
+
+(define (oa-search table key)
+  (let ((m (oa-table-length table))
+        (hash (oa-table-hash table)))
+    (call-with-current-continuation
+     (lambda (return)
+       (loop ((for i (up-from 0 (to m)))
+              (with j (hash key 0) (hash key i)))
+             (let ((ref (oa-table-ref table j)))
+               (cond ((oa-nil? ref) (return oa-nil))
+                     ((= ref key) (return j)))))
+       oa-nil))))
 
 (define (linear-probe hash m)
   (lambda (k i) (modulo (+ (hash k) i) m)))
