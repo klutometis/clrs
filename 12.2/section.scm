@@ -1,13 +1,16 @@
 (require-extension
  syntax-case
- (srfi 9))
+ (srfi 1 9))
 (require '../12.1/section)
 (module
  section-12.2
  (bt-min
   bt-max
   bt-successor
-  figure-12.2)
+  bt-predecessor
+  figure-12.2/root
+  figure-12.2/13
+  figure-12.2/17)
  (import* section-12.1
           bt-node-right
           bt-node-left
