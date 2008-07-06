@@ -1,0 +1,4 @@
+Successive calls to tree-successor never cross the same node more than
+twice (once up and once down), for a complexity of Theta(k + 2h) =
+Theta(k + h); to recross a node again would violate the tree-property
+by introducing back-edges.
