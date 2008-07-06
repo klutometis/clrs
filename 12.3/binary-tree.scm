@@ -32,13 +32,31 @@
           (set-bt-node-left! parent grand-child)
           (set-bt-node-right! parent grand-child)))))
 
-(define (bt-delete! root node)
+(define (bt-delete! node)
   (if (full? node)
-      (let ((successor (bt-successor root node)))
+      (let ((successor (bt-successor node)))
         (splice-out! successor)
         (set-bt-node-key! node (bt-node-key successor))
         (set-bt-node-datum! node (bt-node-datum successor)))
       (splice-out! node)))
+
+(define (splice-in! original substitute)
+  (let ((parent (bt-node-parent original))
+        (left (bt-node-left original))
+        (right (bt-node-right original)))
+    (set-bt-node-parent! substitute parent)
+    (set-bt-node-left! substitute left)
+    (set-bt-node-right! substitute right)))
+
+;;; Returns pointer in case root was deleted.
+(define (bt-delete!/preserve-pointer node)
+  (if (full? node)
+      (let ((successor (bt-successor node)))
+        (splice-out! successor)
+        (splice-in! node successor)
+        successor)
+      (begin (splice-out! node)
+             node)))
 
 (define (figure-12.3)
   (let ((n12 (make-bt-node 12 12 #f #f #f))
@@ -104,3 +122,5 @@
 (define (figure-12.4/13 figure-12.4) (cdr (assq 'n13 figure-12.4)))
 
 (define (figure-12.4/6 figure-12.4) (cdr (assq 'n6 figure-12.4)))
+
+(define (figure-12.4/5 figure-12.4) (cdr (assq 'n5 figure-12.4)))

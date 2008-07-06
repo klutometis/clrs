@@ -6,12 +6,14 @@
  section-12.3
  (bt-insert!
   bt-delete!
+  bt-delete!/preserve-pointer
   figure-12.3
   figure-12.4
   figure-12.4/root
   figure-12.4/13
   figure-12.4/16
-  figure-12.4/6)
+  figure-12.4/6
+  figure-12.4/5)
  (import* section-12.1
           make-bt-node
           bt-node-key
