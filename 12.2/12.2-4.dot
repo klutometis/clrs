@@ -1,0 +1,5 @@
+digraph G {
+        // Thanks, Senthil Kumar; 4 member of B > 3 member of C.
+        4 -> 2 -> 1
+        2 -> 3
+}
