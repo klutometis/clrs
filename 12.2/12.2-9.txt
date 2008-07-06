@@ -2,5 +2,16 @@ If the case where x is y's left child: for there to be a key smaller
 than y but larger than x, it must appear in y's left subtree; but x is
 y's whole subtree.
 
-Similarly, for y's rigt child: any key smaller than x but larger than
+# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#
+#	modified:   12.2-9.txt
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	.#12.2-9.txt
+no changes added to commit (use "git add" and/or "git commit -a")
+Similarly, for y's right child: any key smaller than x but larger than
 y must either violate y's parent-status of x's leaf-status.
