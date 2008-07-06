@@ -1,5 +1,6 @@
 (require-extension
- syntax-case)
+ syntax-case
+ (srfi 27))
 (require '../12.1/section)
 (require '../12.2/section)
 (module
@@ -7,6 +8,7 @@
  (bt-insert!
   bt-delete!
   bt-delete!/preserve-pointer
+  bt-delete!/fair
   figure-12.3
   figure-12.4
   figure-12.4/root
@@ -29,5 +31,6 @@
           set-bt-node-datum!
           set-bt-node-left-right-parent!)
  (import* section-12.2
-          bt-successor)
+          bt-successor
+          bt-predecessor)
  (include "../12.3/binary-tree.scm"))

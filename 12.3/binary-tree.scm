@@ -46,7 +46,11 @@
         (right (bt-node-right original)))
     (set-bt-node-parent! substitute parent)
     (set-bt-node-left! substitute left)
-    (set-bt-node-right! substitute right)))
+    (set-bt-node-right! substitute right)
+    (if (< (bt-node-key substitute)
+           (bt-node-key parent))
+        (set-bt-node-left! parent substitute)
+        (set-bt-node-right! parent substitute))))
 
 ;;; Returns pointer in case root was deleted.
 (define (bt-delete!/preserve-pointer node)
@@ -55,6 +59,21 @@
         (splice-out! successor)
         (splice-in! node successor)
         successor)
+      (begin (splice-out! node)
+             node)))
+
+(define (cessor node)
+  (if (not (negative? (- (random-real) 0.5)))
+      (bt-successor node)
+      (bt-predecessor node)))
+
+;;; Choose the {prede,suc}cesor randomly.
+(define (bt-delete!/fair node)
+  (if (full? node)
+      (let ((cessor (cessor node)))
+        (splice-out! cessor)
+        (splice-in! node cessor)
+        cessor)
       (begin (splice-out! node)
              node)))
 
