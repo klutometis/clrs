@@ -1,0 +1,2 @@
+Theta(n lg n) if a balanced tree occurs of height lg n; Theta(n^2) if
+a maximally unbalanced (i.e. linear) tree occurs of height n.

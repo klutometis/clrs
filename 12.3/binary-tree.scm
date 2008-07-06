@@ -99,8 +99,8 @@
 
 (define (figure-12.4/root figure-12.4) (cdr (assq 'n15 figure-12.4)))
 
-(define (figure-12.4/13 figure-12.4) (cdr (assq 'n13 figure-12.4)))
-
 (define (figure-12.4/16 figure-12.4) (cdr (assq 'n16 figure-12.4)))
+
+(define (figure-12.4/13 figure-12.4) (cdr (assq 'n13 figure-12.4)))
 
 (define (figure-12.4/6 figure-12.4) (cdr (assq 'n6 figure-12.4)))

@@ -1,3 +1,12 @@
+(define (bt-search root key)
+  (if root
+      (let ((root-key (bt-node-key root)))
+        (if (= root-key key)
+            root
+            (if (< key root-key)
+                (bt-search (bt-node-left root) key)
+                (bt-search (bt-node-right root) key))))))
+
 (define (bt-min root)
   (let ((left (bt-node-left root)))
     (if left

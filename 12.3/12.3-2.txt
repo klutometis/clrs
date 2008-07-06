@@ -1,0 +1,3 @@
+The path from root to searched-for node is unique if the tree's values
+are distinct; the plus-one is the additional self-comparison of the
+searched-for node.
