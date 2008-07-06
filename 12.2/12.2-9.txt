@@ -3,4 +3,4 @@ than y but larger than x, it must appear in y's left subtree; but x is
 y's whole subtree.
 
 Similarly, for y's right child: any key smaller than x but larger than
-y must either violate y's parent-status of x's leaf-status.
+y must either violate y's parent-status or x's leaf-status.
