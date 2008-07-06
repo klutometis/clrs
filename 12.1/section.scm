@@ -5,7 +5,11 @@
 (module
  section-12.1
  (make-bt-node
+  bt-node-right
+  bt-node-left
+  bt-node-parent
   bt-node-datum
+  set-bt-node-left-right-parent!
   bt-inorder-tree-map
   bt-preorder-tree-map
   bt-postorder-tree-map
