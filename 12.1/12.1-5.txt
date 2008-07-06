@@ -1,0 +1,4 @@
+A comparison-based binary-search-tree, like comparison-based sorting,
+must be capable of producing all permutations of the input; which,
+depending on the height of the decision tree, is h >= lg(n!) = Omega(n
+lg n).
