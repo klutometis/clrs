@@ -1,0 +1,24 @@
+// Thanks, Arif Ghafoor
+digraph G {
+        subgraph cluster_1 {
+                label="Pre-deletion"
+                a1 [label=1]
+                a2 [label=2]
+                a3 [label=3]
+                a4 [label=4]
+                a2 -> a4 -> a3
+                a2 -> a1
+        }
+        subgraph cluster_2 {
+                label="Delete 1,2"
+                b3 [label=3]
+                b4 [label=4]
+                b4 -> b3
+        }
+        subgraph cluster_3 {
+                label="Delete 2,1"
+                c3 [label=3]
+                c4 [label=4]
+                c3 -> c4
+        }
+}
