@@ -1,0 +1,3 @@
+y would have been a candidate for x's right subtree; and indeed the
+minimum of that subtree. y cannot be larger than x's successor, since
+it would have had to cross more than one right-path on the way up.

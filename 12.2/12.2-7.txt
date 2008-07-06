@@ -1,0 +1,6 @@
+inorder-tree-walk, which runs in Theta(n), effectively does the same
+thing by exhausting the left subtree to attain min; and discovering
+successors by minimizing right subtrees, or ascending to first-right
+parents thanks to the recursive stack.
+
+The procedures are equivalent and both run in Theta(n).

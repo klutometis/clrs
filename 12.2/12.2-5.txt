@@ -1,0 +1,2 @@
+If its successor had a left child, it would not be the min of the
+right subtree; nor predecessor, right: the max of the left tree.
