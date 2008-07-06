@@ -11,7 +11,7 @@
     ;; Check whether node was deleted.
     (check (bt-inorder-tree-map bt-node-datum root)
            => '(23 20 18 16 15 13 12 10 7 6 3))
-    ;; Check whether successor's data is preserved.
+    ;; Check whether successor's pointer is preserved.
     (check (bt-node-datum successor) => 6)
     ;; Check whether graft was successful.
     (check (bt-node-datum (bt-node-left successor))
