@@ -1,8 +1,8 @@
 (define-record-type :bt-node
   (make-bt-node key datum left right parent)
   bt-node?
-  (key bt-node-key)
-  (datum bt-node-datum)
+  (key bt-node-key set-bt-node-key!)
+  (datum bt-node-datum set-bt-node-datum!)
   (left bt-node-left set-bt-node-left!)
   (right bt-node-right set-bt-node-right!)
   (parent bt-node-parent set-bt-node-parent!))

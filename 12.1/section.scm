@@ -9,6 +9,12 @@
   bt-node-left
   bt-node-parent
   bt-node-datum
+  bt-node-key
+  set-bt-node-left!
+  set-bt-node-right!
+  set-bt-node-parent!
+  set-bt-node-key!
+  set-bt-node-datum!
   set-bt-node-left-right-parent!
   bt-inorder-tree-map
   bt-preorder-tree-map
