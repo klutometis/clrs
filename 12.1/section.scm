@@ -19,6 +19,7 @@
   bt-inorder-tree-map
   bt-preorder-tree-map
   bt-postorder-tree-map
+  bt-tree-filter
   bt-inorder-tree-map/iterative
   exercise-12.1)
  (import* section-10.1

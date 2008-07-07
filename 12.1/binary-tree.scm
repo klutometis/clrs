@@ -7,6 +7,15 @@
   (right bt-node-right set-bt-node-right!)
   (parent bt-node-parent set-bt-node-parent!))
 
+(define (bt-tree-filter proc root)
+  (let ((filter '()))
+    (let continue ((root root))
+      (if root
+          (begin (if (proc root) (set! filter (cons root filter)))
+                 (continue (bt-node-left root))
+                 (continue (bt-node-right root)))))
+    filter))
+
 (define (bt-inorder-tree-map proc root)
   (let ((mapping '()))
     (let continue ((root root))

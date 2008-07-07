@@ -1,0 +1,8 @@
+a. Theta(n^2): linear
+
+b. Theta(n^2)
+
+c. Theta(n^2)
+
+d. Theta(n^2) worst case; O(lg n) average: resembles a randomly built
+   binary tree.
