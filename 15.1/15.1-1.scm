@@ -14,11 +14,5 @@
       (n 6))
   (let-values (((f l f* l*)
                 (fastest-way a t e0 e1 x0 x1 n)))
-    (check (array->list f) =>
-           '((9 18 20 24 32 35)
-             (12 16 22 25 30 37)))
-    (check (array->list l) =>
-           '((#f 0 1 0 0 1)
-             (#f 0 1 0 1 1)))
-    (check f* => 38)
-    (check l* => 0)))
+    (check (stations/recursive l l* n) =>
+           '(#f 0 1 0 0 1 1))))
