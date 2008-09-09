@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\title{CLRS 15.1-5}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+\begin{align}
+  l_1[j]=2 &\to& f_1[j-1]+a_{1,j} &> f_2[j-1]+t_{2,j-1}+a_{1,j}\\
+  &\leftrightarrow& f_1[j-1] &> f_2[j-1]+t_{2,j-1}\\
+  l_2[j]=1 &\to& f_2[j-1]+a_{2,j} &> f_1[j-1]+t_{1,j-1}+a_{2,j}\\
+  &\leftrightarrow& f_2[j-1] &> f_1[j-1]+t_{1,j-1}
+\end{align}
+\begin{align}
+  t_{i,j} \geq 0 &\to f_1[j-1] > f_2[j-1]+t_{2,j-1} \geq f_2[j-1] > f_1[j-1] + t_{1,j-1} \\
+  &\nleftrightarrow f_1[j-1] > f_1[j-1] + t_{1,j_1}\label{contradiction}
+\end{align}
+
+(\ref{contradiction}) is a contradiction; which shows that $l_i[j] =
+(2, 1)$ cannot be true without negative transfer costs.
+\end{document}
