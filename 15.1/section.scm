@@ -7,5 +7,6 @@
  section-15.1
  (fastest-way
   stations
-  stations/recursive)
+  stations/recursive
+  fastest-way/compact)
  (include "../15.1/fastest-way.scm"))
