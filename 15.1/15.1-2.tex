@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{amsmath,url}
+\title{CLRS 15.1-4}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+Thanks, \r{A}smund Eldhuset \cite{eldhuset:07}; $r_i$ can be
+generalized followingly:
+
+\begin{align}
+  r_i(n) = r_1(n) = r_2(n) && \text{(15.1), (15.8)}\label{general}
+\end{align}
+
+Similarly:
+
+\begin{align}
+  r_i(n) = r_1(j+1)+r_2(j+1) = 2r_i(j+1) && \text{(\ref{general}),
+    (15.9)}\label{extension}
+\end{align}
+
+Thus:
+
+\begin{align}
+  r_1(n) = r_2(n) = r_i(n) = 2^{n-n} = 1 && \text{(15.8), (15.1-4)}
+\end{align}
+
+Lastly:
+
+\begin{align}
+  r_i(j) &= 2r_i(j+1) & \text{(\ref{extension})}\label{recapit} \\
+  &= 2\cdot 2^{n-(j+1)} & \text{(\ref{recapit}), (15.1-4)} \\
+  &= 2^{1+n-j-1} \\
+  &= 2^{n-j} \\
+\end{align}
+\bibliographystyle{plain}
+\bibliography{15.1-2}
+\end{document}
