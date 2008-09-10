@@ -17,3 +17,21 @@
                                 (begin (array-set! m q i j)
                                        (array-set! s k i j))))))))
       (values m s))))
+
+(define (matrix-multiply A B)
+  (let ((dim-A (array-dimensions A))
+        (dim-B (array-dimensions B)))
+    (let ((p (car dim-A))
+          (q (cadr dim-A))
+          (r (car dim-B))
+          (s (cadr dim-B)))
+      (if (not (= q r))
+          (error "nicht going to worken, freund -- MATRIX-MULTIPLY"
+                 (list q r)))
+      (array-index-map!
+       (make-array p s)
+       (lambda (x y)
+         (let ((row (make-shared-array A (lambda (i) (list x i)) q))
+               (col (make-shared-array B (lambda (j) (list j y)) q)))
+           (let ((multiplicata (array-map '#(#f) * row col)))
+             (array-fold + 0 multiplicata))))))))
