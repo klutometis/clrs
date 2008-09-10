@@ -27,7 +27,7 @@
           (s (cadr dim-B)))
       (if (not (= q r))
           (error "nicht going to worken, freund -- MATRIX-MULTIPLY"
-                 (list q r)))
+                 `((,p ,q) (,r ,s))))
       (array-index-map!
        (make-array p s)
        (lambda (x y)
@@ -35,3 +35,26 @@
                (col (make-shared-array B (lambda (j) (list j y)) q)))
            (let ((multiplicata (array-map '#(#f) * row col)))
              (array-fold + 0 multiplicata))))))))
+
+(define (matrix-chain-multiply A s i j)
+  (if (= i j)
+      (list-ref A i)
+      (matrix-multiply (matrix-chain-multiply A s i (array-ref s i j))
+                       (matrix-chain-multiply A s (+ (array-ref s i j) 1) j))))
+
+(define (matrix-chain-multiply/straight matrices)
+  (fold (lambda (B A) (matrix-multiply A B))
+        (car matrices)
+        (cdr matrices)))
+
+(define (random-matrix p q)
+  (let ((array (make-array p q)))
+    (array-index-map! array (lambda (x y) (random-integer (expt 2 8))))
+    array))
+
+(define (random-matrices p)
+  (let ((lower-bounds (drop-right p 1))
+        (upper-bounds (drop p 1)))
+    (map (lambda (p q) (random-matrix p q))
+         lower-bounds
+         upper-bounds)))
