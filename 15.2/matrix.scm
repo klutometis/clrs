@@ -36,6 +36,9 @@
            (let ((multiplicata (array-map '#(#f) * row col)))
              (array-fold + 0 multiplicata))))))))
 
+;;; Åsmund Eldhuset dispatches instead on (= (+ i 1) j) with
+;;; (matrix-multiply (list-ref A i) (list-ref A
+;;; j). <http://www.idi.ntnu.no/~algdat/notater/2007/lf-kap15.pdf>
 (define (matrix-chain-multiply A s i j)
   (if (= i j)
       (list-ref A i)

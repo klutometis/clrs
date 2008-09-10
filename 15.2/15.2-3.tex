@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage{amsmath,url}
+\title{CLRS 15.2-3}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Thanks, Fiona Gwendolyn Ginn Nielsen \cite{nielsen:03}; prove that
+$P(n) \geq c\cdot2^n$:
+
+\begin{align}
+  P(n) &= \sum_{k=1}^{n-1}P(k)P(n-k)\\
+  &\geq \sum_{k=1}^{n-1}c2^k\cdot c2^{n-k}\\
+  &= c^2\sum_{k=1}^{n-1}2^k2^{n-k}\\
+  &= c^2\sum_{k=1}^{n-1}2^n\\
+  &= c^2(n-1)2^n\\
+  &\geq c\cdot2^n
+\end{align}
+\bibliographystyle{plain}
+\bibliography{15.2-3}
+\end{document}
