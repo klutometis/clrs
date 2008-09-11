@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{amsmath,clrscode}
+\title{CLRS 15.2-4}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Since in \proc{Matrix-Chain-Order} the $i$-loop runs $n - l + 1$ times
+for every $l$; and, for every $i$, the $k$-loop runs $j - i = i + l -
+1 - i = j - l$ times; and, for every $k$, two $m[i,j]$s are looked up;
+it gelds the following:
+
+\begin{align}
+  \sum_{i=1}^n\sum_{j=i}^n &= \sum_{l=2}^n2(n-l+1)(l-1)\\
+  &= 2\sum_{l=1}^{n-1}(n-l)l\\
+  &= 2\sum_{l=1}^{n-1}nl-2\sum_{l=1}^{n-1}l^2\\
+  &= \frac{2n(n-1)n}{2} - \frac{2(n-1)n(2n-1)}{6}\\
+  &= \frac{n^3 - n}{3}
+\end{align}
+\end{document}
