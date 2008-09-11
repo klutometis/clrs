@@ -1,0 +1,19 @@
+digraph G {
+        graph [size="4,4!", ratio=fill]
+        {
+                node [label="( )"]
+                paren1
+                paren2
+                paren3
+        }
+        A1
+        A2
+        A3
+        A4
+        paren1 -> A1
+        paren1 -> paren2
+        paren2 -> A2
+        paren2 -> paren3
+        paren3 -> A3
+        paren3 -> A4
+}
