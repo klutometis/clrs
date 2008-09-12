@@ -1,46 +1,39 @@
-Facienda (things to do)
+Generate dot -> png, bib -> bbl and tex -> pdf from a base Makefile
+with well-composed generics.
 
-  Facienda are incomplete.
+8.3: radix-sort needs generalizing to other bases, cardinalities.
 
-  Facta belong in ChangeLog.
+9: weighted-median-with-select is showing indeterminacy.
 
-  8.3: radix-sort needs generalizing to other bases, cardinalities.
+9.2: randomized-select-iter is defective.
 
-  9: weighted-median-with-select is showing indeterminacy.
+9.3-3: Since fixing partition-median!, balanced-quicksort! is
+     defective.
 
-  9.2: randomized-select-iter is defective.
+9-3: involves calling select for statistics above n/2 and a complex
+   compare-and-exchange thereunder.
 
-  9.3-3: Since fixing partition-median!, balanced-quicksort! is
-         defective.
+10.3-5: solution needs a correctness-argument; I suspect it's flawed.
 
-  9-3: involves calling select for statistics above n/2 and a complex
-       compare-and-exchange thereunder.
+10.4-2: Wasn't there a tree-map from SICP sans mutation? Similarly for
+      tree-map/iter, with the exception of push!, pop!;
+      unbounded-tree-map, for that matter.
 
-  10.3-5: solution needs a correctness-argument; I suspect it's flawed.
+10-2,3
 
-  10.4-2: Wasn't there a tree-map from SICP sans mutation? Similarly for
-          tree-map/iter, with the exception of push!, pop!;
-          unbounded-tree-map, for that matter.
+11.2-5
 
-  10-2,3
+11.3-3,5,6
 
-  11.2-5
+11.4-3,5
 
-  11.3-3,5,6
+11.5-1
 
-  11.4-3,5
+11-1,2,3,4
 
-  11.5-1
+12.1-3: accomplished the "easy" stack solution; but what about the
+      "complicated but elegant" pointer-equivalence solution?
 
-  11-1,2,3,4
+12.4-1,2,3,4,5
 
-  12.1-3: accomplished the "easy" stack solution; but what about the
-          "complicated but elegant" pointer-equivalence solution?
-
-  12.4-1,2,3,4,5
-
-  12-3,4
-
-Facta (things done)
-
-  Standardize on chapter sections, not problems.
+12-3,4
