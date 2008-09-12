@@ -1,0 +1,17 @@
+\documentclass{article}
+\usepackage{clrscode,amsmath}
+\title{CLRS 15.3-3}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle 
+
+Unlike longest simple path, \proc{Matrix-Chain-Order-Max} does evince
+subproblem optimality; whose recurrence is:
+\[m[i,j]=
+  \begin{cases}
+    0 & \text{if $i=j$},\\
+    \max_{i\leq k < j}\{m[i,k]+m[k+1,j]+p_{i-1}p_kp_j\}
+      & \text{if $i < j$}
+  \end{cases}
+  \]
+\end{document}
