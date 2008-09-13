@@ -31,3 +31,18 @@
                         '())))
           (append (lcs b X (+ i (car displacement)) (+ j (cdr displacement)))
                   next)))))
+
+(define (lcs/c c X Y)
+  (define (iter l i j)
+    (if (or (negative? i) (negative? j))
+        l
+        (let ((up (array-ref c (- i 1) j))
+              (left (array-ref c i (- j 1)))
+              (up-left (array-ref c (- i 1) (- j 1)))
+              (this (array-ref c i j)))
+          (if (equal? (list-ref X i) (list-ref Y j))
+              (iter (cons (list-ref X i) l) (- i 1) (- j 1))
+              (if (= this up)
+                  (iter l (- i 1) j)
+                  (iter l i (- j 1)))))))
+  (iter '() (- (length X) 1) (- (length Y) 1)))

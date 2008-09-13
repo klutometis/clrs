@@ -5,5 +5,6 @@
 (module
  section-15.4
  (lcs-length
-  lcs)
+  lcs
+  lcs/c)
  (include "../15.4/lcs.scm"))
