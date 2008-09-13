@@ -46,3 +46,25 @@
                   (iter l (- i 1) j)
                   (iter l i (- j 1)))))))
   (iter '() (- (length X) 1) (- (length Y) 1)))
+
+(define (memoized-lcs-length X Y)
+  (let ((m (length X))
+        (n (length Y)))
+    (let ((c (make-array '#(#f) `(-1 ,m) `(-1 ,n))))
+      (loop ((for i (up-from -1 (to m))))
+            (array-set! c 0 i -1))
+      (loop ((for j (up-from -1 (to n))))
+            (array-set! c 0 -1 j))
+      (letrec ((iter
+                (lambda (i j)
+                  (let ((memo (array-ref c i j)))
+                    (if memo
+                        memo
+                        (let ((new-memo
+                               (if (equal? (list-ref X i) (list-ref Y j))
+                                   (+ (iter (- i 1) (- j 1)) 1)
+                                   (max (iter (- i 1) j) (iter i (- j 1))))))
+                          (array-set! c new-memo i j)
+                          new-memo))))))
+        (iter (- m 1) (- n 1)))
+      c)))

@@ -1,0 +1,7 @@
+(require-extension syntax-case check)
+(require '../15.4/section)
+(import section-15.4)
+(let ((X '(1 0 0 1 0 1 0 1))
+      (Y '(0 1 0 1 1 0 1 1 0)))
+  (let ((c (memoized-lcs-length X Y)))
+    (check (lcs/c c X Y) => '(1 0 0 1 1 0))))
