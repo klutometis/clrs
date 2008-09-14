@@ -4,6 +4,6 @@
 (check (bt-inorder-tree-map bt-node-datum exercise-12.1)
        => '(21 17 16 10 5 4 1))
 (check (bt-preorder-tree-map bt-node-datum exercise-12.1)
-       => '(21 16 17 5 1 4 10))
-(check (bt-postorder-tree-map bt-node-datum exercise-12.1)
        => '(10 17 21 16 4 5 1))
+(check (bt-postorder-tree-map bt-node-datum exercise-12.1)
+       => '(21 16 17 5 1 4 10))

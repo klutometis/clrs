@@ -25,22 +25,24 @@
                  (continue (bt-node-right root)))))
     mapping))
 
+;;; Reverse the order because of cons
 (define (bt-preorder-tree-map proc root)
-  (let ((mapping '()))
-    (let continue ((root root))
-      (if root
-          (begin (set! mapping (cons (proc root) mapping))
-                 (continue (bt-node-left root))
-                 (continue (bt-node-right root)))))
-    mapping))
-
-(define (bt-postorder-tree-map proc root)
   (let ((mapping '()))
     (let continue ((root root))
       (if root
           (begin (continue (bt-node-left root))
                  (continue (bt-node-right root))
                  (set! mapping (cons (proc root) mapping)))))
+    mapping))
+
+;;; Reverse the order because of cons
+(define (bt-postorder-tree-map proc root)
+  (let ((mapping '()))
+    (let continue ((root root))
+      (if root
+          (begin (set! mapping (cons (proc root) mapping))
+                 (continue (bt-node-left root))
+                 (continue (bt-node-right root)))))
     mapping))
 
 (define (bt-inorder-tree-map/iterative proc root)
