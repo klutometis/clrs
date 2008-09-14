@@ -18,3 +18,8 @@
       (let ((stack-top (- (stack-top stack) 1)))
         (set-stack-top! stack stack-top)
         (vector-ref (stack-data stack) (+ stack-top 1)))))
+
+(define (peek stack)
+  (if (stack-empty? stack)
+      (error "Stack underflow -- PEEK")
+      (vector-ref (stack-data stack) (stack-top stack))))

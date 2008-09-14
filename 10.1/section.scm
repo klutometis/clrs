@@ -10,6 +10,7 @@
   stack-empty?
   push!
   pop!
+  peek
   make-queue
   queue-data
   enqueue!
