@@ -8,6 +8,7 @@
  section-15.4
  (lcs-length
   lcs-length/2n
+  lcs-length/n
   memoized-lcs-length
   lcs
   lcs/c)
