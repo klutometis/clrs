@@ -1,0 +1,5 @@
+(require-extension syntax-case check)
+(require '../15.4/section)
+(import section-15.4)
+(let ((X '(127 113 8 182 120 138 103 53 192 40)))
+  (check (longest-increasing-subsequence X) => '(113 120 138 192)))

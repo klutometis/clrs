@@ -105,3 +105,7 @@
                           new-memo))))))
         (iter (- m 1) (- n 1)))
       c)))
+
+(define (longest-increasing-subsequence X)
+  (let ((Y (heapsort X)))
+    (lcs/c (memoized-lcs-length X Y) X Y)))
