@@ -1,14 +1,14 @@
 \documentclass{article}
 \usepackage{amsmath,clrscode}
 \usepackage{booktabs}
-\title{Iterative vs. Memoized \proc{Matrix-Chain}}
+\title{Iterative vs. Memoized \proc{LCS-Length}}
 \author{Peter Danenberg}
 \begin{document}
 \maketitle
 
-Iterative \proc{Matrix-Chain} (figure \ref{fig:iter}), though
-asymptotically equivalent, performs more calculations than
-memoized \proc{Matrix-Chain} (figure \ref{fig:memo}).
+Iterative \proc{LCS-Length} (figure \ref{fig:iter}), whose complexity
+is asymptotically equivalent, performs more calculations than memoized
+\proc{LCS-Length} (figure \ref{fig:memo}).
 \begin{figure}[ht]
   \[
     \begin{array}{c|ccccccccc}
@@ -26,7 +26,7 @@ memoized \proc{Matrix-Chain} (figure \ref{fig:memo}).
       \bottomrule
     \end{array}
     \]
-  \caption{Paths calculated by iterative \proc{Matrix-Chain}}
+  \caption{Paths calculated by iterative \proc{LCS-Length}}
   \label{fig:iter}
 \end{figure}
 \begin{figure}[ht]
@@ -46,7 +46,7 @@ memoized \proc{Matrix-Chain} (figure \ref{fig:memo}).
       \bottomrule
     \end{array}
     \]
-  \caption{Paths calculated by memoized \proc{Matrix-Chain}}
+  \caption{Paths calculated by memoized \proc{LCS-Length}}
   \label{fig:memo}
 \end{figure}
 \end{document}
