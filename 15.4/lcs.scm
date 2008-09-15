@@ -88,6 +88,7 @@
   (let ((m (length X))
         (n (length Y)))
     (let ((c (make-array '#(#f) `(-1 ,m) `(-1 ,n))))
+      ;; Why not add them as special cases?
       (loop ((for i (up-from -1 (to m))))
             (array-set! c 0 i -1))
       (loop ((for j (up-from -1 (to n))))
