@@ -61,7 +61,7 @@
 
 (define (memoized-bst p q)
   (let* ((n (car (array-dimensions p)))
-         (dim `(-1 ,(+ n 1))))
+         (dim `(-1 ,n)))
     (let ((e (make-array '#(#f) dim dim))
           (w (make-array '#(#f) dim dim))
           (root (make-array '#(#f) dim dim)))
@@ -85,19 +85,15 @@
                            (array-set! e +inf i j)
                            (if (= (- i 1) j)
                                (begin
-                                 (format #t "setting i: ~A; j: ~A; q: ~A~%" i j (array-ref q j))
                                  (array-set! e (array-ref q j) i j)
                                  (array-ref q j))
                                (begin
-                                 (loop ((for r (up-from i (to j))))
-                                       (format #t "i: ~A; j: ~A; r: ~A~%" i j r)
+                                 (loop ((for r (up-from i (to (+ j 1)))))
                                        (let ((t (+ (iter-e i (- r 1))
                                                    (iter-e (+ r 1) j)
                                                    (iter-w i j))))
-                                         (format #t "t: ~A~%" t)
                                          (if (< t (array-ref e i j))
                                              (begin
-                                               (format #t "setting i: ~A; j: ~A; cost; ~A~%" i j cost)
                                                (array-set! e t i j)
                                                (array-set! root r i j)))))
                                  (array-ref e i j)))))))))
