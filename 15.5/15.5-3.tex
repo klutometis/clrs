@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CLRS 15.5-3}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+\begin{align}
+  \sum_{l=1}^n\sum_{i=1}^{n-l+1}\sum_{r=i}^{i+l-1}j-1 &=
+  \sum_{l=1}^n\sum_{i=1}^{n-l+1}\sum_{r=i}^{i+l-1}l-1\\
+  &= \sum_{l=1}^n(n-l+1-1)(i +l-1-i)(l-1)\\
+  &= \sum_{l=0}^n(n-l+1)l^2\\
+  &= \frac{n(n+1)(2n+1)}{6} - \frac{n^2(n+1)^2}{4} + \frac{n(n+1)(2n+1)}{6}\\
+  &\in \Theta(n^4)
+\end{align}
+\end{document}
