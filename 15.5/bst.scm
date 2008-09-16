@@ -116,7 +116,6 @@
                                      (array-ref p j)
                                      (array-ref q j)) i j)
                     (loop ((for r (up-from i (to (+ j 1)))))
-                          (format #t "i: ~A; j: ~A; r: ~A~%" i j r)
                           (let ((t (+ (array-ref e i (- r 1))
                                       (array-ref e (+ r 1) j)
                                       (array-ref w i j))))
