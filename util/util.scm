@@ -1,6 +1,9 @@
 (require-extension
- syntax-case)
+ syntax-case
+ array-lib
+ array-lib-hof)
 (module
  util
- (except?)
+ (except?
+  round-array)
  (include "../util/test.scm"))
