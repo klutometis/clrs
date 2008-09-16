@@ -62,7 +62,7 @@
 (define (memoized-bst p q)
   (let* ((n (car (array-dimensions p)))
          (dim `(-1 ,(+ n 1))))
-    (let ((e (make-array '#(+inf) dim dim))
+    (let ((e (make-array '#(#f) dim dim))
           (w (make-array '#(#f) dim dim))
           (root (make-array '#(#f) dim dim)))
       (let* ((iter-w
@@ -79,9 +79,10 @@
              (iter-e
               (rec (iter-e i j)
                    (let ((cost (array-ref e i j)))
-                     (if (finite? cost)
+                     (if cost
                          cost
                          (begin
+                           (array-set! e +inf i j)
                            (if (= (- i 1) j)
                                (begin
                                  (format #t "setting i: ~A; j: ~A; q: ~A~%" i j (array-ref q j))
@@ -104,20 +105,22 @@
         (values e root)))))
 
 (define (optimal-bst p q n)
-  (let ((dim `(-1 ,(+ n 1))))
-    (let ((e (make-array '#(+inf) dim dim))
+  (let ((dim `(-1 ,(+ n 1 1))))
+    (let ((e (make-array '#(#f) dim dim))
           (w (make-array '#(#f) dim dim))
           (root (make-array '#(#f) dim dim)))
-      (loop ((for i (up-from 0 (to (+ n 1)))))
+      (loop ((for i (up-from 0 (to (+ n 1 1)))))
             (array-set! e (array-ref q (- i 1)) i (- i 1))
             (array-set! w (array-ref q (- i 1)) i (- i 1)))
-      (loop ((for l (up-from 1 (to n))))
-            (loop ((for i (up-from 0 (to (+ (- n l) 1)))))
+      (loop ((for l (up-from 1 (to (+ n 1 1)))))
+            (loop ((for i (up-from 0 (to (+ (- n l) 1 1)))))
                   (let ((j (- (+ i l) 1)))
+                    (array-set! e +inf i j)
                     (array-set! w (+ (array-ref w i (- j 1))
                                      (array-ref p j)
                                      (array-ref q j)) i j)
-                    (loop ((for r (up-from i (to j))))
+                    (loop ((for r (up-from i (to (+ j 1)))))
+                          (format #t "i: ~A; j: ~A; r: ~A~%" i j r)
                           (let ((t (+ (array-ref e i (- r 1))
                                       (array-ref e (+ r 1) j)
                                       (array-ref w i j))))
