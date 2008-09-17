@@ -5,5 +5,7 @@
 (module
  util
  (except?
-  round-array)
- (include "../util/test.scm"))
+  round-array
+  sublist)
+ (include "../util/test.scm")
+ (include "../util/string.scm"))
