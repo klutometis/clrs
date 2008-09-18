@@ -25,7 +25,8 @@
   make-schedule
   job-spec->list
   edit-distance
-  ops)
+  ops
+  dna-alignment)
  (import* util sublist)
  (import* section-6.4 heapsort)
  (include "../15/bitonic-euclidean.scm")

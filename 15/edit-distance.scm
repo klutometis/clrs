@@ -79,6 +79,68 @@
         (iter-cost (- m 1) (- n 1))
         (values cost op)))))
 
+(define (dna-alignment X Y)
+  (let ((m (string-length X))
+        (n (string-length Y))
+        (cost-delete 2)
+        (cost-insert 2)
+        (cost-copy -1)
+        (cost-replace 1))
+    (let ((cost (make-array '#(#f) `(0 ,m) `(0 ,n)))
+          (op (make-array '#(#f) `(0 ,m) `(0 ,n))))
+      (let ((iter-cost
+             (rec (iter-cost i j)
+                  (let ((c (array-ref cost i j)))
+                    (if c
+                        c
+                        (let ((xi (string-ref X i))
+                              (yj (string-ref Y j))
+                              (xi-1 (if (zero? i) #f (string-ref X (- i 1))))
+                              (yj-1 (if (zero? j) #f (string-ref Y (- j 1)))))
+                          (array-set! cost +inf i j)
+                          (cond ((and (zero? i) (zero? j))
+                                 (array-set! cost 0 i j)
+                                 (array-set! op 'noop i j))
+                                ((zero? i)
+                                 (array-set! cost (* j cost-insert) i j)
+                                 (array-set! op `(insert ,yj) i j))
+                                ((zero? j)
+                                 (array-set! cost (* i cost-delete) i j)
+                                 (array-set! op '(delete) i j))
+                                (else
+                                 (let ((costs (make-hash-table))
+                                       (copy
+                                        (if (= xi yj)
+                                            (+ (iter-cost (- i 1) (- j 1))
+                                               cost-copy)
+                                            +inf))
+                                       (replace
+                                        (if (= xi yj)
+                                            +inf
+                                            (+ (iter-cost (- i 1) (- j 1))
+                                               cost-replace)))
+                                       (delete
+                                        (+ (iter-cost (- i 1) j)
+                                           cost-delete))
+                                       (insert
+                                        (+ (iter-cost i (- j 1))
+                                           cost-insert)))
+                                   (hash-table-set! costs copy '(copy))
+                                   (hash-table-set! costs replace `(replace . ,yj))
+                                   (hash-table-set! costs insert `(insert . ,yj))
+                                   (hash-table-set! costs delete '(delete))
+                                   ;; Hack! Just alist it.
+                                   (let* ((min-cost (inexact->exact
+                                                     (apply min (hash-table-keys
+                                                                 costs))))
+                                          (min-op (hash-table-ref costs
+                                                                  min-cost)))
+                                     (array-set! cost min-cost i j)
+                                     (array-set! op min-op i j)))))
+                          (array-ref cost i j)))))))
+        (iter-cost (- m 1) (- n 1))
+        (values cost op)))))
+
 (define (ops op i j)
   (if (and (zero? i) (zero? j))
       '()
