@@ -23,10 +23,13 @@
   sort-by-deadline
   schedule-max
   make-schedule
-  job-spec->list)
+  job-spec->list
+  edit-distance
+  ops)
  (import* util sublist)
  (import* section-6.4 heapsort)
  (include "../15/bitonic-euclidean.scm")
  (include "../15/print-neatly.scm")
  (include "../15/viterbi.scm")
- (include "../15/scheduling.scm"))
+ (include "../15/scheduling.scm")
+ (include "../15/edit-distance.scm"))
