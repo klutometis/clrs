@@ -17,5 +17,5 @@
   (let-values (((compatibles choices)
                 (memoized-activity-selector
                  (sort-by-finishing-time activities))))
-    (check (choices->activities choices) =>
-           '(11 8 4 1))))
+    ;; Doesn't work (extra 7 artifact).
+    (check (choices->activities choices) => '(11 8 4 1))))
