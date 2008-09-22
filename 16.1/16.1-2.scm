@@ -19,3 +19,7 @@
   ;; Defective null case (0 . 0)
   (check (recursive-activity-selector-last activities) =>
          '((12 . 14) (8 . 11) (5 . 7) (1 . 4) (0 . 0))))
+
+;;; The same greedy and optimality arguments for earliest-first apply
+;;; to latest-first, since latest-first is symmetrical to earliest-
+;;; first; and relies merely upon the reversal of time.
