@@ -46,14 +46,20 @@
     '()
     choices)))
 
-(define (recursive-activity-selector-first activities)
+(define (recursive-activity-selector activities)
   (if (null? activities)
       '()
       (let* ((current-f (cdr (car activities)))
-             (rest (find-tail (lambda (next) (>= (car next) current-f))
-                              (cdr activities))))
+             (rest (find-tail
+                    (lambda (next)
+                      (let ((next-s (car next))
+                            (next-f (cdr next)))
+                        (and (positive? next-f)
+                             (finite? next-s)
+                             (>= (car next) current-f))))
+                    (cdr activities))))
         (if rest
-            (cons (car rest) (recursive-activity-selector-first (cdr rest)))
+            (cons (car rest) (recursive-activity-selector rest))
             '()))))
 
 (define (recursive-activity-selector-last activities)
@@ -65,3 +71,20 @@
         (if (null? first)
             '()
             (cons (last first) (recursive-activity-selector-last first))))))
+
+(define (activity-selector-across-rooms activities)
+  (let ((iter
+         (rec (iter activities room)
+              (if (or (null? activities)
+                      (equal? activities '((0 . 0)
+                                           (+inf . +inf))))
+                  '()
+                  (let* ((compatible-activities
+                          (recursive-activity-selector activities))
+                         (rest-activities
+                          (lset-difference equal?
+                                           activities
+                                           compatible-activities)))
+                    (cons (cons room compatible-activities)
+                          (iter rest-activities (+ room 1))))))))
+    (iter activities 0)))

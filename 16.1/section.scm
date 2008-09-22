@@ -9,6 +9,7 @@
  (memoized-activity-selector
   sort-by-finishing-time
   choices->activities
-  recursive-activity-selector-first
-  recursive-activity-selector-last)
+  recursive-activity-selector
+  recursive-activity-selector-last
+  activity-selector-across-rooms)
  (include "../16.1/activity.scm"))

@@ -14,7 +14,7 @@
                      (2 . 13)
                      (12 . 14)
                      (+inf . +inf))))
-  (check (recursive-activity-selector-first activities) =>
+  (check (recursive-activity-selector activities) =>
          '((1 . 4) (5 . 7) (8 . 11) (12 . 14)))
   ;; Defective null case (0 . 0)
   (check (recursive-activity-selector-last activities) =>
