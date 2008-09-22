@@ -8,5 +8,6 @@
  section-16.1
  (memoized-activity-selector
   sort-by-finishing-time
-  choices->activities)
+  choices->activities
+  recursive-activity-selector)
  (include "../16.1/activity.scm"))

@@ -45,3 +45,11 @@
       (if k (cons k activities) activities))
     '()
     choices)))
+
+(define (recursive-activity-selector activities)
+  (if (null? activities)
+      '()
+      (let* ((current-f (cdr (car activities)))
+             (rest (find-tail (lambda (next) (>= (car next) current-f))
+                              activities)))
+        (cons (car rest) (recursive-activity-selector (cdr rest))))))
