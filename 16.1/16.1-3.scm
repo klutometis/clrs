@@ -26,3 +26,7 @@
 ;;; activities. Since activities are maximized across halls, the
 ;;; cardinality of halls is minimized; otherwise, we could propose an
 ;;; optimal solution that minimized rooms.
+
+;;; The result is a suboptimal Theta(n^2) algorithm that may use more
+;;; rooms than necessary; see e.g. {[1, 4), [2, 5), [6, 7), [4, 8)}.
+;;; O(n lg n) is possible, and more difficult.
