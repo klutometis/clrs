@@ -46,3 +46,19 @@
                                        (- weight
                                           (cdr (list-ref items index)))))))))))
       (iter-item (- n 1) max-weight))))
+
+(define (greedy-binary-knapsack value-weights max-weight)
+  (let ((rest (find-tail
+               (lambda (value-weight)
+                 (let ((value (car value-weight))
+                       (weight (cdr value-weight)))
+                   (< weight max-weight)))
+               value-weights)))
+    (if rest
+        (let ((value-weight (car rest)))
+          (let ((value (car value-weight))
+                (weight (cdr value-weight)))
+            (cons value-weight
+                  (greedy-binary-knapsack (cdr rest)
+                                          (- max-weight weight)))))
+        '())))

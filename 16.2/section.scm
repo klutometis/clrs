@@ -5,5 +5,6 @@
 (module
  section-16.2
  (binary-knapsack
-  weights->items)
+  weights->items
+  greedy-binary-knapsack)
  (include "../16.2/knapsack.scm"))
