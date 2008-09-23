@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CLRS 16.2-1}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+Given amounts \(a_1 \dots a_n\) and value densities \(\frac{v_1}{w_1}
+    \geq \frac{v_2}{w_2} \geq \dots \geq \frac{v_n}{w_n}\),
+ \(\frac{v_1}{w_1}\left(a_1 + \dots + a_n\right)\) is at least as much as \(\frac{v_1}{w_1}a_1 + \dots + \frac{v_n}{w_n}a_n\):
+\begin{align}
+  \sum_{i=1}^n\frac{v_1}{w_1}a_i &\geq \sum_{i=1}^n\frac{v_i}{w_i}a_i\\
+  n\frac{v_1}{w_1}\sum_{i=1}^na_i &\geq n\max_{1 \leq i \leq n}(\frac{v_i}{w_i})\sum_{i=1}^na_i\\
+  \frac{v_1}{w_1} &\geq \max_{1 \leq i \leq n}(\frac{v_i}{w_i})
+\end{align}
+\end{document}
