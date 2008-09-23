@@ -1,0 +1,16 @@
+Least duration:
+
+(    )(    )
+    (  )
+
+Overlaps with fewest (defective):
+
+           (   )
+         (   )
+       (   )
+(        )
+
+Earliest start time:
+
+(        )
+ (  )(  )
