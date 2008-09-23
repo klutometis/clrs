@@ -20,4 +20,4 @@
 ;;; where Wi,w is the optimal value of items 1 .. i at weight w.
 ;;;
 ;;; Wi-1,w-wi is an optimal solution, otherwise substitute an optimal
-;;; solution; Wi,w is therefore Wi-1,w-wi + vi.
+;;; solution; Wi,w is therefore the greater of Wi-1,w-wi + vi, Wi-1,w.
