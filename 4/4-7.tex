@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{amsmath,enumerate}
+\title{CLRS 4-7}
+\author{Peter Danenberg}
+\DeclareMathOperator{\monge}{Monge}
+\begin{document}
+\maketitle
+
+\begin{enumerate}[a.]
+  \item
+    \begin{enumerate}[i.]
+    \item That $\monge(A_{m,n}) \to \forall 1\leq i< m,1\leq j <
+      n(a_{i,j}+a_{i+1,j+1}\leq a_{i,j+1} + a_{i+1,j})$ follows
+      directly from the definition of a monge array.
+    \item 
+      \begin{description}
+      \item[Basis]
+        \[a_{0,0}+a_{1,1}\leq a_{0,1}+a_{1,0}\to
+        \monge(A_{2,2})\]
+      \item[Hypothesis]
+        \[\forall 1\leq i< m,1\leq j <
+        n(a_{i,j}+a_{i+1,j+1}\leq a_{i,j+1} + a_{i+1,j}) \to
+        \monge(A_{m,n})\]
+      \item[Induction]
+        \begin{align}
+          \begin{split}
+            \forall 1\leq i < m,1\leq j < n(a_{i,j}+a_{i+1,j+1}\leq
+            a_{i,j+1} + a_{i+1,j}) &\to\\
+            \forall j < n (a_{m,j} + a_{m+1,j+1} \leq a_{m,j+1} + a_{m+1,j}) \wedge\\
+            \monge(A_{m,n})
+          \end{split}\\
+          &\to \monge(A_{m+1,n})
+        \end{align}
+        Similarly for $A_{m,n+1}$.
+      \end{description}
+    \end{enumerate}
+    \item Changing either $a$ or $b$ to the given range will work.
+      \[\begin{bmatrix}
+        37&23&22&32\\
+        21&6&7&10\\
+        53&34&30&31\\
+        43&21&15&8
+      \end{bmatrix}
+      \Rightarrow
+      \begin{bmatrix}
+        37&23&a\geq23&32\\
+        21&6&b\leq6&10\\
+        53&34&30&31\\
+        43&21&15&8
+      \end{bmatrix}\]
+    \item $f(k) > f(k+1)$ violates the Monge definition by creating a
+      minimum sum that no other combination of elements can undersum.
+
+      Let $f(k) > f(k+1)$; pick $1 \leq q < r < m$ such that:
+      \[\forall q \leq i < r, q < j \leq r (a_{k,i} > a_{k,r} \wedge a_{k+1,j} > a_{k+1, q})\]
+      It follows, then, that
+      \[\forall q \leq i < r, q < j \leq r (a_{k,i} + a_{k+1,j} > a_{k,r} + a_{k+1,q})\]
+      contradicting the Monge definition.
+    \item For each odd row $i$, start at column $j = f(i-1)$, where $f(0)
+      = 0$; let $m_i = \infty$; iterate to $j = f(i+1)$, where $f(n+1)=m$;
+      setting $m_i$ to $\min(m_i, a_{i,j})$.
+
+      Running time is:
+      \begin{align}
+        \begin{split}
+          O(m) + \sum_{i=1}^mf(i - 1)- f(i+1) &= O(m) + f(0) + f(m) + \\
+          \sum_{i=1}^mf(i)-f(i)
+        \end{split}\\
+        &= O(m) + O(n) + 0\\
+        &= O(m + n)
+      \end{align}
+    \item
+      \begin{align}
+        T(m) &= T(m/2) + O(m + n)\\
+        &= \sum_{i=0}^{\lg m}2^i+n\\
+        &= \Theta(m + n\lg m)
+      \end{align}
+\end{enumerate}
+\end{document}
