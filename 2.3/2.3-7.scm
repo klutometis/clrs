@@ -1,0 +1,8 @@
+(require-extension syntax-case check (srfi 11))
+(require '../2.3/section)
+(import section-2.3)
+(let ((S '(117 13 207 170 138 222 145 109 16 248 140)))
+  (let-values (((x y) (sum-search S 130)))
+    (check x => 13)
+    (check y => 117))
+  (check (sum-search S 129) => #f))
