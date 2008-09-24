@@ -1,0 +1,7 @@
+(require-extension syntax-case check)
+(require '../2/chapter)
+(import chapter-2)
+(let ((counter (make-inversion-counter))
+      (inverta '#(2 3 8 6 1)))
+  ((counter 'count-inversions) inverta 0 (- (vector-length inverta) 1))
+  (check (counter 'inversions) => 5))

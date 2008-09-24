@@ -17,7 +17,8 @@
   partition-median!
   k-medial-proximals!
   dual-medians
-  lower-median)
+  lower-median
+  medial-index)
  (import* section-7.1
           quicksort!
           quicksort-general!
