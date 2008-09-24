@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{amsmath,enumerate}
+\title{CLRS 2-1}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+\begin{enumerate}[a.]
+\item \[\Theta(\frac{n}{k}\cdot k^2) \in \Theta(nk)\]
+\item Merge the lists pairwise, such that the recursion tree is of
+  height \(\Theta(\lg \frac{n}{k})\); each level takes \(\Theta(n)\) for \(\Theta(n
+ \lg(\frac{n}{k}))\) total.
+\item \(k \in \Theta(\lg n)\), since:
+\begin{align}
+  \Theta(nk + n\lg(\frac{n}{k})) &\equiv \Theta(n\lg n + n\lg n - n\lg k)\\
+  &\in \Theta(2n\lg n - n\lg\lg n)\\
+  &\in \Theta(n\lg n)
+\end{align}
+\item Sort strings of increasing length until insertion sort surpasses
+  merge sort; the cardinality of that list is $k$.
+\end{enumerate}
+\end{document}
