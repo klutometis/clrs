@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CLRS 15-2}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Let $e[i,j] = M - (j - i) - \sum_{k=i}^jl_k$; let $l[i,j]$ be the cost
+of including a line containing words $i$ through $j$. Then:
+\[l[i,j]=\left\{
+  \begin{aligned}
+    e[i,j]<0 &\to \infty\\
+    j=n &\to 0\\
+    \text{otherwise} &\to e[i,j]^3
+  \end{aligned}
+  \right.\]
+Let $c[i,j]$ be the cost of an optimal arrangement of words $1,\dots,j$:
+\[c[i,j]=\left\{
+  \begin{aligned}
+    j=0&\to0\\
+    j>0&\to\min_{1\leq i\leq j}(c[i-1]+l[i,j])
+  \end{aligned}
+  \right.\]
+$p[i,j]$ keeps track of the choices made to produce $c[i,j]$.
+\end{document}

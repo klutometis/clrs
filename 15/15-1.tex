@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CLRS 15-1}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Let $b[i, j]$ be the length of the shortest bitonic path $P_{i,j}$:
+\begin{align}
+  b[0,1] &= |p_0p_1|\\
+  i < j - 1 \to b[i,j] &= b[i, j-1] + |p_{j-1}p_j|\\
+  b[j-1,j] &= \min_{0\leq k<j-1}\{b[k,j-1]+|p_kp_j|\}\\
+    b[n,n] &=b[n-1,n] +|p_{n-1}p_n|
+\end{align}
+Let $r[i,j]$ be the index of the immediate predecessor of $p_j$.
+\end{document}

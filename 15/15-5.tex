@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{amsmath,url}
+\title{CLRS 15-5}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Thanks, Manfred Warmuth \cite{warmuth:05}. Let $S[i,j]$ signify whether there is a path
+$v_0\dots v_i$ labeled $\sigma_0\dots \sigma_i$; then:
+\begin{align}
+  S[i,j] &= \underset{k:(v_k,v_i)\in E\wedge\sigma(v_k,v_i)=\sigma_j}{\bigvee}S(k,j-1)\\
+  S[0,0] &= 1\\
+  1\leq i\leq n-1\to S[i,0]&= 0
+\end{align}
+For max probabilities, on the other hand:
+\begin{align}
+  S[i,j] &= \max_{k:(v_k,v_i)\in E\wedge\sigma(v_k,v_i)=\sigma_j}p(v_k,v_k)\cdot S(k,j-1)\\
+  S[0,0] &= 1\\
+  1\leq i\leq n-1\to S[i,0]&= 0
+\end{align}
+Let $R[i,j]$ keep track of which edges produce the maximum.
+\bibliographystyle{plain}
+\bibliography{15-5}
+\end{document}

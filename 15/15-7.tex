@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{amsmath,url}
+\title{CLRS 15-7}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+Thanks, Brian D. Carlstrom \cite{carlstrom:04}. Let $T[i,t]$ be the
+profit based on completing the $i$th job at time $t$. Initially:
+
+\[T[1,t]=\left\{
+  \begin{aligned}
+    t\neq t_1 &\to 0\\
+    t=t_1\leq d_1 &\to p_1\\
+    t=t_1>d_1 &\to 0
+  \end{aligned}
+  \right.\]
+
+Thereafter:
+
+\[T[1,t]=\max\left\{
+  \begin{aligned}
+    \text{true} &\to T[i-1,t]\\
+    t\leq d_i &\to T[i-1,t-t_i]+p_i\\
+    t>d_i &\to T[i-1,t-t_i]
+  \end{aligned}
+  \right.\]
+
+Also, $R[i,j]$ should record the choice of cell which maximized the
+apposite expression.
+
+\bibliographystyle{plain}
+\bibliography{15-7}
+\end{document}
