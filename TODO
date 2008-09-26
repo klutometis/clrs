@@ -48,8 +48,10 @@ with well-composed generics.
 
 15.5-4
 
-16.6-1 is defective (extra activity artifact)
+15.6-1 is defective (extra activity artifact)
 
-16.6-3 there is a known O(n lg n) solution
+15.6-3 there is a known O(n lg n) solution
 
-16.6-4 overlaps with fewest activities
+15.6-4 overlaps with fewest activities
+
+16.2-6
