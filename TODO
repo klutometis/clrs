@@ -2,7 +2,8 @@ Generate dot -> png, bib -> bbl and tex -> pdf from a base Makefile
 with well-composed generics.
 
 Satellite data can be harvested by means of KEY (see srfi 95); ad hoc
-data structures are superfluous.
+data structures are superfluous. KEY default to, say, VALUES or other
+identity mapping.
 
 Each solution could probably use a description in addition to the
 code.
