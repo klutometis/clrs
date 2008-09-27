@@ -1,6 +1,12 @@
 Generate dot -> png, bib -> bbl and tex -> pdf from a base Makefile
 with well-composed generics.
 
+Satellite data can be harvested by means of KEY (see srfi 95); ad hoc
+data structures are superfluous.
+
+Each solution could probably use a description in addition to the
+code.
+
 6.5-8 need a heap with satellite data
 
 8.3 radix-sort needs generalizing to other bases, cardinalities.
