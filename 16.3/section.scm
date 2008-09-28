@@ -9,7 +9,10 @@
  (heapify!
   make-heap
   heap-data
-  build-heap!)
+  build-heap!
+  heap-extract-extremum!
+  heap-empty?
+  heapsort!)
  (import* srfi-70 exact-floor)
  (import* section-5.4 swap! list-set!)
  (include "../16.3/priority-queue.scm"))

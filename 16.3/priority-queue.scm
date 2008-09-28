@@ -29,6 +29,9 @@
 (define (heap-set! heap i k)
   (list-set! (heap-data heap) i k))
 
+(define (heap-empty? heap)
+  (zero? (heap-size heap)))
+
 (define (heapify! heap i)
   (let ((l (left i))
         (r (right i))
@@ -62,19 +65,12 @@
     (loop ((for i (down-from median (to 0))))
           (heapify! heap i))))
 
-(define (heapsort! heap)
-  (let ((size (heap-size heap)))
-    (loop ((for i (down-from size (to 0))))
-          (heap-swap! heap 0 i)
-          (set-heap-size! heap (- size 1))
-          (heapify! heap i))))
-
 (define (heap-extract-extremum! heap)
   (let ((size (heap-size heap)))
     (if (< size 1)
         (error "heap underflow -- EXTRACT-EXTREMUM"))
     (let ((extremum (car (heap-data heap))))
-      (heap-set! 0 (heap-ref heap (- size 1)))
+      (heap-set! heap 0 (heap-ref heap (- size 1)))
       (set-heap-size! heap (- size 1))
       (heapify! heap 0)
       extremum)))
@@ -106,3 +102,8 @@
     (set-heap-data! heap (append (heap-data heap) (list elt)))
     ((heap-set-key! heap) elt (heap-extremum heap))
     (heap-adjust-key! heap (- new-size 1) key)))
+
+(define (heapsort! heap)
+  (if (heap-empty? heap)
+      '()
+      (cons (heap-extract-extremum! heap) (heapsort! heap))))
