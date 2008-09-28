@@ -1,0 +1,4 @@
+Any child x of a non-full parent z can replace z, since f(x) = f(z);
+and z harbinges no symbol, being no leaf. Moreover, since Dt(x) =
+Dt(z) + 1; replacing z with x will reduce the length of x's encoding
+by one character.
