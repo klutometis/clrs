@@ -17,7 +17,8 @@
   heapsort!
   heap-insert!
   huffman!
-  huffman-codes)
+  huffman-codes
+  huffman-tree)
  (import* srfi-70 exact-floor)
  (import* section-5.4 swap! list-set!)
  (import* util debug)
@@ -29,6 +30,7 @@
           set-bt-node-right!
           bt-node-datum
           bt-node-key
-          set-bt-node-key!)
+          set-bt-node-key!
+          bt-preorder-tree-map)
  (include "../16.3/priority-queue.scm")
  (include "../16.3/huffman.scm"))

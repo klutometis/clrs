@@ -7,34 +7,23 @@
                            n
                            frequencies)))
     (build-heap! queue)
-    (let* ((maybe (lambda (object predicate? transform default)
-                    (if (predicate? object)
-                        (transform object)
-                        default)))
-           (iter
+    (let ((iter
             (rec (iter i)
-                 (let ((x (maybe queue
-                                 (complement heap-empty?)
-                                 heap-extract-extremum!
-                                 #f))
-                       (y (maybe queue
-                                 (complement heap-empty?)
-                                 heap-extract-extremum!
-                                 #f)))
+                 (let ((x (heap-extract-extremum! queue))
+                       (y (heap-extract-extremum! queue)))
                    (let ((z (make-bt-node
-                             (+ (maybe x values bt-node-key 0)
-                                (maybe y values bt-node-key 0))
-                             (string-append (maybe x values bt-node-datum "")
-                                            (maybe y values bt-node-datum ""))
+                             (+ (bt-node-key x)
+                                (bt-node-key y))
+                             (string-append (bt-node-datum x)
+                                            (bt-node-datum y))
                              #f
                              #f
                              #f)))
                      (if x (set-bt-node-left! z x))
                      (if y (set-bt-node-right! z y))
                      (heap-insert! queue z)
-                     (if (positive? i)
-                         (iter (- i 1))))))))
-      (iter (- n 2))
+                     (if (positive? i) (iter (- i 1))))))))
+      (iter (- n 1 1))
       (heap-extract-extremum! queue))))
 
 (define (huffman-codes root)
@@ -51,3 +40,8 @@
                      (set! mapping (cons (cons prefix (bt-node-datum root))
                                          mapping))))))
     mapping))
+
+(define (huffman-tree root)
+  (bt-preorder-tree-map (lambda (frequency) (list (bt-node-key frequency)
+                                                  (bt-node-datum frequency)))
+                        root))
