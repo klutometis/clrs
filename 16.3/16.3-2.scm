@@ -11,13 +11,11 @@
                          (make-bt-node 8 "f" #f #f #f)
                          (make-bt-node 13 "g" #f #f #f)
                          (make-bt-node 21 "h" #f #f #f))))
-;;;   (check (huffman-codes (huffman! frequencies)) =>
-;;;          '(((1 1 1 1 1 1 1) . "b") ((1 1 1 1 1 1 0) . "a")
-;;;            ((1 1 1 1 1 0) . "c") ((1 1 1 1 0) . "d")
-;;;            ((1 1 1 0) . "e") ((1 1 0) . "f")
-;;;            ((1 0) . "g") ((0) . "h")))
-;;;   (print (bt-node-datum (huffman! frequencies)))
-  (huffman-tree (huffman! frequencies)))
+  (check (huffman-codes (huffman! frequencies)) =>
+         '(((1 1 1 1 1 1 1) . "b") ((1 1 1 1 1 1 0) . "a")
+           ((1 1 1 1 1 0) . "c") ((1 1 1 1 0) . "d")
+           ((1 1 1 0) . "e") ((1 1 0) . "f")
+           ((1 0) . "g") ((0) . "h"))))
 
 ;;; Where Dt(c_i) is the height of a given node in the tree, its
 ;;; Fibonacci encoding is {1}^(Dt(c_i)-1){0}; except for the last
