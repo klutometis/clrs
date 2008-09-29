@@ -6,6 +6,8 @@
  util
  (except?
   round-array
-  sublist)
+  sublist
+  debug)
  (include "../util/test.scm")
- (include "../util/string.scm"))
+ (include "../util/string.scm")
+ (include "../util/debug.scm"))

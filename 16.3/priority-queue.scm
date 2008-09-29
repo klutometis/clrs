@@ -1,8 +1,17 @@
+;; (define (parent index)
+;;   (- (floor (/ (+ index 1) 2)) 1))
+
 (define (parent i)
-  (exact-floor (/ i 2)))
+  (- (exact-floor (/ (+ i 1) 2)) 1))
+
+;; (define (left index)
+;;   (- (* (+ index 1) 2) 1))
 
 (define (left i)
   (+ (* i 2) 1))
+
+;; (define (right index)
+;;   (* (+ index 1) 2))
 
 (define (right i)
   (+ (* i 2) 1 1))
@@ -80,22 +89,20 @@
         (set-key! (heap-set-key! heap)))
     (let* ((i-ref (heap-ref heap i))
            (i-key (key i-ref)))
-      (if (and ((complement =) k i-key)
-               ((complement (heap-more? heap)) k i-key))
+      (if ((heap-more? heap) i-key k)
           (error "new key violates heap gradient -- ADJUST-KEY!" k))
       (set-key! i-ref k)
       (loop continue ((with i i)
-                      (with parent-i (parent i) (parent i))
+                      (with parent-i (parent i))
                       (while (> i 0))
-                      ;; Strict inequality might reduce the complexity
-                      ;; by a constant
-                      (while ((complement (heap-more? heap))
-                              (key (heap-ref heap parent-i))
-                              (key (heap-ref heap i)))))
+                      (while ((heap-more? heap)
+                              (key (heap-ref heap i))
+                              (key (heap-ref heap parent-i)))))
             (heap-swap! heap i parent-i)
-            (continue (=> i parent-i))))))
+            (continue (=> i parent-i)
+                      (=> parent-i (parent parent-i)))))))
 
-(define (heap-insert heap elt)
+(define (heap-insert! heap elt)
   (let ((new-size (+ (heap-size heap) 1))
         (key ((heap-key heap) elt)))
     (set-heap-size! heap new-size)
