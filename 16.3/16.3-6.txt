@@ -1,0 +1,6 @@
+f(w)dT(w) + f(x)dT(x) + f(y)dT(y) = (f(w) + f(x) + f(y))*(dT'(z) + 1)
+                                  = f(z)dT'(z) + f(w) + f(x) + f(y)
+
+B(T''') = B(T'') - (f(w) + f(x) + f(y))
+        < B(T) - (f(w) + f(x) + f(y))
+        = B(T')

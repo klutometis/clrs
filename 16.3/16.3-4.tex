@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{CLRS 16.3-4}
+\author{Peter Danenberg}
+\begin{document}
+\maketitle
+
+It were a contradiction to have an optimal tree whose frequencies and
+codewords were monotonically increasing in the strict sense; since, given $f(x_1) > \dots > f(x_n) \wedge d_T(x_1) > \cdots > d_T(x_n)$, it follows that (where $n$ is odd):
+\begin{align}
+  f(x_1)d_T(x_1) + \cdots + f(x_n)d_T(x_n) &> f(x_1)d_T(x_n) + \cdots
+  + f(x_n)d_T(x_1)\\
+  \begin{split}
+    f(x_1)(d_T(x_1) - d_T(x_n)) + \cdots + \\
+    f(x_n)(d_T(x_n) - d_T(x_1)) &> 0
+  \end{split}
+\end{align}
+\begin{equation}
+  \begin{split}
+    f(x_1)(d_T(x_1) - d_T(x_n)) + \cdots +\\
+    f(x_{\lfloor\frac{n}{2} - 1\rfloor})(d_T(x_{\lfloor\frac{n}{2}\rfloor -
+      1}) - d_T(x_{\lfloor\frac{n}{2}\rfloor + 1})) &>\\
+    f(x_{\lfloor\frac{n}{2} + 1\rfloor})(d_T(x_{\lfloor\frac{n}{2}\rfloor -
+      1}) - d_T(x_{\lfloor\frac{n}{2}\rfloor + 1}))
+    + \cdots + \\f(x_n)(d_T(x_1) - d_T(x_n))
+  \end{split}
+\end{equation}
+That is, where $i$ and $j$ are the upper and lower median,
+respectively; and $c_i = d_T(x_i) - d_T(x_{n-i+1})$:
+\begin{equation}
+  f(x_1)c_1 + \cdots + f(x_i)c_i > f(x_j)c_i + \cdots + f(x_n)c_1
+\end{equation}
+since
+\begin{align}
+  f(x_i) &> f(x_{n-i+1}) && 1\leq i\leq\lfloor\frac{n}{2}\rfloor
+\end{align}
+\end{document}

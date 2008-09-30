@@ -1,0 +1,5 @@
+This is demonstrably the case with a two-node tree; assume the same
+for a k-node tree, and add (without loss of generality) a most
+frequent node k+1. Since k+1's sibling k is the combined sum of its
+internal nodes by the inductive hypothesis, the k+1 tree is also the
+sum of node k+1 and tree k.

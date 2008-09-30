@@ -1,0 +1,7 @@
+For a full binary tree, there are n leaves and n - 1 internal nodes;
+use n + n - 1 = 2n - 1 bits to send a 0 if node x_i is internal, and 1
+if it is a leaf.
+
+Since the maximum length of a code is height(T) = ceiling(log(n)),
+send n zero-padded codes in O(n*ceiling(log(n))); yielding O(2n - 1 +
+n*ceiling(log(n))).
