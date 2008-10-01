@@ -1,17 +1,8 @@
-;; (define (parent index)
-;;   (- (floor (/ (+ index 1) 2)) 1))
-
 (define (parent i)
   (- (exact-floor (/ (+ i 1) 2)) 1))
 
-;; (define (left index)
-;;   (- (* (+ index 1) 2) 1))
-
 (define (left i)
   (+ (* i 2) 1))
-
-;; (define (right index)
-;;   (* (+ index 1) 2))
 
 (define (right i)
   (+ (* i 2) 1 1))
