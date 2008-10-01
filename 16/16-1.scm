@@ -25,4 +25,9 @@
 
 ;;; d.
 (let ((denominations '(1 5 6)))
-  (dynamic-change denominations 15))
+  (let-values (((s r) (dynamic-change denominations 15)))
+    (check (make-change denominations s r) => '(5 5 5))))
+
+(let ((denominations '(1 10 25)))
+  (let-values (((s r) (dynamic-change denominations 30)))
+    (check (make-change denominations s r) => '(10 10 10))))

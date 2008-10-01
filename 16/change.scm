@@ -32,23 +32,44 @@
           (r (make-array '#(#f) `(0 ,d) `(0 ,(+ n 1)))))
       (let ((iter-s
              (rec (iter-s i j)
-                  (let ((lookup (array-ref s i j)))
+                  (let ((lookup (if (negative? j) #f (array-ref s i j))))
                     (if lookup
                         lookup
                         (let ((denomination (list-ref denominations i)))
-                          (cond ((zero? j) (array-set! s 0 i j))
-                                ((or (negative? j)
-                                     (> (+ j denomination) n))
-                                 (array-set! s +inf i j))
-                                (else
+                          (cond ((zero? j)
+                                 (array-set! s 0 i j))
+                                ((positive? j)
                                  (array-set! s +inf i j)
-                                 (loop ((for k (up-from 0 (to i))))
+                                 (loop ((for k (up-from 0 (to (+ i 1)))))
                                        (let ((q (+ (iter-s k (- j denomination)) 1)))
                                          (if (< q (array-ref s i j))
                                              (begin
                                                (array-set! s q i j)
-                                               (array-set! r denomination i j)))))))))
-                    (array-ref s i j)))))
+                                               (array-set! r k i j)))))))))
+                    (if (negative? j)
+                        +inf
+                        (array-ref s i j))))))
         (loop ((for k (up-from 0 (to d))))
               (iter-s k n))
-        s))))
+        (values s r)))))
+
+(define (make-change denominations s r)
+  (let ((d-n (array-dimensions s)))
+    (let ((d (car d-n))
+          (n (cadr d-n)))
+      (let* ((final-tallies
+              (make-shared-array s (lambda (i) (list i (- n 1))) d))
+             (min-tally (inexact->exact (array-fold min +inf final-tallies)))
+             (min-index (list-index (lambda (x) (= x min-tally))
+                                    (array->list final-tallies))))
+        (let ((iter
+               (rec (iter change coins d n)
+                    (if (zero? coins)
+                        change
+                        (let ((next-coin (array-ref r d n))
+                              (denomination (list-ref denominations d)))
+                          (iter (cons denomination change)
+                                (- coins 1)
+                                next-coin
+                                (- n denomination)))))))
+          (iter '() min-tally min-index (- n 1)))))))
