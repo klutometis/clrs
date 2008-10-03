@@ -13,7 +13,7 @@
   (key heap-key)
   (set-key! heap-set-key!)
   (more? heap-more?)
-  (extremum heap-extremum)
+  (extremum heap-range-extremum)
   (size heap-size set-heap-size!)
   (data heap-data set-heap-data!))
 
@@ -75,6 +75,12 @@
       (heapify! heap 0)
       extremum)))
 
+(define (heap-extremum heap)
+  (let ((size (heap-size heap)))
+    (if (< size 1)
+        (error "heap underflow -- EXTREMUM"))
+    (car (heap-data heap))))
+
 (define (heap-adjust-key! heap i k)
   (let ((key (heap-key heap))
         (set-key! (heap-set-key! heap)))
@@ -100,10 +106,17 @@
     (if (>= (heap-length heap) new-size)
         (list-set! (heap-data heap) (- new-size 1) elt)
         (set-heap-data! heap (append (heap-data heap) (list elt))))
-    ((heap-set-key! heap) elt (heap-extremum heap))
+    ((heap-set-key! heap) elt (heap-range-extremum heap))
     (heap-adjust-key! heap (- new-size 1) key)))
 
 (define (heapsort! heap)
   (if (heap-empty? heap)
       '()
       (cons (heap-extract-extremum! heap) (heapsort! heap))))
+
+(define (heap-union! destination source)
+  (if (heap-empty? source)
+      destination
+      (begin
+        (heap-insert! destination (heap-extract-extremum! source))
+        (heap-union! destination source))))

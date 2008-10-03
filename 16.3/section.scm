@@ -16,6 +16,8 @@
   heap-empty?
   heapsort!
   heap-insert!
+  heap-extremum
+  heap-union!
   huffman!
   huffman-codes
   huffman-tree)

@@ -7,6 +7,7 @@
   (let ((max-heap
          (make-heap car set-car! > -inf (length data) (list-copy data))))
     (build-heap! max-heap)
+    (check (heap-extremum max-heap) => '(16 . #f))
     (check (heap-data max-heap) =>
            '((16 . #f) (14 . #f) (10 . #f) (8 . #f) (7 . #f) (9 . #f)
              (3 . #f) (2 . #f) (4 . #f) (1 . #f)))
@@ -16,6 +17,7 @@
   (let ((min-heap
          (make-heap car set-car! < +inf (length data) (list-copy data))))
     (build-heap! min-heap)
+    (check (heap-extremum min-heap) => '(1 . #f))
     (check (heap-data min-heap) =>
            '((1 . #f) (2 . #f) (3 . #f) (4 . #f) (7 . #f) (9 . #f)
              (10 . #f) (14 . #f) (8 . #f) (16 . #f)))
@@ -44,3 +46,16 @@
   (heap-insert! heap '(7 . #f))
   (check (heap-data heap) =>
          '((1 . #f) (2 . #f) (3 . #f) (4 . #f) (5 . #f) (6 . #f) (7 . #f))))
+
+(let ((data-a '((4 . #f) (1 . #f) (3 . #f) (2 . #f) (16 . #f)))
+      (data-b '((9 . #f) (10 . #f) (14 . #f) (8 . #f) (7 . #f))))
+  (let ((heap-a
+         (make-heap car set-car! > -inf (length data-a) data-a))
+        (heap-b
+         (make-heap car set-car! > -inf (length data-b) data-b)))
+    (build-heap! heap-a)
+    (build-heap! heap-b)
+    (check (heap-data (heap-union! heap-a heap-b)) =>
+           '((16 . #f) (9 . #f) (14 . #f) (8 . #f)
+             (7 . #f) (3 . #f) (10 . #f) (2 . #f)
+             (4 . #f) (1 . #f)))))
