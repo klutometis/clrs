@@ -1,0 +1,3 @@
+For every non-power-of-two, charge two units; for every power-of-two,
+none. Thus, credit is equal to expenditure; and total amortized
+complexity O(n) (O(1) per operation).

@@ -1,0 +1,6 @@
+Charge three units for every increment: one to pay for the setting;
+one to pay for the future resetting; one to contribute to the
+highest-order pot, should the highest order increase.
+
+Reset should be charged one dollar for the resetting of the highest
+bit; the highest-order pot will go towards resetting the rest.

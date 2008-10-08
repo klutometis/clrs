@@ -1,0 +1,4 @@
+Charge two units for every push and two for every pop; using one unit
+to pay for the operation and another to keep in the pot. Thus, after
+every k operations, there are at least k units in the pot; credit
+never goes negative, and the amortized complexity is O(n).
