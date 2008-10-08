@@ -1,0 +1,3 @@
+The logarithmic bit flipping predicate does not hold, and indeed a
+sequence of events could consist of the incrementation of all 1s and
+decrementation of all 0s; yielding Theta(nk).

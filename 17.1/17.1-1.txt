@@ -1,0 +1,1 @@
+Yes; in the worst case, the average cost is still O(k)/k = O(1).
