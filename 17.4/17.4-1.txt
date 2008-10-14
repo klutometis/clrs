@@ -1,0 +1,10 @@
+Since there is an exponential relationship betteen the load factor and
+expected number of probes; expanding the table early (while alpha < 1)
+would be economical.
+
+If c is the multiplying factor of expansion, the table size should be
+increasing when the difference between 1/(1 - alpha) and 1/(1 -
+alpha/c) will pay for copying the table.
+
+The expected number of probes approaches n as the expected number of
+probes increases.

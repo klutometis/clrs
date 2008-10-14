@@ -1,0 +1,4 @@
+There should be four cases to test, only one of which works:
+
+c^_i = 1 + (-(2num_i - size_i)) - (-(2(num_i + 1) - size_i))
+     = 3

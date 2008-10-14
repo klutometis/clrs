@@ -1,0 +1,6 @@
+The following, mysteriously, does not work:
+
+c^_i = c_i + phi_i - phi_{i-1}
+     = 1 + 2num_i - size_i - (2num_{i-1} - size_{i-1})
+     = 1 + 2num_i - size_i - 2num_i - 2 + size_i
+     = -1
