@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{clrscode, enumerate, amsmath, url}
+\author{Peter Danenberg}
+\title{CLRS 17-1}
+\begin{document}
+\maketitle
+\begin{enumerate}[a.]
+\item Iteratively $\func{rev_k}$ the $n$ numbers in $\Theta(k)$,
+  yielding $\Theta(nk)$.
+\item Cf. $\proc{Increment}(A)$; a similar amortized analysis applies.
+  \begin{codebox}
+    \Procname{$\proc{Bit-Reversed-Increment}(A, k)$}
+    \li $i \gets k - 1$
+    \li \While $i \geq 0$ and $A[i] = 0$
+    \li \Do
+    $A[i] \gets 1$
+    \li $i \gets i + 1$
+    \End
+    \li \If $i \geq 0$
+    \li \Then
+    $A[i] \gets 1$
+  \End
+  \end{codebox}
+\item Thanks, Richard
+  Borie;\footnote{\url{http://cs.ua.edu/601/fall2000/hw-soln.htm}} the
+  same amortized analysis still holds.
+  \begin{codebox}
+    \Procname{$\proc{Bit-Reversed-Increment-Shift}(A, k)$}
+    \li $\id{mask} \gets 2^{k-1}$
+    \li $\id{count} \gets 0$
+    \li \While $\proc{Bitwise-AND}(A, \id{mask})$
+    \li \Do
+    $\proc{Left-Shift}(A)$
+    \li $\id{count} \gets \id{count} + 1$
+    \End
+    \li $x \gets \proc{Bitwise-OR}(x, \id{mask})$
+    \li \While $\id{count} > 0$
+    \li \Do
+    $\proc{Right-Shift}(A)$
+    \li $\id{count} \gets \id{count} - 1$
+    \End
+  \end{codebox}
+\end{enumerate}
+\end{document}

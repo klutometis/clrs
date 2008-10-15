@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{enumerate, amsmath, clrscode}
+\author{Peter Danenberg}
+\title{CLRS 17-2}
+\begin{document}
+\maketitle
+
+\begin{enumerate}[a.]
+\item Search through the preliminary elements of $A_0, \dots, A_{\lg
+  n - 1}$, finding $A_i[0] \leq x$; search $A_i$ for $x$: if $x$ is not
+  found, search the next $A_{i < j < \lg n}$ such that $A_j[0] \leq x$
+  or declare ``not found.''
+
+  Worst case, must search through all $A_0, \dots, A_{\lg n}$ arrays
+  in $\Theta(\lg n)$; each of which must be binary-searched in
+  $\Theta(\lg n)$ (since already sorted): for a total of $\Theta(\lg^2
+  n)$.
+\item Insert an element as follows:
+  \begin{codebox}
+    \Procname{$\proc{Insert}(A, x)$}
+    \li \If $\lceil\lg{n+1}\rceil > k$
+    \li \Then
+    Allocate new array $A_{k+1}$
+    \li $k \gets k+1$
+    \End
+    \li \While $i < k$ and $n[i] = 1$
+    \li \Do
+    $\proc{Merge}(A_i, A_{i+1})$
+    \li $n[i] \gets 0$
+    \li $i \gets i + 1$
+    \End
+    \li $n[i] \gets 1$
+  \end{codebox}
+  Worst case merge and remerge arrays in $\Theta(2^{\lg n}) \in
+  \Theta(n)$ time; alternatively, merge sorted lists in $\Theta(n)$:
+  \begin{align}
+    \sum_{i=0}^{k-1}2^i &= \left(\frac{2^{k+1} - 1}{2-1}\right)\\
+    &\in \Theta(2^k)\\
+    &\in \Theta(n)
+  \end{align}
+  Since, for every bit set, there are worst-case $\Theta(\lg n)$ merge
+  operations; we can define modify the potential function in the
+  counter example followingly:
+  \begin{align}
+    \Phi(D_i)-\Phi(D_{i-1}) &\leq \lg n\cdot(b_{i-1}-t_i+1) - \lg n\cdot b_{i-1}\\
+    &= \lg n\cdot(t_i - 1)
+  \end{align}
+  And analyze the amortized complexity:
+  \begin{align}
+    \hat{c}_i &= c_i + \Phi(D_i) - \Phi(D_{i-1})\\
+    &= \lg n \cdot t_i + \lg n\cdot(1 - t_i)\\
+    &= \lg n
+  \end{align}
+  The amortized cost of each $\proc{Insert}$ is therefore $\Theta(\lg n)$.
+\item For $\proc{Delete}(x)$: find $A_j$, the first full array; and
+  $A_i$, the array to which $x$ belongs. Remove an element $y$ from
+  $A_j$ and replace $x$ in $A_i$ with it; distribute the remaining
+  items from $A_j$ into $A_0, \dots, A_{j-1}$.
+
+  Worst case analysis: $\Theta(\lg n)$ to find $A_j$; $\Theta(\lg^2
+  n)$ to find $A_i$; $\Theta(2^{\lg n}) \in \Theta(n)$ to insert $y$
+  into $A_i$; and $\Theta(2^{\lg n - 1}) \in \Theta(n)$ to distribute
+  $A_j$ to its underarrays: for $\Theta(n)$ total in the worst case.
+\end{enumerate}
+\end{document}
