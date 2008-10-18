@@ -1,0 +1,66 @@
+(define-record-type :fibonacci-heap
+  (make-fibonacci-heap min n)
+  fibonacci-heap?
+  (min fibonacci-heap-min set-fibonacci-heap-min!)
+  (n fibonacci-heap-n set-fibonacci-heap-n!))
+
+(define-record-type :fibonacci-node
+  (make-fibonacci-node key datum parent child left right mark degree)
+  fibonacci-node?
+  (key fibonacci-node-key set-fibonacci-node-key!)
+  (datum fibonacci-node-datum set-fibonacci-node-datum!)
+  (p fibonacci-node-p set-fibonacci-node-parent!)
+  (child fibonacci-node-child set-fibonacci-node-child!)
+  (left fibonacci-node-left set-fibonacci-node-left!)
+  (right fibonacci-node-right set-fibonacci-node-right!)
+  (mark fibonacci-node-mark set-fibonacci-node-mark!)
+  (degree fibonacci-node-degree set-fibonacci-node-degree!))
+
+(define (splice! n1 n2)
+  (let ((n1-left (fibonacci-node-left n1))
+        (n2-left (fibonacci-node-left n2)))
+    (set-fibonacci-node-right! n1-left n2-left)
+    (set-fibonacci-node-left! n2-left n1-left)
+    (set-fibonacci-node-right! n2 n1)
+    (set-fibonacci-node-left! n1 n2)))
+
+(define (fibonacci-heap-insert! heap node)
+  (set-fibonacci-node-degree! node 0)
+  (set-fibonacci-node-parent! node #f)
+  (set-fibonacci-node-child! node #f)
+  (set-fibonacci-node-left! node node)
+  (set-fibonacci-node-right! node node)
+  (set-fibonacci-node-mark! node #f)
+  (let ((min (fibonacci-heap-min heap)))
+    (if min
+        (begin (splice! min node)
+               (if (< (fibonacci-node-key node)
+                      (fibonacci-node-key min))
+                   (set-fibonacci-heap-min! heap node)))
+        (set-fibonacci-heap-min! heap node)))
+  (set-fibonacci-heap-n! heap (+ (fibonacci-heap-n heap) 1)))
+
+(define (fibonacci-heap-union! . heaps)
+  (let ((uniheap (make-fibonacci-heap #f 0)))
+    (for-each (lambda (heap)
+                (let ((unimin (fibonacci-heap-min uniheap))
+                      (min (fibonacci-heap-min heap)))
+                  (cond ((and unimin min)
+                         (begin (splice! unimin min)
+                                (if (< (fibonacci-node-key min)
+                                       (fibonacci-node-key unimin))
+                                    (set-fibonacci-heap-min! heap min))))
+                        (min (set-fibonacci-heap-min! uniheap min)))))
+              heaps)
+    uniheap))
+
+(define (fibonacci-heap-map-roots proc heap)
+  (let ((min (fibonacci-heap-min heap)))
+    (if min
+        (let iter ((next (fibonacci-node-left min)))
+          (let ((processum (proc next)))
+            (if (eq? min next)
+                (cons processum '())
+                (cons processum
+                      (iter (fibonacci-node-left next))))))
+        '())))
