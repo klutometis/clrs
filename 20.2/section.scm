@@ -9,6 +9,6 @@
   fibonacci-node-key
   fibonacci-heap-insert!
   fibonacci-heap-union!
-  fibonacci-heap-map-roots)
+  fibonacci-heap-roots)
  (import* util debug)
  (include "../20.2/fibonacci.scm"))

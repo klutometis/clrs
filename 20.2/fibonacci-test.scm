@@ -15,4 +15,4 @@
 ;;;   (debug (fibonacci-heap-map-roots fibonacci-node-key h1))
 ;;;   (debug (fibonacci-heap-map-roots fibonacci-node-key h2))
   (let ((union (fibonacci-heap-union! h1 h2)))
-    (fibonacci-heap-map-roots fibonacci-node-key union)))
+    (map fibonacci-node-key (fibonacci-heap-roots union))))
