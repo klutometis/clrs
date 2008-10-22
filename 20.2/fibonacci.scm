@@ -91,12 +91,13 @@
 
 (define (siblings node)
 ;;;   (debug (fibonacci-node-key node))
-  (let iter ((next (fibonacci-node-right node)))
+  (cons node
+        (let iter ((next (fibonacci-node-right node)))
 ;;;     (debug (fibonacci-node-key next))
-    (if (eq? node next)
-        (cons node '())
-        (cons next
-              (iter (fibonacci-node-right next))))))
+          (if (eq? node next)
+              '()
+              (cons next
+                    (iter (fibonacci-node-right next)))))))
 
 (define (fibonacci-heap-roots heap)
   (let ((min (fibonacci-heap-min heap)))
