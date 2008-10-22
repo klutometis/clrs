@@ -1,0 +1,3 @@
+D(n)  = C(k, 1)
+      = k
+     <= floor(lg(n))

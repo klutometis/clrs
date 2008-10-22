@@ -1,0 +1,3 @@
+In the two cases where a minimum must be reestablished (delete and
+extract-min), all roots must be compared for a cost of Theta(D(n)) =
+Theta(lg n); the amortized cost is no different.

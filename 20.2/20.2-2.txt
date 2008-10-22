@@ -1,0 +1,15 @@
+1. An unordered binomial tree U_k consists of two copies of U_{k-1}
+and thus has 2 * 2^{k-1} = 2^k nodes.
+
+2. Because the root of U_k is the immediate parent of U_{k-1}, its
+maximum depth is (k - 1) + 1 = k.
+
+3. D(k, i) = D(k - 1, i) + D(k - 1, i - 1)
+           = C(k, i)
+
+4'. The roots of U_{k-1} are U_{k-2}, ..., U_0 by the inductive
+hypothesis; since U_{k-1} becomes the child of U_{k-1} to form U_k,
+the children of U_k are U_{k-1}, U_{k-2}, ..., U_0.
+
+U_k has one more child (itself) than the previous most degreed root
+U_{k-1}.

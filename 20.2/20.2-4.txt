@@ -1,0 +1,12 @@
+               McGee heap (worst case)
+make-heap      Theta(1)
+insert         O(lg n)
+minimum        O(lg n)
+extract-min    Theta(lg n)
+union          O(lg n)
+decrease-key   Theta(lg n)
+delete         Theta(lg n)
+
+McGee heaps are indistinguishable from binomial heaps in that they
+refrain from deferring the difficult work of restructuring to delete
+and extract-min.
