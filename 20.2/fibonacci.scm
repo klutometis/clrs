@@ -55,7 +55,9 @@
   (let ((min (fibonacci-heap-min heap)))
     (if min
         (splice! (fibonacci-heap-min heap) node)
-        (set-fibonacci-heap-min! heap node))))
+        (begin
+          (self-relate! node)
+          (set-fibonacci-heap-min! heap node)))))
 
 (define (fibonacci-heap-insert! heap node)
   (set-fibonacci-node-degree! node 0)
@@ -140,21 +142,37 @@
   (let ((degrees (make-vector (+ (maximum-degree heap) 1) #f)))
     (for-each
      (lambda (root)
+;;;        (debug (list 'for-each
+;;;                     (fibonacci-node-key root)))
        (let iter ((root root)
                   (degree (fibonacci-node-degree root)))
+;;;          (debug (list
+;;;                  'iter
+;;;                  (fibonacci-node-key root)
+;;;                  degree))
          (let ((byroot (vector-ref degrees degree)))
+;;;            (debug (list 'byroot
+;;;                         (if byroot
+;;;                             (fibonacci-node-key byroot)
+;;;                             #f)))
            (if byroot
                (let-values (((parent child)
                              (if (< (fibonacci-node-key root)
                                     (fibonacci-node-key byroot))
                                  (values root byroot)
                                  (values byroot root))))
+;;;                  (debug (list
+;;;                          'link
+;;;                          (fibonacci-node-key child)
+;;;                          (fibonacci-node-key parent)))
                  (link! heap child parent)
+;;;                  (debug (fibonacci-heap->list fibonacci-node-key heap))
                  (vector-set! degrees degree #f)
                  (iter parent (+ degree 1)))
                (vector-set! degrees degree root)))))
      (fibonacci-heap-roots heap))
     (set-fibonacci-heap-min! heap #f)
+;;;     (debug (vector-map (lambda (i x) (if x (fibonacci-node-key x) #f)) degrees))
     (loop ((for root (in-vector degrees)))
           (if root
               (let ((min (fibonacci-heap-min heap)))
@@ -162,7 +180,9 @@
                 (if (or (not min)
                         (< (fibonacci-node-key root)
                            (fibonacci-node-key min)))
-                    (set-fibonacci-heap-min! heap root)))))))
+                    (set-fibonacci-heap-min! heap root))))
+;;;           (debug (fibonacci-heap->list fibonacci-node-key heap))
+          )))
 
 (define (fibonacci-heap-extract-min! heap)
   (let ((min (fibonacci-heap-min heap)))
@@ -175,12 +195,15 @@
            (children min))
           (set-fibonacci-node-child! min #f)
           (sever! min)
-;;;           (debug (siblings (fibonacci-node-right (fibonacci-node-right min))))
+;;;           (debug (map fibonacci-node-key (siblings (fibonacci-node-right (fibonacci-node-right min)))))
           (if (only? min)
               (set-fibonacci-heap-min! heap #f)
               (begin
                 (set-fibonacci-heap-min! heap (fibonacci-node-right min))
-                (consolidate! heap)))
+;;;                 (debug (fibonacci-heap->list fibonacci-node-key heap))
+                (consolidate! heap)
+;;;                 (debug (fibonacci-heap->list fibonacci-node-key heap))
+                ))
           (set-fibonacci-heap-n! heap (- (fibonacci-heap-n heap) 1))
           ))
     min))

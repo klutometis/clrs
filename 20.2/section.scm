@@ -1,6 +1,7 @@
 (require-extension
  syntax-case
  foof-loop
+ vector-lib
  (srfi 9 11))
 (require '../util/util)
 (require '../srfi/srfi-70)
