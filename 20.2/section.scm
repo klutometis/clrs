@@ -15,6 +15,7 @@
   fibonacci-heap-roots
   fibonacci-heap-min
   fibonacci-heap-extract-min!
+  fibonacci-heap-empty?
   fibonacci-heap->list
   figure-20.3)
  (import* util debug)

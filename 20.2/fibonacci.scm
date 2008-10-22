@@ -16,6 +16,9 @@
   (mark fibonacci-node-mark set-fibonacci-node-mark!)
   (degree fibonacci-node-degree set-fibonacci-node-degree!))
 
+(define (fibonacci-heap-empty? heap)
+  (not (fibonacci-heap-min heap)))
+
 ;; (define (splice! n1 n2)
 ;;   (let ((n1-left (fibonacci-node-left n1))
 ;;         (n2-left (fibonacci-node-left n2)))
