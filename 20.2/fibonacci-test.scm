@@ -15,7 +15,7 @@
   (fibonacci-heap-insert! h1 n4)
   (let ((union (fibonacci-heap-union! h1 h2)))
     (check (fibonacci-heap->list fibonacci-node-key union)
-           => '((4) (3) (2) (1)))
+           => '((2) (3) (4) (1)))
     (check (fibonacci-node-key (fibonacci-heap-extract-min! union))
            => 1)
     (check (fibonacci-heap->list fibonacci-node-key union)

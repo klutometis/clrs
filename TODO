@@ -8,6 +8,10 @@ identity mapping.
 Each solution could probably use a description in addition to the
 code.
 
+There should be one big tex file which includes the sectional tex
+files programatically; each sectional tex should have no title,
+therefore, but well perhaps a section or subsection.
+
 6.5-8 need a heap with satellite data
 
 8.3 radix-sort needs generalizing to other bases, cardinalities.
