@@ -1,0 +1,6 @@
+Starting from an empty head, an succession of n inserts and
+decrease-keys in O(n)/n = O(1) amortized time; but since each
+cascading cut produces at most k = lg(n) new roots of height lg(k):
+subsequent cascades produce O(lg*(k)) ~= O(1) cuts.
+
+(Need to refine.)

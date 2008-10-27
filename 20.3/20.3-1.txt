@@ -1,0 +1,6 @@
+The marked child of a min that was appended to the root list during an
+extract-min may still be marked; but since parentless nodes cannot
+propagate a cascading cut, there is no pontential cut to compensate
+for.
+
+Parentless nodes cannot be marked by terminating a cascading cut.

@@ -18,7 +18,8 @@
       (set-fibonacci-node-child! parent (fibonacci-node-right child)))
   (root-list-append! heap child)
   (set-fibonacci-node-degree! parent (- (fibonacci-node-degree parent) 1))
-  (set-fibonacci-node-parent! child #f))
+  (set-fibonacci-node-parent! child #f)
+  (set-fibonacci-node-mark! child #f))
 
 (define (cascading-cut! heap child)
   (let ((parent (fibonacci-node-parent child)))
@@ -27,3 +28,7 @@
             (begin (cut! heap child parent)
                    (cascading-cut! heap parent))
             (set-fibonacci-node-mark! child #t)))))
+
+(define (fibonacci-heap-delete! heap node)
+  (fibonacci-heap-decrease-key! heap node -inf)
+  (fibonacci-heap-extract-min! heap))
