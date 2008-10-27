@@ -1,0 +1,2 @@
+Repeated invocation of decrease-key produces a linear chain of n
+roots.
