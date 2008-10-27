@@ -217,5 +217,8 @@
     (set-fibonacci-node-parent-child-left-right! n39 n18 #f n39 n39)
     (set-fibonacci-node-parent-child-left-right! n41 n38 #f n41 n41)
     (set-fibonacci-node-parent-child-left-right! n35 n26 #f n35 n35)
+    (set-fibonacci-node-mark! n18 #t)
+    (set-fibonacci-node-mark! n26 #t)
+    (set-fibonacci-node-mark! n39 #t)
     (set-fibonacci-heap-min! heap n3)
     heap))
