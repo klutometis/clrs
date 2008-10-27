@@ -3,5 +3,7 @@
 (import section-20.2)
 (module
  section-20.3
- (fibonacci-heap-decrease-key!)
+ (fibonacci-heap-decrease-key!
+  cut!
+  cascading-cut!)
  (include "../20.3/fibonacci.scm"))
