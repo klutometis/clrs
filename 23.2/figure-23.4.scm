@@ -1,0 +1,8 @@
+(require-extension srfi-69)
+(require 'section)
+(import section-23.2)
+(map (lambda (edge)
+       (list (member-datum (edge-whence edge))
+             (member-datum (edge-whither edge))
+             (edge-weight edge))) (minimum-spanning-tree/kruskal (figure-23.1)))
+;; (print (alist->hash-table (figure-23.1)))
