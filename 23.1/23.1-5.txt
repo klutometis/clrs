@@ -1,0 +1,7 @@
+In order to convert a cycle into a spanning tree, remove an arbitrary
+edge; if any edge but e be removed, remove e instead to achieve a
+lesser or equal total weight.
+
+Conversely, in building the tree from the bottom up; e would be
+rejected as a light edge in every cut, until it is the last
+unincorporated edge: at which point the spanning tree is complete.

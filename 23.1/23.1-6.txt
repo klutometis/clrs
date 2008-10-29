@@ -1,0 +1,3 @@
+Consider a decision tree for the choice of light edge; a sequence of
+unique light edges will result in a linear decision tree, and thus a
+unique spanning tree.

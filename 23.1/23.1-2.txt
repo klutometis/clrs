@@ -1,0 +1,2 @@
+In 23.1-2.png, a cut across b--d and c--e has one light edge but two
+safe edges.

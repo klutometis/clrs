@@ -1,0 +1,2 @@
+Since T still contains the edges of least weight, the MST property is
+not violated.

@@ -1,0 +1,9 @@
+Assume for the sake of contradiction that a subset of edges E'
+connects all vertices and has a minimum total weight; assume that T' =
+(V', E') is not a tree: if T' is not a tree, it has some cycle C; if
+T' has a cycle C, an edge e could be removed while still connecting
+V'; if e has a positive weight, T' cannot have a minimum total weight;
+thus contradicting the assumption.
+
+23.1-7.png shows a graph with a minimal set of real edges that is not
+a tree.

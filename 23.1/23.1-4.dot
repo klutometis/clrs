@@ -1,0 +1,6 @@
+digraph G {
+  edge [dir=none];
+  a -> b [label=1];
+  b -> c [label=1];
+  c -> a [label=1];
+}

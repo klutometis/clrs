@@ -1,0 +1,2 @@
+According to Theorem 23.1, if (u, v) was ever safe in T; it must have
+been a light edge.

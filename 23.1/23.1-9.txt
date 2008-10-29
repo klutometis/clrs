@@ -1,0 +1,2 @@
+E' in T' will contain the crossection of edges in G' with least
+weight, thus upholding the MST theorem of light -> safe.

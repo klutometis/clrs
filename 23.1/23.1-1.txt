@@ -1,0 +1,2 @@
+It belongs to the MST, namely, that cuts across (u, v); for (u, v)
+must be the light edge in that case.

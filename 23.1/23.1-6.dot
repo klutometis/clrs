@@ -1,0 +1,6 @@
+digraph G {
+  graph [rankdir=LR];
+  edge [dir=none];
+  a -> b [label=1];
+  a -> c [label=1];
+}
