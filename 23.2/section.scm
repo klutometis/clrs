@@ -16,7 +16,9 @@
   set-union!
   set-map
   graph-edges
-  graph-vertices)
+  graph-vertices
+  set-head
+  set-tail)
  (import* util debug)
  (include "../23.2/graph.scm")
  (include "../23.2/set.scm")

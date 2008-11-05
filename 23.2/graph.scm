@@ -49,7 +49,7 @@
          (hash-table-set! x-y->weight (cons x y) weight)))
      weights)
     (lambda (x y)
-      (debug x y)
+;;;       (debug x y)
       (hash-table-ref
        x-y->weight
        (cons x y)

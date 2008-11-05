@@ -20,6 +20,7 @@
 
 (define (set-map proc set)
   (let iter ((member (set-head set)))
+;;;     (debug (if member (set-member-datum member)))
     (if (not member)
         '()
         (cons (proc member) (iter (set-member-next member))))))
@@ -33,7 +34,8 @@
 (define (set-union! x y)
   (let ((representative (set-member-representative (set-head y))))
     (set-for-each
-     (lambda (member) (set-set-member-representative! member representative))
+     (lambda (member)
+       (set-set-member-representative! member representative))
      x))
   (set-set-member-next! (set-tail y) (set-head x))
   (set-set-tail! y (set-tail x))
