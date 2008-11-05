@@ -1,20 +1,40 @@
-(define-record-type :member
-  (make-member datum representative)
-  member?
-  (representative member-representative set-member-representative!)
-  (datum member-datum set-member-datum!))
+(define-record-type :set
+  (make-set head tail)
+  set?
+  (head set-head set-set-head!)
+  (tail set-tail set-set-tail!))
+
+(define-record-type :set-member
+  (make-set-member datum representative next)
+  set-member?
+  (datum set-member-datum)
+  (representative set-member-representative set-set-member-representative!)
+  (next set-member-next set-set-member-next!))
+
+(define (set-for-each proc set)
+  (let iter ((member (set-head set)))
+    (if member
+        (begin
+          (proc member)
+          (iter (set-member-next member))))))
+
+(define (set-map proc set)
+  (let iter ((member (set-head set)))
+    (if (not member)
+        '()
+        (cons (proc member) (iter (set-member-next member))))))
+
+(define (make-set/datum datum)
+  (let* ((member (make-set-member datum #f #f))
+         (set (make-set member member)))
+    (set-set-member-representative! member member)
+    set))
 
 (define (set-union! x y)
-  (cond ((null? x) y)
-        ((null? y) x)
-        (else
-         (let-values
-             (((appensum appendendum)
-               (if (> (length x) (length y))
-                   (values x y)
-                   (values y x))))
-           (let ((representative
-                  (member-representative (car appensum))))
-             (loop ((for member (in-list appendendum)))
-                   (set-member-representative! member representative))
-             (set-cdr! (last-pair appensum appendendum)))))))
+  (let ((representative (set-member-representative (set-head y))))
+    (set-for-each
+     (lambda (member) (set-set-member-representative! member representative))
+     x))
+  (set-set-member-next! (set-tail y) (set-head x))
+  (set-set-tail! y (set-tail x))
+  (set-set-head! x (set-head y)))
