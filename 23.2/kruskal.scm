@@ -6,9 +6,7 @@
           (let ((whence (edge-whence edge))
                 (whither (edge-whither edge)))
             (let ((whence-set (node-datum whence))
-                  (whither-set (node-datum whither))
-                  (whence-label (node-label whence))
-                  (whither-label (node-label whither)))
+                  (whither-set (node-datum whither)))
               (let ((whence-representative
                      (set-member-representative
                       (set-head whence-set)))
@@ -17,15 +15,9 @@
                       (set-head whither-set))))
                 (if (not (eq? whence-representative whither-representative))
                     (begin
-                      (debug (list
-                              whence-label
-                              whither-label
-                              (set-map set-member-datum whence-set)
-                              (set-map set-member-datum whither-set)))
                       (set-union! whence-set whither-set)
                       (continue
-                       (=> tree-edges
-                           (cons (cons whence-label whither-label) tree-edges))))
+                       (=> tree-edges (cons edge tree-edges))))
                     (continue))))))))
 
 (define (figure-23.1)

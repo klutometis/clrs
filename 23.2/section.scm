@@ -18,7 +18,8 @@
   graph-edges
   graph-vertices
   set-head
-  set-tail)
+  set-tail
+  node-label)
  (import* util debug)
  (include "../23.2/graph.scm")
  (include "../23.2/set.scm")
