@@ -6,9 +6,10 @@
   (weight edge-weight))
 
 (define-record-type :node
-  (make-node datum weight)
+  (make-node datum label weight)
   node?
   (datum node-datum set-node-datum!)
+  (label node-label set-node-label!)
   (weight node-weight set-node-weight!))
 
 (define-record-type :weighted-graph

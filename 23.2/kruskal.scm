@@ -5,30 +5,39 @@
           => tree-edges
           (let ((whence (edge-whence edge))
                 (whither (edge-whither edge)))
-            (let ((whence-representative
-                   (set-member-representative (set-head whence)))
-                  (whither-representative
-                   (set-member-representative (set-head whither))))
-                    (debug (list
-                            (set-map set-member-datum whence)
-                            (set-map set-member-datum whither)))
-              (if (not (eq? whence-representative whither-representative))
-                  (begin
-                    (set-union! whence whither)
-                    (continue
-                     (=> tree-edges (cons edge tree-edges))))
-                  (continue)))))))
+            (let ((whence-set (node-datum whence))
+                  (whither-set (node-datum whither))
+                  (whence-label (node-label whence))
+                  (whither-label (node-label whither)))
+              (let ((whence-representative
+                     (set-member-representative
+                      (set-head whence-set)))
+                    (whither-representative
+                     (set-member-representative
+                      (set-head whither-set))))
+                (if (not (eq? whence-representative whither-representative))
+                    (begin
+                      (debug (list
+                              whence-label
+                              whither-label
+                              (set-map set-member-datum whence-set)
+                              (set-map set-member-datum whither-set)))
+                      (set-union! whence-set whither-set)
+                      (continue
+                       (=> tree-edges
+                           (cons (cons whence-label whither-label) tree-edges))))
+                    (continue))))))))
 
 (define (figure-23.1)
-  (let ((a (make-set/datum 'a))
-        (b (make-set/datum 'b))
-        (c (make-set/datum 'c))
-        (d (make-set/datum 'd))
-        (e (make-set/datum 'e))
-        (f (make-set/datum 'f))
-        (g (make-set/datum 'g))
-        (h (make-set/datum 'h))
-        (i (make-set/datum 'i)))
+  (let ((a (make-node (make-set/datum 'a) 'a 0))
+        (b (make-node (make-set/datum 'b) 'b 0))
+        (c (make-node (make-set/datum 'c) 'c 0))
+        (d (make-node (make-set/datum 'd) 'd 0))
+        (e (make-node (make-set/datum 'e) 'e 0))
+        (f (make-node (make-set/datum 'f) 'f 0))
+        (g (make-node (make-set/datum 'g) 'g 0))
+        (h (make-node (make-set/datum 'h) 'h 0))
+        (i (make-node (make-set/datum 'i) 'i 0)))
     (let ((adjacencies
            (list->adjacencies
             `((,a ,b)
