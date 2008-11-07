@@ -18,6 +18,9 @@
   (adjacencies graph-adjacencies)
   (weight-ref graph-weight-ref))
 
+;; (define (list->adjacencies adjacencies)
+;;   (alist->hash-table adjacencies eq? hash-by-identity))
+
 (define list->adjacencies alist->hash-table)
 
 (define (graph-edges graph)
@@ -39,8 +42,19 @@
 (define (graph-nodes graph)
   (hash-table-keys (graph-adjacencies graph)))
 
+;; (define (adjacent-nodes graph node)
+;;   (hash-table-ref (graph-adjacencies graph) node))
+
+;;; Why is this shit necessary after passing graph and root to a
+;;; procedure?
+(define (adjacent-nodes graph node)
+  (cdr (find (lambda (row) (eq? node (car row)))
+             (hash-table->alist (graph-adjacencies graph)))))
+
 ;;; Adding new edges is a pain-in-the-ass: O(|E|). Or: pass two values
-;;; back: the weight-ref and modifiable weight-table.
+;;; back: the weight-ref and modifiable weight-table. Abstract out the
+;;; "add a trinary list to the hash-table function", and use it to
+;;; modify the table.
 (define (bidirectional-weight-ref weights . default)
   (let ((x-y->weight (make-hash-table)))
     (for-each

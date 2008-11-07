@@ -4,9 +4,11 @@
  (srfi 1 9 11 26 69 95))
 (require '../util/util)
 (require '../20.2/section)
+(require '../20.3/section)
 (module
  section-23.2
  (minimum-spanning-tree/kruskal
+  minimum-spanning-tree/prim
   figure-23.1
   edge-whence
   edge-whither
@@ -20,14 +22,21 @@
   graph-nodes
   set-head
   set-tail
-  node-label)
+  node-label
+  make-prim-datum
+  set-prim-datum-key!
+  node-datum
+  adjacent-nodes)
  (import* util debug)
  (import* section-20.2
           make-fibonacci-heap
-          make-fibonacci-heap-node
+          make-fibonacci-node
           fibonacci-heap-insert!
           fibonacci-heap-extract-min!
+          fibonacci-node-datum)
+ (import* section-20.3
           fibonacci-heap-decrease-key!)
  (include "../23.2/graph.scm")
  (include "../23.2/set.scm")
- (include "../23.2/kruskal.scm"))
+ (include "../23.2/kruskal.scm")
+ (include "../23.2/prim.scm"))

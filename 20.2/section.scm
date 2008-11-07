@@ -32,7 +32,9 @@
   set-fibonacci-heap-min!
   fibonacci-node-child
   set-fibonacci-node-key!
-  children)
+  children
+  fibonacci-node-datum
+  set-fibonacci-node-datum!)
  (import* util debug)
  (import* srfi-70 exact-floor)
  (include "../20.2/fibonacci.scm"))
