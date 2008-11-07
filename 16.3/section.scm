@@ -20,7 +20,9 @@
   heap-union!
   huffman!
   huffman-codes
-  huffman-tree)
+  huffman-tree
+  heap-adjust-key!
+  heap-adjust-key!/elt)
  (import* srfi-70 exact-floor)
  (import* section-5.4 swap! list-set!)
  (import* util debug)

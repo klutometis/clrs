@@ -5,6 +5,7 @@
 (require '../util/util)
 (require '../20.2/section)
 (require '../20.3/section)
+(require '../16.3/section)
 (module
  section-23.2
  (minimum-spanning-tree/kruskal
@@ -36,6 +37,7 @@
           fibonacci-node-datum)
  (import* section-20.3
           fibonacci-heap-decrease-key!)
+ (import section-16.3)
  (include "../23.2/graph.scm")
  (include "../23.2/set.scm")
  (include "../23.2/kruskal.scm")

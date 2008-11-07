@@ -20,6 +20,9 @@
 (define (heap-length heap)
   (length (heap-data heap)))
 
+(define (heap-index heap urelt)
+  (list-index (lambda (elt) (eq? urelt elt)) (heap-data heap)))
+
 (define (heap-swap! heap i j)
   (swap! (heap-data heap) i j))
 
@@ -98,6 +101,12 @@
             (heap-swap! heap i parent-i)
             (continue (=> i parent-i)
                       (=> parent-i (parent parent-i)))))))
+
+(define (heap-adjust-key!/elt heap elt k)
+  (let ((i (heap-index heap elt)))
+    (if i
+        (heap-adjust-key! heap i k)
+        (error "No such elt -- HEAP-ADJUST-KEY!/ELT" elt))))
 
 (define (heap-insert! heap elt)
   (let ((new-size (+ (heap-size heap) 1))
