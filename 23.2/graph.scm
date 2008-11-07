@@ -36,11 +36,12 @@
         edges))
      '())))
 
-(define (graph-vertices graph)
+(define (graph-nodes graph)
   (hash-table-keys (graph-adjacencies graph)))
 
-;;; Adding new edges is a pain-in-the-ass: O(|E|).
-(define (bidirectional-weight-ref weights)
+;;; Adding new edges is a pain-in-the-ass: O(|E|). Or: pass two values
+;;; back: the weight-ref and modifiable weight-table.
+(define (bidirectional-weight-ref weights . default)
   (let ((x-y->weight (make-hash-table)))
     (for-each
      (lambda (x-y-weight)
@@ -50,11 +51,16 @@
          (hash-table-set! x-y->weight (cons x y) weight)))
      weights)
     (lambda (x y)
-;;;       (debug x y)
       (hash-table-ref
        x-y->weight
        (cons x y)
        (lambda ()
-         (hash-table-ref
+         (hash-table-ref/default
           x-y->weight
-          (cons y x)))))))
+          (cons y x)
+          (if (null? default)
+              (error "WEIGHT-REF -- no such edge")
+              (default))))))))
+
+(define (bidirectional-weight-ref/default weights default)
+  (bidirectional-weight-ref weights (lambda () default)))

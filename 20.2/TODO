@@ -1,0 +1,5 @@
+Heaps should instead to a node-key parameter which is a key-accessor
+of the arbitrary datum attached to the node; static keys already
+burned me in the ass with Prim's: I have to call a set-prim-datum-key!
+and fibonacci-heap-decrease-key!; if it were keyed on the datum with
+an accessor, one call to set-prim-datum-key! would suffice.

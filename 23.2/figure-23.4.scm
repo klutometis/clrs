@@ -10,4 +10,4 @@
               (cons whence-label whither-label))) MST)))
   (check
    edge-labels
-   => '((d . e) (b . c) (c . d) (c . f) (a . b) (f . g) (i . c) (g . h))))
+   => '((d . e) (b . c) (c . d) (a . b) (c . f) (f . g) (i . c) (g . h))))

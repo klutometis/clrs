@@ -4,6 +4,8 @@
   (min fibonacci-heap-min set-fibonacci-heap-min!)
   (n fibonacci-heap-n set-fibonacci-heap-n!))
 
+;;; TODO: key should be a procedure that queries datum; need a mutator
+;;; then, too.
 (define-record-type :fibonacci-node
   (make-fibonacci-node key datum parent child left right mark degree)
   fibonacci-node?

@@ -1,4 +1,10 @@
 (define (minimum-spanning-tree/kruskal graph)
+  (for-each
+   (lambda (node)
+     (set-node-datum!
+      node
+      (make-set/datum (node-label node))))
+   (graph-nodes graph))
   (let ((edges (sort (graph-edges graph) < edge-weight)))
     (loop continue ((for edge (in-list edges))
                     (with tree-edges '()))
@@ -21,15 +27,15 @@
                     (continue))))))))
 
 (define (figure-23.1)
-  (let ((a (make-node (make-set/datum 'a) 'a 0))
-        (b (make-node (make-set/datum 'b) 'b 0))
-        (c (make-node (make-set/datum 'c) 'c 0))
-        (d (make-node (make-set/datum 'd) 'd 0))
-        (e (make-node (make-set/datum 'e) 'e 0))
-        (f (make-node (make-set/datum 'f) 'f 0))
-        (g (make-node (make-set/datum 'g) 'g 0))
-        (h (make-node (make-set/datum 'h) 'h 0))
-        (i (make-node (make-set/datum 'i) 'i 0)))
+  (let ((a (make-node #f 'a 0))
+        (b (make-node #f 'b 0))
+        (c (make-node #f 'c 0))
+        (d (make-node #f 'd 0))
+        (e (make-node #f 'e 0))
+        (f (make-node #f 'f 0))
+        (g (make-node #f 'g 0))
+        (h (make-node #f 'h 0))
+        (i (make-node #f 'i 0)))
     (let ((adjacencies
            (list->adjacencies
             `((,a ,b)
