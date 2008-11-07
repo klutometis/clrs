@@ -6,7 +6,7 @@
 (let* ((graph (figure-23.1))
        (root (find (lambda (node) (eq? 'a (node-label node)))
                    (graph-nodes graph))))
-  (debug (map node-label (adjacent-nodes graph root)))
-;;;   (minimum-spanning-tree/prim graph root)
-  )
+;;;   (debug (map node-label (adjacent-nodes graph root)))
+  (minimum-spanning-tree/prim graph root)
+)
 
