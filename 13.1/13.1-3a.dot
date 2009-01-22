@@ -1,0 +1,58 @@
+digraph G {
+  node [style=filled]
+  1 [fillcolor=red]
+  2 [fillcolor=gray]
+  3 [fillcolor=red]
+  4 [fillcolor=red]
+  5 [fillcolor=red]
+  6 [fillcolor=gray]
+  7 [fillcolor=gray]
+  8 [fillcolor=red]
+  9 [fillcolor=red]
+  10 [fillcolor=gray]
+  11 [fillcolor=red]
+  12 [fillcolor=red]
+  13 [fillcolor=gray]
+  14 [fillcolor=red]
+  15 [fillcolor=red]
+  nil1 [label="nil"]
+  nil2 [label="nil"]
+  nil3 [label="nil"]
+  nil4 [label="nil"]
+  nil5 [label="nil"]
+  nil6 [label="nil"]
+  nil7 [label="nil"]
+  nil8 [label="nil"]
+  nil9 [label="nil"]
+  nil10 [label="nil"]
+  nil11 [label="nil"]
+  nil12 [label="nil"]
+  nil13 [label="nil"]
+  nil14 [label="nil"]
+  nil15 [label="nil"]
+  nil16 [label="nil"]
+  1 -> nil1
+  1 -> nil2
+  3 -> nil3
+  3 -> nil4
+  5 -> nil5
+  5 -> nil6
+  8 -> nil7
+  8 -> nil8
+  9 -> nil9
+  9 -> nil10
+  14 -> nil11
+  14 -> nil12
+  12 -> nil13
+  12 -> nil14
+  15 -> nil15
+  15 -> nil16
+  7 -> 4 -> 2 -> 1
+  2 -> 3
+  4 -> 6 -> 5
+  6 -> 8
+  7 -> 11 -> 10 -> 9
+  10 -> 14
+  11 -> 13 -> 12
+  13 -> 15
+}
