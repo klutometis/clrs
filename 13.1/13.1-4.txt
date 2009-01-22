@@ -1,0 +1,3 @@
+2 if both children are black; 3 if one of them is red (and the other
+black); 4 if both the children are red. The resultant height of the
+tree is its black height: all depths are the same.
