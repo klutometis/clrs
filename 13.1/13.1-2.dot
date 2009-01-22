@@ -1,0 +1,33 @@
+digraph G {
+  node [style=filled]
+  26 [fillcolor=gray]
+  17 [fillcolor=red]
+  41 [fillcolor=gray]
+  14 [fillcolor=gray]
+  21 [fillcolor=gray]
+  30 [fillcolor=red]
+  47 [fillcolor=gray]
+  10 [fillcolor=red]
+  16 [fillcolor=gray]
+  19 [fillcolor=gray]
+  23 [fillcolor=gray]
+  28 [fillcolor=gray]
+  38 [fillcolor=gray]
+  36 [fillcolor=red]
+  7 [fillcolor=gray]
+  12 [fillcolor=gray]
+  15 [fillcolor=red]
+  20 [fillcolor=red]
+  35 [fillcolor=red]
+  39 [fillcolor=red]
+  3 [fillcolor=red ]
+  26 -> 17 -> 14 -> 10 -> 7 -> 3
+  10 -> 12
+  14 -> 16 -> 15
+  17 -> 21 -> 19 -> 20
+  21 -> 23
+  26 -> 41 -> 30 -> 28
+  30 -> 38 -> 35
+  38 -> 39
+  41 -> 47 -> 36
+}
