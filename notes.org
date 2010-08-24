@@ -1,0 +1,13 @@
+# -*- mode: org; -*-
+* 13 red-black trees
+** 13.1 properties of red-black trees
+   - red-black properties:
+     1. every node is red or black
+     2. the root is black
+     3. every leaf (NIL) is black
+     4. if a node is red, then both its children are black
+     5. for each node, al paths from the node to descendant leaves
+        contain the same number of black nodes
+** 13.2 rotations
+   - tree-insert and tree-delete modify the tree and may violate the
+     red-black properties

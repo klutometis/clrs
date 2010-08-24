@@ -1,0 +1,6 @@
+- red-black trees: binary; black height: number of black nodes on any
+  path from, but not including, a node x down to a leaf; bh(x).
+- lemma 13.1: a red-black tree with n internal nodes has height at
+  most $2\lg(n + 1)$.
+- subtree rooted at x contains at least $2^{bh(x)} - 1$ internal nodes.
+- black height of root must be at least $\frac{h}{2}$.

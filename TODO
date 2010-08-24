@@ -1,78 +1,111 @@
-Generate dot -> png, bib -> bbl and tex -> pdf from a base Makefile
-with well-composed generics.
+# -*- mode: org; -*-
+* TODO org
+# <<org>>
+  should we retrofit previous notes? ouch. merely going forward for
+  now. this should allow us to do [[descriptions]] with problems, for
+  instance.
 
-Satellite data can be harvested by means of KEY (see srfi 95); ad hoc
-data structures are superfluous. KEY default to, say, VALUES or other
-identity mapping.
+  we can do problems within one per-section org-file, for instance;
+  and if we need abstractions, we can just create an ad-hoc module in
+  the same directory: including it with, say, =require=.
 
-Each solution could probably use a description in addition to the
-code.
+  so, per chapter directories, then? interestingly, some chapters
+  borrow from others; where we have to resort to relative includes. is
+  this an argument for one directory? nah; let's have:
+  =chapter-number/{notes.org,exercises.org,{<module1.scm>,...,<modulen.scm>}}=.
 
-There should be one big tex file which includes the sectional tex
-files programatically; each sectional tex should have no title,
-therefore, but well perhaps a section or subsection.
+  =exercises.org= has explanations along with solution snippets in src
+  blocks. is there an argument for doing exercises in the notes.org
+  files? wow. might be a pain in the ass to find, though; on the other
+  hand: consolidation.
 
-6.5-8 need a heap with satellite data
+  don't forget: =problem.org=? special cases are shit. let's do it in
+  one file, say, =notes.org=; let's house it in a directory in case we
+  have subordinate files: images that result from graphviz, modules,
+  etc. think of anything better than =notes.org= for now? no.
 
-8.3 radix-sort needs generalizing to other bases, cardinalities.
+  and only one dir per chapter. and this starts from chapter 13, by
+  the way; so we're going to be somewhat asymmetrical until we
+  backport (never?). fuck it: it's mainly for us, anyway. nobody links
+  to my shit. and i'm tired of the old system.
+* CANCELED notes
+  CLOSED: [2010-08-24 Tue 14:48]
+  - CLOSING NOTE [2010-08-24 Tue 14:48] \\
+    see [[org]].
+  should have a per-chapter notes.org file; must also be able to think
+  copiously for individual exercises; how to structure this?
+* CANCELED Makefile
+  CLOSED: [2010-08-24 Tue 14:01]
+  - CLOSING NOTE [2010-08-24 Tue 14:02] \\
+    superceded by [[org]]
+  Generate dot -> png, bib -> bbl and tex -> pdf from a base Makefile
+  with well-composed generics.
+* TODO satellite data
+  Satellite data can be harvested by means of KEY (see srfi 95); ad hoc
+  data structures are superfluous. KEY default to, say, VALUES or other
+  identity mapping.
+* CANCELED descriptions with solutions
+  CLOSED: [2010-08-24 Tue 14:01]
+  - CLOSING NOTE [2010-08-24 Tue 14:01] \\
+    should be solved with [[org]].
+# <<descriptions>>
+  Each solution could probably use a description in addition to the
+  code.
 
-9 weighted-median-with-select is showing indeterminacy.
+  we can solve this by transitioning to org.
+* CANCELED master tex file
+  CLOSED: [2010-08-24 Tue 14:03]
+  - CLOSING NOTE [2010-08-24 Tue 14:04] \\
+    org appears to allow [[http://orgmode.org/manual/Include-files.html][inclusion]]; so this should indeed supersede tex.
+  There should be one big tex file which includes the sectional tex
+  files programatically; each sectional tex should have no title,
+  therefore, but well perhaps a section or subsection.
 
-9.2 randomized-select-iter is defective.
-
-9.3-3 Since fixing partition-median!, balanced-quicksort! is
+  probably superseded by org.
+* TODO 6.5-8
+  need a heap with satellite data
+* TODO 8.3
+  radix-sort needs generalizing to other bases, cardinalities.
+* TODO 9
+  weighted-median-with-select is showing indeterminacy.
+* TODO 9.2
+  randomized-select-iter is defective.
+* TODO 9.3-3
+  Since fixing partition-median!, balanced-quicksort! is
      defective.
-
-9-3 involves calling select for statistics above n/2 and a complex
+* TODO 9-3
+  involves calling select for statistics above n/2 and a complex
    compare-and-exchange thereunder.
-
-10.3-5 solution needs a correctness-argument; I suspect it's flawed.
-
-10.4-2 Wasn't there a tree-map from SICP sans mutation? Similarly for
+* TODO 10.3-5
+  solution needs a correctness-argument; I suspect it's flawed.
+* TODO 10.4-2
+  Wasn't there a tree-map from SICP sans mutation? Similarly for
       tree-map/iter, with the exception of push!, pop!;
       unbounded-tree-map, for that matter.
-
-10-2,3
-
-11.2-5
-
-11.3-3,5,6
-
-11.4-3,5
-
-11.5-1
-
-11-1,2,3,4
-
-12.1-3 accomplished the "easy" stack solution; but what about the
+* TODO 10-2,3
+* TODO 11.2-5
+* TODO 11.3-3,5,6
+* TODO 11.4-3,5
+* TODO 11.5-1
+* TODO 11-1,2,3,4
+* TODO 12.1-3
+  accomplished the "easy" stack solution; but what about the
       "complicated but elegant" pointer-equivalence solution?
-
-12.4-1,2,3,4,5
-
-12-3,4
-
-13
-
-14
-
-15.4-6
-
-15.5-4
-
-15.6-1 is defective (extra activity artifact)
-
-15.6-3 there is a known O(n lg n) solution
-
-15.6-4 overlaps with fewest activities
-
-16.2-6
-
-16.3-8
-
-16.4
-
-16.5
-
-16-3
-
-16-4
+* TODO 12.4-1,2,3,4,5
+* TODO 12-3,4
+* TODO 13
+* TODO 14
+* TODO 15.4-6
+* TODO 15.5-4
+* TODO 15.6-1
+  is defective (extra activity artifact)
+* TODO 15.6-3
+  there is a known O(n lg n) solution
+* TODO 15.6-4
+  overlaps with fewest activities
+* TODO 16.2-6
+* TODO 16.3-8
+* TODO 16.4
+* TODO 16.5
+* TODO 16-3
+* TODO 16-4
