@@ -1,4 +1,7 @@
 # -*- mode: org; -*-
+* TODO pseudocode
+  we'll have to add clrscode to the latex preamble, etc.; unless we
+  want to use unstructured lists (preferable?)
 * TODO org
 # <<org>>
   should we retrofit previous notes? ouch. merely going forward for
