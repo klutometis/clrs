@@ -28,6 +28,17 @@
   the way; so we're going to be somewhat asymmetrical until we
   backport (never?). fuck it: it's mainly for us, anyway. nobody links
   to my shit. and i'm tired of the old system.
+
+  what the embedded solutions frustrates, though, is a simple way to
+  run the solution with =csi=, etc. should we indeed referenc scripts
+  from within exercises? ok. that really does justify a separate dir,
+  then.
+
+  maybe we can vary this depending on e.g. the size of the sample.
+
+  solutions to problems will indeed resemble a thinking journal. the
+  only way to clean it up is by a second publishing, of course. peer
+  review, etc.
 * CANCELED notes
   CLOSED: [2010-08-24 Tue 14:48]
   - CLOSING NOTE [2010-08-24 Tue 14:48] \\

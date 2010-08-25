@@ -1,0 +1,67 @@
+#+OPTIONS: num:nil
+#+TITLE: Chapter 13
+* 13.1
+  - binary tree with color (two-way coloring)
+  - red-black constraint ensures that no path is more than twice as
+    long as any other: balanced.
+  - red-black properties:
+    1. every node red or black
+    2. root: black
+    3. every leaf (nil): black
+    4. if a node is red: both children are black
+    5. all path from a node to leaves contain the same number of black nodes.
+  - single sentinel represents =nil=.
+  - black height: black nodes on any path from, but not including,
+    node x.
+  - red-black tree with n internal nodes has height at most $2\lg(n + 1)$
+  - subtree rooted at x contains at least $2^{bh(k)} - 1$ internal
+    nodes.
+  - black-height of root at least $h/2$; thus: $n \geq 2^{h/2} - 1$
+** Exercises
+*** 13.1-1
+    See [[../13.1/13.1-3a.dot]], [[../13.1/13.1-3a.png]], [[../13.1/13.1-3b.dot]],
+    [[../13.1/13.1-3b.png]].
+*** 13.1-2
+    See [[../13.1/13.1-2.dot]], [[../13.1/13.1-2.png]], [[../13.1/13.1-2.txt]].
+*** 13.1-3
+    See [[../13.1/13.1-3.txt]].
+*** 13.1-4
+    See [[../13.1/13.1-4.txt]].
+*** 13.1-5
+    See [[../13.1/13.1-5.txt]].
+*** 13.1-6
+    $h \geq 2\lg(n + 1)$; how does h relate to bh, though?
+    #+BEGIN_QUOTE
+    red-black trees ensure that no such path is more than twice as
+    long as any other. (275)
+    #+END_QUOTE
+    moreover:
+    #+BEGIN_QUOTE
+    consequently, the black-height of the root must be at least
+    $h/2$. (276)
+    #+END_QUOTE
+    #+BEGIN_QUOTE
+    according to property 4, at least half the nodes on any simple
+    path from the root to a leaf, not including tho root, must be
+    black. (274)
+    #+END_QUOTE
+    $n \geq 2^{bh(x)} - 1$; $bh(x) \geq h/2$; $n \geq 2^{bh(x)} - 1
+    \geq 2^{h/2} - 1$. Where $bh(x) = k$, the smallest number gives
+    itself immediately:
+    #+BEGIN_QUOTE
+    $n \geq 2^k - 1$
+    #+END_QUOTE
+    "internal nodes," by the way, are the non-nil nodes from root to
+    leaf (excluding leaves).
+
+    the largest red-black tree of a $bh = k$ is one in which the rows
+    alternate black-red (proof?): the only way to expand such a tree
+    would be to add a black node, contradicting $bh = k$. such a tree
+    has $2^h - 1$ = $2^{2k} - 1$ internal nodes (need to be able to
+    derive this stuff ourselves); therefore:
+
+    #+BEGIN_QUOTE
+    $2^k - 1 \leq n \leq 2^{2k} - 1$
+    #+END_QUOTE
+*** 13.1-7
+    See [[../13.1/13.1-7.txt]].
