@@ -65,3 +65,64 @@
     #+END_QUOTE
 *** 13.1-7
     See [[../13.1/13.1-7.txt]].
+
+* 13.2
+  - =tree-insert= and =tree-delete= take O(lg n); because they modify
+    the tree, they may violate the red-black properties: must restore
+    them.
+  - change pointer structure through *rotation*
+  - left-rotation on any x whose right-child y is non-nil;
+    left-rotation pivots around the link from x to y: makes y the new
+    root of the subtree; with x as y's left child and y's left child
+    as x's right child.
+    - keeps x's left child?
+  - rotation preserves the binary search tree property.
+    #+BEGIN_SRC org
+      ,- left-rotate(T, x)
+      ,  - y = right[x]                # let y be the right child of x.
+      ,  - right[x] = left[y]          # let y's left child be x's right.
+      ,  - if left[y] != nil[T]        # if y has a left child,
+      ,    - then p[left[y]] = x       # let x be y's left child's parent.
+      ,  - p[y] = p[x]                 # let y's parent be x's parent.
+      ,  - if p[x] = nil[T]            # if x is root,
+      ,    - then root[T] = y          # let y be the new root (so we have to
+      ,                                # do tree objects with roots; the node
+      ,                                # itself doesn't suffice);
+      ,    - else if x = left[p[x]]    # otherwise, if x is its parent's left
+      ,                                # child,
+      ,      - then left[p[x]] = y     # let y be x's parent's left child;
+      ,      - else right[p[x]] = y    # otherwise, let y be x's parent's
+      ,                                # right child.
+      ,  - left[y] = x                 # let x be y's right child.
+      ,  - p[x] = y                    # let y be the parent of x.
+    #+END_SRC
+    - the code for =right-rotate= is symmetric.
+    - =right-= and =left-rotate= appear to be inverse.
+** Exercises
+*** 13.2-1
+    need to reorder the =lets= below, such that the assignee is on
+    the left
+    #+BEGIN_SRC org
+      ,- right-rotate(T, y)
+      ,  - x = left[y]                 # let x be the left child of y.
+      ,  - left[y] = right[x]          # let x's right child be y's left.
+      ,  - if right[x] != nil[T]       # if x has a right child,
+      ,    - then p[right[x]] = y      # let y be x's right child's parent.
+      ,  - p[x] = p[y]                 # let x's parent be y's parent.
+      ,  - if p[y] = nil[T]            # if y is root,
+      ,    - then root[T] = x          # let x be the new root (so we have to
+      ,                                # do tree objects with roots; the node
+      ,                                # itself doesn't suffice);
+      ,    - else if y = right[p[y]]   # otherwise, if y is its parent's right
+      ,                                # child,
+      ,      - then right[p[y]] = x    # let x be y's parent's right child;
+      ,      - else left[p[y]] = x     # otherwise, let x be y's parent's
+      ,                                # left child.
+      ,  - right[x] = y                # let y be x's left child.
+      ,  - p[y] = x                    # let x be the parent of y.
+    #+END_SRC
+*** 13.2-2
+    In an $n$-node binary tree, there an $n - 1$ children; since the
+    root is the child of no node. The criterion of rotatability is the
+    presence of a child; there are therefore $n - 1$ ways to rotate,
+    corresponding to the $n - 1$ children.
