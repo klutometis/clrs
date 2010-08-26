@@ -126,3 +126,21 @@
     root is the child of no node. The criterion of rotatability is the
     presence of a child; there are therefore $n - 1$ ways to rotate,
     corresponding to the $n - 1$ children.
+*** 13.2-3
+    $a$ is increased by one; $b$ stays the same; $c$ loses one.
+*** 13.2-4
+    Sleator (1988) nakedly asserts that:
+    #+BEGIN_QUOTE
+    Any binary tree of size n can be converted into any other by
+    performing an appropriate sequence of rotations.
+    #+END_QUOTE
+    No citation; interesting:
+    #+BEGIN_QUOTE
+    Associativity of a binary operation means that performing a tree
+    rotation on it does not change the final result.
+    #+END_QUOTE
+    Given two BSTs T and T', transform T into a right-going chain by
+    right-rotating all of its left children in no more than $n - 1$
+    rotations (there can be no more than $n - 1$ left children); do
+    the same for $T'$ on $O(2n - 2) = O(n)$.
+*** TODO 13.2-5
