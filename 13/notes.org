@@ -77,27 +77,27 @@
     as x's right child.
     - keeps x's left child?
   - rotation preserves the binary search tree property.
-    #+BEGIN_SRC org
-      ,- left-rotate(T, x)
-      ,  - y = right[x]                # let y be the right child of x.
-      ,  - right[x] = left[y]          # let y's left child be x's right.
-      ,  - if left[y] != nil[T]        # if y has a left child,
-      ,    - then p[left[y]] = x       # let x be y's left child's parent.
-      ,  - p[y] = p[x]                 # let y's parent be x's parent.
-      ,  - if p[x] = nil[T]            # if x is root,
-      ,    - then root[T] = y          # let y be the new root (so we have to
-      ,                                # do tree objects with roots; the node
-      ,                                # itself doesn't suffice);
-      ,    - else if x = left[p[x]]    # otherwise, if x is its parent's left
-      ,                                # child,
-      ,      - then left[p[x]] = y     # let y be x's parent's left child;
-      ,      - else right[p[x]] = y    # otherwise, let y be x's parent's
-      ,                                # right child.
-      ,  - left[y] = x                 # let x be y's right child.
-      ,  - p[x] = y                    # let y be the parent of x.
-    #+END_SRC
-    - the code for =right-rotate= is symmetric.
-    - =right-= and =left-rotate= appear to be inverse.
+  #+BEGIN_SRC org
+    ,- left-rotate(T, x)
+    ,  - y = right[x]                # let y be the right child of x.
+    ,  - right[x] = left[y]          # let y's left child be x's right.
+    ,  - if left[y] != nil[T]        # if y has a left child,
+    ,    - then p[left[y]] = x       # let x be y's left child's parent.
+    ,  - p[y] = p[x]                 # let y's parent be x's parent.
+    ,  - if p[x] = nil[T]            # if x is root,
+    ,    - then root[T] = y          # let y be the new root (so we have to
+    ,                                # do tree objects with roots; the node
+    ,                                # itself doesn't suffice);
+    ,    - else if x = left[p[x]]    # otherwise, if x is its parent's left
+    ,                                # child,
+    ,      - then left[p[x]] = y     # let y be x's parent's left child;
+    ,      - else right[p[x]] = y    # otherwise, let y be x's parent's
+    ,                                # right child.
+    ,  - left[y] = x                 # let x be y's right child.
+    ,  - p[x] = y                    # let y be the parent of x.
+  #+END_SRC
+  - the code for =right-rotate= is symmetric.
+  - =right-= and =left-rotate= appear to be inverse.
 ** Exercises
 *** 13.2-1
     need to reorder the =lets= below, such that the assignee is on
@@ -129,12 +129,12 @@
 *** 13.2-3
     $a$ is increased by one; $b$ stays the same; $c$ loses one.
 *** 13.2-4
-    Sleator (1988) nakedly asserts that:
+    [[http://www.cs.cmu.edu/~sleator/papers/Rotation-Distance.htm][Sleator]] (1988) nakedly asserts that:
     #+BEGIN_QUOTE
     Any binary tree of size n can be converted into any other by
     performing an appropriate sequence of rotations.
     #+END_QUOTE
-    No citation; interesting:
+    [[http://en.wikipedia.org/wiki/Tree_rotation][interesting]]:
     #+BEGIN_QUOTE
     Associativity of a binary operation means that performing a tree
     rotation on it does not change the final result.
@@ -142,5 +142,5 @@
     Given two BSTs T and T', transform T into a right-going chain by
     right-rotating all of its left children in no more than $n - 1$
     rotations (there can be no more than $n - 1$ left children); do
-    the same for $T'$ on $O(2n - 2) = O(n)$.
+    the same for $T'$ in $O(2n - 2) = O(n)$.
 *** TODO 13.2-5
