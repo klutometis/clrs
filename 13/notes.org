@@ -5,11 +5,12 @@
   - red-black constraint ensures that no path is more than twice as
     long as any other: balanced.
   - red-black properties:
-    1. every node red or black
-    2. root: black
-    3. every leaf (nil): black
-    4. if a node is red: both children are black
-    5. all path from a node to leaves contain the same number of black nodes.
+    1. every node red or black (<<property 1>>)
+    2. root: black (<<property 2>>)
+    3. every leaf (nil): black (<<property 3>>)
+    4. if a node is red: both children are black (<<property 4>>)
+    5. all path from a node to leaves contain the same number of black
+       nodes. (<<property 5>>)
   - single sentinel represents =nil=.
   - black height: black nodes on any path from, but not including,
     node x.
@@ -134,7 +135,7 @@
     Any binary tree of size n can be converted into any other by
     performing an appropriate sequence of rotations.
     #+END_QUOTE
-    [[http://en.wikipedia.org/wiki/Tree_rotation][interesting]]:
+    [[http://en.wikipedia.org/wiki/Tree_rotation][Interesting]]:
     #+BEGIN_QUOTE
     Associativity of a binary operation means that performing a tree
     rotation on it does not change the final result.
@@ -142,5 +143,99 @@
     Given two BSTs T and T', transform T into a right-going chain by
     right-rotating all of its left children in no more than $n - 1$
     rotations (there can be no more than $n - 1$ left children); do
-    the same for $T'$ in $O(2n - 2) = O(n)$.
+    the same for $T'$ (but in reverse) in $O(2n - 2) = O(n)$.
 *** TODO 13.2-5
+* 13.3
+  - insert in $O(\lg n)$
+  - insert as in BST; color node red; run auxiliary fix-up (which
+    recolors and rotates).
+  #+BEGIN_SRC org
+    ,- rb-insert(T, z)
+    ,  - y = nil[T]                  # let y be the nil-sentinel (the
+    ,                                # default case, in case of an empty
+    ,                                # tree
+    ,  - x = root[T]                 # start from the root
+    ,  - while x != nil[T]           # progress down to the sentinel-leaves
+    ,    - do y = x                  # y is one behind x, and will
+    ,                                # eventually be the parent of the
+    ,                                # leaf-sentinel
+    ,      - if key[z] < key[x]      # compare z's and x' key so as to
+    ,                                # uphold the binary search tree property.
+    ,        - then x = left[x]      # left branches are smaller
+    ,        - else x = right[x]     # right branches are greater than or
+    ,                                # equal to
+    ,  - p[z] = y                    # attach z to the penultimate node
+    ,  - if y = nil[T]               # if the tree is empty,
+    ,    - then root[T] = z          # z is the new root;
+    ,    - else if key[z] < key[y]   # otherwise, attach z to the
+    ,                                # appropriate branch so as to
+    ,                                # uphold the BST property
+    ,      - then left[y] = z
+    ,      - else right[y] = z
+    ,  - left[z] = nil[T]            # since z is a penultimate leaf,
+    ,                                # add the nil-sentinels.
+    ,  - right[z] = nil[T]
+    ,  - color[z] = RED              # not sure why this is not black:
+    ,                                # presumptuous to alter the
+    ,                                # black-height unilaterally?
+    ,  - rb-insert-fixup(T, z)       # recolor, rotate as needed.
+  #+END_SRC
+  - interestingly, $z$ is never re-colored during rb-insert-fixup; it
+    should be, though, if it violates 2 (i.e. is root): then it should
+    be re-colored at line 16: $color[root[T]] \gets BLACK$.
+  - both the parent and children of the root are sentinel; violation
+    of property 2 is the only violation.
+  - case 1: p[z] and z's uncle y = {right,left}[p[p[z]]] are red.
+    - since p[p[z]] is black (why? because red nodes must be preceded
+      by black nodes; where are black nodes can be preceded by either
+      red or black), we can color both p[z] and y black, fixing the
+      problem of z and p[z] both being red; and color p[p[z]] red,
+      maintaining property 5. repeat the while loop with p[p[z]] as
+      the new node z.
+  - case 2, 3: z's uncle y = {right,light}[p[p[z]]] is black and (2) z
+    is a left or (3) z is a right child.
+    - eventual goal is a rotation around a three-fold
+      {left,right}-going chain and recoloring of the top
+      node. {left,right}-rotate the bottom node first (case 2), if
+      necessary; this leads to case 3 (rotation, recolor).
+    - we immediately use a left rotation to transform the situation
+      into case 3; beacuse both z and p[z] are red, the rotation
+      affects neither the black-height of nodes nor property 5 (see
+      [[13.2-3]]).
+    - z's uncle is black; also, p[p[z]] exists.
+    - upon case 3, color changes and right rotation; preserves
+      [[property 5]].
+    - p[z] is now black; body of while is not executed again.
+    - rb-insert-fixup climbs up the tree by grand-parents, is
+      therefore $O(\lg n)$; rb-insert is moreover $O(\lg n)$.
+  #+BEGIN_SRC org
+    ,- rb-insert-fixup(T, z)
+    ,  - while color[p[z]] = RED # z, i believe, is guaranteed to be red
+    ,    (even in subsequent invocations of the while loop); such that we
+    ,    need not continue if we have a black parent: where no such
+    ,    black->{red,black} constraint exists
+    ,    - do if p[z] = left[p[p[z]]] # depending upon whether z is a left
+    ,      or right grandchild (and, thus, has a right of left uncle,
+    ,      respectively), do this
+    ,        - then y = right[p[p[z]]] # y is the right uncle
+    ,          - if color[y] = RED # p[z] is red; so p[p[z]] must be black;
+    ,            therefore, toggle the colors of the grandparent, parent
+    ,            and uncle; preserving [[property 5]]. start the =while= anew
+    ,            from the grandparent, which may still violate [[property 4]];
+    ,            but not [[property 2]]? yes, possibly 2; in which case it will
+    ,            simply be blackened after the next =while= iteration;
+    ,            leaving two black children (no contradiction).
+    ,            - then color[p[z]] = BLACK
+    ,              - color[y] = BLACK
+    ,              - color[p[p[z]]] = RED
+    ,              - z = p[p[z]]
+    ,            - else if z = right[p[z]] # if case 2 holds, convert it
+    ,              into a case 3 (left-going chain) before rotation.
+    ,                - then z = p[z]
+    ,                  - left-rotate(T, z)
+    ,              - color[p[z]] = black
+    ,              - color[p[p[z]]] = red
+    ,              - right-rotate(T, p[p[z]])
+    ,        - else (mirror)
+    ,    - color[root[T]] = black
+  #+END_SRC

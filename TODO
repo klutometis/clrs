@@ -1,8 +1,26 @@
 # -*- mode: org; -*-
-* TODO pseudocode
+* DONE TODOs
+  CLOSED: [2010-08-26 Thu 18:23]
+  should be next to the problem, like:
+  #+BEGIN_SRC org
+    ,*** TODO 13.2-5
+  #+END_SRC
+  etc.
+* DONE brilliant! references to problems work
+  CLOSED: [2010-08-26 Thu 18:22]
+  by merely doing [[13.2-3]], etc.; given a section with the same
+  name. fantastic! can even refer to lemmata, etc. if need be.
+* DONE pseudocode
+  CLOSED: [2010-08-26 Thu 18:22]
+  - CLOSING NOTE [2010-08-26 Thu 18:22] \\
+    we're just doing unstructured lists; but let's try to come up with an
+    emacs pseudocode-mode.
   we'll have to add clrscode to the latex preamble, etc.; unless we
   want to use unstructured lists (preferable?)
-* TODO org
+* DONE org
+  CLOSED: [2010-08-26 Thu 18:22]
+  - CLOSING NOTE [2010-08-26 Thu 18:22] \\
+    sweet!
 # <<org>>
   should we retrofit previous notes? ouch. merely going forward for
   now. this should allow us to do [[descriptions]] with problems, for
