@@ -1,4 +1,13 @@
 # -*- mode: org; -*-
+* TODO universal org
+  if we want a universal org file that bundles the chapters into one
+  book, we might have to handle the relative paths in images, links,
+  etc. differently.
+
+  brilliant, though, the way we can include source files and images!
+  in that sense, i can have my cake and eat it, too: publishing the
+  source, even while having functional files that i can simply
+  execute. praise org!
 * DONE TODOs
   CLOSED: [2010-08-26 Thu 18:23]
   should be next to the problem, like:
