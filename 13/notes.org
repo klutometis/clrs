@@ -236,6 +236,27 @@
     ,              - color[p[z]] = black
     ,              - color[p[p[z]]] = red
     ,              - right-rotate(T, p[p[z]])
-    ,        - else (mirror)
+    ,        - else                  # y is the left uncle
+    ,          - if color[y] = RED
+    ,            - then color[p[z]] = BLACK
+    ,              - color[y] = BLACK
+    ,              - color[p[p[z]]] = RED
+    ,              - z = p[p[z]]
+    ,            - else if z = left[p[z]]
+    ,                - then z = p[z]
+    ,                  - right-rotate(T, z)
+    ,              - color[p[z]] = BLACK
+    ,              - color[p[p[z]]] = RED
+    ,              - left-rotate(T, p[p[z]])
     ,    - color[root[T]] = black
   #+END_SRC
+** Exercises
+*** 13.3-1
+    Coloring $z$ black would have immediate consequences for the
+    tree's black-height; whereas a red $z$ is black-height-neutral
+    (the black-height can be adjusted by subsequent calls to
+    rb-insert-fixup, if necessary).
+*** 13.3-2
+#+INCLUDE: "13.3-2.dot" src dot
+#+CAPTION: Red-black tree after inserting 41, 38, 31, 12, 19, 8
+    [[./13.3-2.png]]

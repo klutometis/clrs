@@ -1,0 +1,19 @@
+digraph G {
+  node [style=filled]
+  edge [dir=none]
+  {
+    node [fillcolor=red]
+    21
+    8
+  }
+  {
+    node [fillcolor=gray]
+    38
+    41
+    19
+    31
+  }
+  38 -> 21 -> 19 -> 8
+  21 -> 31
+  38 -> 41
+}
