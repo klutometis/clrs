@@ -1,8 +1,20 @@
 # -*- mode: org; -*-
-* TODO universal org
+* TODO unified org
   if we want a universal org file that bundles the chapters into one
   book, we might have to handle the relative paths in images, links,
   etc. differently.
+
+  we could solve this, of course, by using one flat directory; call
+  the files simply [1-35].org, for instance, with supporting files
+  called red-black-tree.scm, 13.3-2.{dot,png}, 13.3-2.scm, etc.
+
+  test, however, is a problem if we want to use the chicken egg
+  testing; we might have to have one large egg for the entire book
+  with testing harnesses.
+
+  that's one advantage, i suppose, of having per-chapter eggs:
+  per-chapter tests; can also do per-chapter tests, of course, with
+  the unified harness.
 
   brilliant, though, the way we can include source files and images!
   in that sense, i can have my cake and eat it, too: publishing the
