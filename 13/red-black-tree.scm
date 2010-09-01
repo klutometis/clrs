@@ -2,11 +2,19 @@
  red-black-tree
 
  (make-node
+  nil
+  node-color-set!
   node-left-set!
   node-right-set!
   node-parent-set!
   left-rotate!
   right-rotate!
+  node-null?
+  node-key
+  node-left
+  node-right
+  node-parent
+  node->alist
   tree->pre-order-key-list)
 
  (import scheme

@@ -377,3 +377,45 @@
             pre-order-key-list
             (tree->pre-order-key-list right-rotated-root)))))
    #+END_SRC
+** TODO insert
+   #+BEGIN_SRC scheme
+     (load "red-black-tree.scm")
+     (use red-black-tree debug test)
+     
+     (define (insert! root inserendum)
+       (let-values
+           (((x y)
+             (let find-leaf ((x root)
+                             (y nil))
+               (if (node-null? x)
+                   (values x y)
+                   ;; what happens if we're dealing with sentinel whose key
+                   ;; is non-numeric?
+                   (find-leaf (if (< (node-key inserendum)
+                                     (node-key x))
+                                  (node-left x)
+                                  (node-right x))
+                              x)))))
+         (node-parent-set! inserendum y)
+         (if (node-null? y)
+             (set! root inserendum)
+             (if (< (node-key inserendum)
+                    (node-key y))
+                 (node-left-set! y inserendum)
+                 (node-right-set! y inserendum)))
+         (node-left-set! inserendum nil)
+         (node-right-set! inserendum nil)
+         (node-color-set! inserendum 'red)
+         root))
+     
+     (let ((root (make-node color: 'black
+                            left: nil
+                            right: nil
+                            parent: nil
+                            key: 10)))
+       (let ((new-root (insert! root (make-node key: 11))))
+         (test
+          "insert without fixup"
+          '(10 #f (11 #f #f))
+          (tree->pre-order-key-list new-root))))
+   #+END_SRC

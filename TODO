@@ -6,6 +6,13 @@
 
   the implementation section could consist simply of dispatched TODOs,
   for instance; and could come, for instance, at the end.
+
+  should implementation sections come as a subsections within
+  subchapter-sections; as opposed to one large one at the end? why
+  not?
+
+  why not? probably because i don't feel like it; i like the
+  implementation being one artifically continuous narrative.
 * TODO unified org
   if we want a universal org file that bundles the chapters into one
   book, we might have to handle the relative paths in images, links,
