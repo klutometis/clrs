@@ -24,7 +24,8 @@
   insert-fixup!)
 
  (import scheme
-         chicken)
+         chicken
+         data-structures)
 
  (use defstruct)
 
@@ -95,8 +96,62 @@
  (define (tree->pre-order-key-list root)
    (nested-map node-key (tree->pre-order-list root)))
 
- ;; NOOP
- (define (insert-fixup! root fixandum) root)
+ (define (red? node)
+   (eq? (node-color node) 'red))
+
+ ;; some assumptions here about the binarism of color (might be
+ ;; surprised, for instance, if we have inconsistent data).
+ (define (black? node)
+   (not (red? node)))
+
+ (define node-grand-parent (compose node-parent node-parent))
+
+ (define node-left-uncle (compose node-left node-grand-parent))
+
+ (define node-right-uncle (compose node-right node-grand-parent))
+
+ (define (insert-fixup! root fixandum)
+   (let resolve-upward-until-black-parent ((fixandum fixandum))
+     (let ((parent (node-parent fixandum))
+           (grand-parent (node-grand-parent fixandum)))
+       (if (red? parent)
+           (if (eq? parent (node-left-uncle fixandum))
+               (let ((uncle (node-right-uncle fixandum)))
+                 (if (red? uncle)
+                     (begin
+                       (node-color-set! parent 'black)
+                       (node-color-set! uncle 'black)
+                       (node-color-set! grand-parent 'red)
+                       (resolve-upward-until-black-parent grand-parent))
+                     (let ((fixandum (if (eq? fixandum (node-right parent))
+                                         (begin
+                                           (set! root (left-rotate! root parent))
+                                           parent)
+                                         fixandum)))
+                       ;; have to revert to node-parent, etc. here
+                       ;; because fixandum may have changed.
+                       (node-color-set! (node-parent fixandum) 'black)
+                       (node-color-set! (node-grand-parent fixandum) 'red)
+                       (set! root (right-rotate! root (node-grand-parent fixandum))))))
+               (let ((uncle (node-left-uncle fixandum)))
+                 (if (red? uncle)
+                     (begin
+                       (node-color-set! parent 'black)
+                       (node-color-set! uncle 'black)
+                       (node-color-set! grand-parent 'red)
+                       (resolve-upward-until-black-parent grand-parent))
+                     (let ((fixandum (if (eq? fixandum (node-left parent))
+                                         (begin
+                                           (set! root (right-rotate! root parent))
+                                           parent)
+                                         fixandum)))
+                       ;; have to revert to node-parent, etc. here
+                       ;; because fixandum may have changed.
+                       (node-color-set! (node-parent fixandum) 'black)
+                       (node-color-set! (node-grand-parent fixandum) 'red)
+                       (set! root (left-rotate! root (node-grand-parent fixandum))))))))))
+   (node-color-set! root 'black)
+   root)
 
  (define (insert! root inserendum)
   (let-values

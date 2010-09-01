@@ -1,4 +1,5 @@
-#+OPTIONS: num:nil
+# These options are self-contradictory; num:nil wins:
+#+OPTIONS: num:nil toc:t
 #+TITLE: Chapter 13
 * 13.1
   - binary tree with color (two-way coloring)
@@ -256,10 +257,14 @@
     tree's black-height; whereas a red $z$ is black-height-neutral
     (the black-height can be adjusted by subsequent calls to
     rb-insert-fixup, if necessary).
-*** 13.3-2
-#+INCLUDE: "13.3-2.dot" src dot
+*** TODO 13.3-2
+    the result of 13.3-2.scm contradicts my hand-drawn tree; which is
+    correct?
+
 #+CAPTION: Red-black tree after inserting 41, 38, 31, 12, 19, 8
+#+LABEL: fig:13.3-2
     [[./13.3-2.png]]
+#+INCLUDE: "13.3-2.scm" src scheme
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
