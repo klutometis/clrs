@@ -408,14 +408,24 @@
          (node-color-set! inserendum 'red)
          root))
      
+     (define (tree->pre-order-key-color-list root)
+       (nested-map (lambda (node) (cons (node-key node)
+                                        (node-color node)))
+                   (tree->pre-order-list root)))
+     
      (let ((root (make-node color: 'black
                             left: nil
                             right: nil
                             parent: nil
                             key: 10)))
-       (let ((new-root (insert! root (make-node key: 11))))
+       (let* ((root (insert! root (make-node key: 11)))
+              (root (insert! root (make-node key: 9)))
+              (root (insert! root (make-node key: 12))))
          (test
           "insert without fixup"
-          '(10 #f (11 #f #f))
-          (tree->pre-order-key-list new-root))))
+          '((10 . black)
+            ((9 . red) (#f . black) (#f . black))
+            ((11 . red) (#f . black)
+             ((12 . red) (#f . black) (#f . black))))
+          (tree->pre-order-key-color-list root))))
    #+END_SRC

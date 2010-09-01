@@ -10,11 +10,14 @@
   left-rotate!
   right-rotate!
   node-null?
+  node-color
   node-key
   node-left
   node-right
   node-parent
   node->alist
+  nested-map
+  tree->pre-order-list
   tree->pre-order-key-list)
 
  (import scheme
