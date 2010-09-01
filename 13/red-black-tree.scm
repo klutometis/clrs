@@ -18,7 +18,10 @@
   node->alist
   nested-map
   tree->pre-order-list
-  tree->pre-order-key-list)
+  tree->pre-order-key-list
+  tree->pre-order-key-color-list
+  insert!
+  insert-fixup!)
 
  (import scheme
          chicken)
@@ -90,4 +93,38 @@
        (f tree)))
 
  (define (tree->pre-order-key-list root)
-   (nested-map node-key (tree->pre-order-list root))))
+   (nested-map node-key (tree->pre-order-list root)))
+
+ ;; NOOP
+ (define (insert-fixup! root fixandum) root)
+
+ (define (insert! root inserendum)
+  (let-values
+      (((x y)
+        (let find-leaf ((x root)
+                        (y nil))
+          (if (node-null? x)
+              (values x y)
+              ;; what happens if we're dealing with sentinel whose key
+              ;; is non-numeric?
+              (find-leaf (if (< (node-key inserendum)
+                                (node-key x))
+                             (node-left x)
+                             (node-right x))
+                         x)))))
+    (node-parent-set! inserendum y)
+    (if (node-null? y)
+        (set! root inserendum)
+        (if (< (node-key inserendum)
+               (node-key y))
+            (node-left-set! y inserendum)
+            (node-right-set! y inserendum)))
+    (node-left-set! inserendum nil)
+    (node-right-set! inserendum nil)
+    (node-color-set! inserendum 'red)
+    (insert-fixup! root inserendum)))
+
+ (define (tree->pre-order-key-color-list root)
+   (nested-map (lambda (node) (cons (node-key node)
+                                    (node-color node)))
+               (tree->pre-order-list root))))

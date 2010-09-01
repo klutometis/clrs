@@ -377,10 +377,14 @@
             pre-order-key-list
             (tree->pre-order-key-list right-rotated-root)))))
    #+END_SRC
-** TODO insert
+** DONE insert without fixup
+   CLOSED: [2010-09-01 Wed 01:46]
    #+BEGIN_SRC scheme
      (load "red-black-tree.scm")
      (use red-black-tree debug test)
+     
+     ;;; NOOP
+     (define insert-fixup! values)
      
      (define (insert! root inserendum)
        (let-values
@@ -406,6 +410,7 @@
          (node-left-set! inserendum nil)
          (node-right-set! inserendum nil)
          (node-color-set! inserendum 'red)
+         (insert-fixup! root inserendum)
          root))
      
      (define (tree->pre-order-key-color-list root)
@@ -413,19 +418,108 @@
                                         (node-color node)))
                    (tree->pre-order-list root)))
      
-     (let ((root (make-node color: 'black
-                            left: nil
-                            right: nil
-                            parent: nil
-                            key: 10)))
-       (let* ((root (insert! root (make-node key: 11)))
-              (root (insert! root (make-node key: 9)))
-              (root (insert! root (make-node key: 12))))
-         (test
-          "insert without fixup"
-          '((10 . black)
-            ((9 . red) (#f . black) (#f . black))
-            ((11 . red) (#f . black)
-             ((12 . red) (#f . black) (#f . black))))
-          (tree->pre-order-key-color-list root))))
+     (let* ((root nil)
+            (root (insert! root (make-node key: 11)))
+            (root (insert! root (make-node key: 2)))
+            (root (insert! root (make-node key: 7)))
+            (root (insert! root (make-node key: 5)))
+            (root (insert! root (make-node key: 4)))
+            (root (insert! root (make-node key: 8)))
+            (root (insert! root (make-node key: 1)))
+            (root (insert! root (make-node key: 14)))
+            (root (insert! root (make-node key: 15))))
+       (test
+        "insert without fixup"
+        '((11 . red)
+          ((2 . red)
+           ((1 . red) (#f . black) (#f . black))
+           ((7 . red)
+            ((5 . red) ((4 . red) (#f . black) (#f . black)) (#f . black))
+            ((8 . red) (#f . black) (#f . black))))
+          ((14 . red) (#f . black) ((15 . red) (#f . black) (#f . black))))
+        (tree->pre-order-key-color-list root)))
+   #+END_SRC
+** DONE fixup
+   CLOSED: [2010-09-01 Wed 02:38]
+   #+BEGIN_SRC scheme
+     (load "red-black-tree.scm")
+     (use red-black-tree debug test)
+     
+     (define (red? node)
+       (eq? (node-color node) 'red))
+     
+     ;;; some assumptions here about the binarism of color (might be
+     ;;; surprised, for instance, if we have inconsistent data).
+     (define (black? node)
+       (not (red? node)))
+     
+     (define node-grand-parent (compose node-parent node-parent))
+     
+     (define node-left-uncle (compose node-left node-grand-parent))
+     
+     (define node-right-uncle (compose node-right node-grand-parent))
+     
+     (define (insert-fixup! root fixandum)
+       (let resolve-upward-until-black-parent ((fixandum fixandum))
+         (let ((parent (node-parent fixandum))
+               (grand-parent (node-grand-parent fixandum)))
+           (if (red? parent)
+               (if (eq? parent (node-left-uncle fixandum))
+                   (let ((uncle (node-right-uncle fixandum)))
+                     (if (red? uncle)
+                         (begin
+                           (node-color-set! parent 'black)
+                           (node-color-set! uncle 'black)
+                           (node-color-set! grand-parent 'red)
+                           (resolve-upward-until-black-parent grand-parent))
+                         (let ((fixandum (if (eq? fixandum (node-right parent))
+                                             (begin
+                                               (set! root (left-rotate! root parent))
+                                               parent)
+                                             fixandum)))
+                           ;; have to revert to node-parent, etc. here
+                           ;; because fixandum may have changed.
+                           (node-color-set! (node-parent fixandum) 'black)
+                           (node-color-set! (node-grand-parent fixandum) 'red)
+                           (set! root (right-rotate! root (node-grand-parent fixandum))))))
+                   (let ((uncle (node-left-uncle fixandum)))
+                     (if (red? uncle)
+                         (begin
+                           (node-color-set! parent 'black)
+                           (node-color-set! uncle 'black)
+                           (node-color-set! grand-parent 'red)
+                           (resolve-upward-until-black-parent grand-parent))
+                         (let ((fixandum (if (eq? fixandum (node-left parent))
+                                             (begin
+                                               (set! root (right-rotate! root parent))
+                                               parent)
+                                             fixandum)))
+                           ;; have to revert to node-parent, etc. here
+                           ;; because fixandum may have changed.
+                           (node-color-set! (node-parent fixandum) 'black)
+                           (node-color-set! (node-grand-parent fixandum) 'red)
+                           (set! root (left-rotate! root (node-grand-parent fixandum))))))))))
+       (node-color-set! root 'black)
+       root)
+     
+     (let* ((root nil)
+            (root (insert! root (make-node key: 7)))
+            (root (insert! root (make-node key: 2)))
+            (root (insert! root (make-node key: 5)))
+            (root (insert! root (make-node key: 4)))
+            (root (insert! root (make-node key: 1)))
+            (root (insert! root (make-node key: 11)))
+            (root (insert! root (make-node key: 14)))
+            (root (insert! root (make-node key: 15)))
+            (root (insert! root (make-node key: 8))))
+       (test
+        "insert with fixup"
+        '((5 . black)
+          ((2 . black)
+           ((1 . red) (#f . black) (#f . black))
+           ((4 . red) (#f . black) (#f . black)))
+          ((11 . red)
+           ((7 . black) (#f . black) ((8 . red) (#f . black) (#f . black)))
+           ((14 . black) (#f . black) ((15 . red) (#f . black) (#f . black)))))
+        (tree->pre-order-key-color-list root)))
    #+END_SRC
