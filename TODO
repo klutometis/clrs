@@ -1,4 +1,11 @@
 # -*- mode: org; -*-
+* TODO implementation
+  let's have running implementation notes just like with did with
+  simR; as opposed to expungible test-files. if we want, we can have
+  an "implementation" section in addition to the final module.
+
+  the implementation section could consist simply of dispatched TODOs,
+  for instance; and could come, for instance, at the end.
 * TODO unified org
   if we want a universal org file that bundles the chapters into one
   book, we might have to handle the relative paths in images, links,

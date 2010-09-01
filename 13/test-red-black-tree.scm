@@ -86,8 +86,8 @@
                           key: 39
                           left: nil
                           right: nil))
-      (pre-order-tree '(38 (21 #f #f) (41 (39 #f #f) (51 #f #f))))
-      (left-rotated-pre-order-tree '(41 (38 (21 #f #f) (39 #f #f)) (51 #f #f))))
+      (pre-order-key-list '(38 (21 #f #f) (41 (39 #f #f) (51 #f #f))))
+      (left-rotated-pre-order-key-list '(41 (38 (21 #f #f) (39 #f #f)) (51 #f #f))))
   (node-left-set! node-38 node-21)
   (node-right-set! node-38 node-41)
   (node-left-set! node-41 node-39)
@@ -98,15 +98,15 @@
   (node-parent-set! node-51 node-41)
   (test
    "tree structure"
-   pre-order-tree
+   pre-order-key-list
    (tree->pre-order-key-list node-38))
   (let ((left-rotated-root (left-rotate! node-38 node-38)))
     (test
      "left rotation"
-     left-rotated-pre-order-tree
+     left-rotated-pre-order-key-list
      (tree->pre-order-key-list left-rotated-root))
     (let ((right-rotated-root (right-rotate! left-rotated-root left-rotated-root)))
       (test
        "right rotation inverse of left rotation"
-       pre-order-tree
+       pre-order-key-list
        (tree->pre-order-key-list right-rotated-root)))))
