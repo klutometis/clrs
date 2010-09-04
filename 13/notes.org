@@ -257,9 +257,13 @@
     tree's black-height; whereas a red $z$ is black-height-neutral
     (the black-height can be adjusted by subsequent calls to
     rb-insert-fixup, if necessary).
-*** TODO 13.3-2
+*** DONE 13.3-2
+    CLOSED: [2010-09-04 Sat 04:37]
+    - CLOSING NOTE [2010-09-04 Sat 04:37] \\
+      we had a spurious 21.
     the result of 13.3-2.scm contradicts my hand-drawn tree; which is
-    correct?
+    correct? partially because you have a spurious 21, dumbass! you
+    meant 12, i believe.
 
 #+CAPTION: Red-black tree after inserting 41, 38, 31, 12, 19, 8
 #+LABEL: fig:13.3-2

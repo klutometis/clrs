@@ -11,9 +11,10 @@
   (test
    "insertion of successive keys"
    '((38 . black)
-     ((21 . red)
-      ((19 . black)
-       ((8 . red) (#f . black) (#f . black)) (#f . black))
+     ((19 . red)
+      ((12 . black)
+       ((8 . red) (#f . black) (#f . black))
+       (#f . black))
       ((31 . black) (#f . black) (#f . black)))
      ((41 . black) (#f . black) (#f . black)))
    (tree->pre-order-key-color-list root)))

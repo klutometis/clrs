@@ -3,17 +3,17 @@ digraph G {
   edge [dir=none]
   {
     node [fillcolor=red]
-    21
+    19
     8
   }
   {
     node [fillcolor=gray]
     38
     41
-    19
+    12
     31
   }
-  38 -> 21 -> 19 -> 8
-  21 -> 31
+  38 -> 19 -> 12 -> 8
+  19 -> 31
   38 -> 41
 }
