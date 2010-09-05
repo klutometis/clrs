@@ -1,0 +1,48 @@
+digraph G {
+  node [style=filled]
+  edge [dir=none]
+  {
+    node [fillcolor=gray]
+    C [label="C: k-1"]
+    A2 [label="A: k-1"]
+    D2 [label="D: k-1"]
+  }
+  {
+    node [shape=plaintext, fillcolor=white]
+    α [label="α"]
+    β [label="β"]
+    γ [label="γ"]
+    δ [label="δ"]
+    ε [label="ε"]
+    α2 [label="α"]
+    β2 [label="β"]
+    γ2 [label="γ"]
+    δ2 [label="δ"]
+    ε2 [label="ε"]
+  }
+  {
+    node [fillcolor=red]
+    A [label="A: k"]
+    B [label="B: k"]
+    D [label="D: k"]
+    C2 [label="C: k-1"]
+    B2 [label="B: k"]
+  }
+  C -> A
+  C -> D
+  A -> B
+  A -> α
+  B -> β
+  B -> γ
+  D -> δ
+  D -> ε
+
+  C2 -> A2
+  C2 -> D2
+  A2 -> B2
+  A2 -> α2
+  B2 -> β2
+  B2 -> γ2
+  D2 -> δ2
+  D2 -> ε2
+}

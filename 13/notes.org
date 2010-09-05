@@ -269,6 +269,18 @@
 #+LABEL: fig:13.3-2
     [[./13.3-2.png]]
 #+INCLUDE: "13.3-2.scm" src scheme
+*** 13.3-3
+    #+BEGIN_QUOTE
+    We call the number of black nodes on any path from, but not
+    including, a node $x$ down to a leaf the **black-height** of the
+    node.
+    #+END_QUOTE
+
+    black height is exclusive, therefore; [[property 5]] states that "all
+    paths from the node to descendant leaves contain the same number
+    of black nodes."
+
+    
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
