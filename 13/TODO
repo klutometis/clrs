@@ -1,0 +1,15 @@
+# -*- mode: org; -*-
+* TODO TODOs
+  let's take the TODOs out of the notes into the TODO file? nah, it's
+  compact; and if we really want to publish, we're going to have to go
+  over all this again, anyway, with a fine-tooth comb.
+* TODO pre-order-key-color-list->tree
+* DONE tree-structures
+  CLOSED: [2010-08-31 Tue 19:13]
+  let's have a node structure that also stands for trees if it happens
+  to be a root; we'll have to have a singular red-black-nil
+  (sentinel), though, unless the tree-structure-cum-root-node happens
+  to have its own nil. nah, let's just go singular.
+* TODO tests
+  we still have to find a place to store the tests (they're currently
+  just inline within the implementation section)
