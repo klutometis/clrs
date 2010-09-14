@@ -306,6 +306,12 @@
 
     Case 2, which sets $z = p[z]$ before rotating, preserves
     $p[p[z]]$; and is therefore indistinguishable from case 3.
+*** 13.3-5
+    $z$, upon insertion, is red; $z$ is only ever blackened if it
+    becomes the root (in which case $n = 1$) and remains, otherwise,
+    red.
+
+    TODO: consider cases 1, 2, 3; none of which changes it to black.
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
