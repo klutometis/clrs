@@ -311,7 +311,16 @@
     becomes the root (in which case $n = 1$) and remains, otherwise,
     red.
 
-    TODO: consider cases 1, 2, 3; none of which changes it to black.
+    If $z$'s parent is black, at least one node (namely $z$) remains
+    red. If $z$'s parent is red, case 1 blackens the parent and uncle
+    and reddens the grandparent; leaving at least two nodes (namely
+    $z$ and $p[p[z]]$) red. Case 2 leaves at least two nodes red ($z$
+    and $p[z]$) on its way to transforming to case three; and case 3
+    performs a rotation but does not alter the number of black or red
+    nodes, leaving $z$ and $z$'s sibling red.
+
+    In all cases, therefore, at least one red node is preserved when
+    $z > 1$.
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
