@@ -294,6 +294,14 @@
 #+LABEL: fib:13.3-3a
 #+ATTR_LaTeX: width=\textwidth
     [[./13.3-3c.png]]
+*** 13.3-4
+    =rb-insert-fixup= only ever reddens the grandparent of $z$; thus,
+    $z$ would have to be the child of $root[T]$ to redden $nil[T]$
+    (since $nil[T]$ is only parent to $root[T]$). Furthermore, $z$'s
+    parent would have to be red to redden its grandparent (otherwise,
+    the =while= loop in line 1 would never be executed); but $root[T]$
+    is always black. Therefore, since "child of a red parent" and
+    "child of $root[T]$" are contradictory; $nil[T]$ is never reddened.
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
