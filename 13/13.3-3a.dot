@@ -9,16 +9,16 @@ digraph G {
   }
   {
     node [shape=plaintext, fillcolor=white]
-    α [label="α"]
-    β [label="β"]
-    γ [label="γ"]
-    δ [label="δ"]
-    ε [label="ε"]
-    α2 [label="α"]
-    β2 [label="β"]
-    γ2 [label="γ"]
-    δ2 [label="δ"]
-    ε2 [label="ε"]
+    α [label="α: k"]
+    β [label="β: k"]
+    γ [label="γ: k"]
+    δ [label="δ: k"]
+    ε [label="ε: k"]
+    α2 [label="α: k"]
+    β2 [label="β: k"]
+    γ2 [label="γ: k"]
+    δ2 [label="δ: k"]
+    ε2 [label="ε: k"]
   }
   {
     node [fillcolor=red]
