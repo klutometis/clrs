@@ -276,11 +276,24 @@
     node.
     #+END_QUOTE
 
-    black height is exclusive, therefore; [[property 5]] states that "all
+    Black height is exclusive, therefore; [[property 5]] states that "all
     paths from the node to descendant leaves contain the same number
     of black nodes."
 
-    
+    See [[fib:13.3-3a][13.3-a]], [[fib:13.3-3b][13.3-b]], [[fib:13.3-3c][13.3-3c]].
+
+#+CAPTION: Case 1 of \texttt{rb-insert} maintains black-height when $z$ is a right child.
+#+LABEL: fib:13.3-3a
+#+ATTR_LaTeX: width=\textwidth
+    [[./13.3-3a.png]]
+#+CAPTION: Case 1 of \texttt{rb-insert} maintains black-height when $z$ is a left child.
+#+LABEL: fib:13.3-3b
+#+ATTR_LaTeX: width=\textwidth
+    [[./13.3-3b.png]]
+#+CAPTION: Cases 2 and 3 of \texttt{rb-insert} maintain black-height.
+#+LABEL: fib:13.3-3a
+#+ATTR_LaTeX: width=\textwidth
+    [[./13.3-3c.png]]
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
