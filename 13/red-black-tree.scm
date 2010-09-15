@@ -21,7 +21,9 @@
   tree->pre-order-key-list
   tree->pre-order-key-color-list
   insert!
-  insert-fixup!)
+  insert-fixup!
+  red?
+  black?)
 
  (import scheme
          chicken

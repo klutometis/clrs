@@ -321,6 +321,20 @@
 
     In all cases, therefore, at least one red node is preserved when
     $z > 1$.
+*** 13.3-6
+    [[http://en.wikipedia.org/wiki/Red-black_tree][This]] is interesting, by the way:
+    #+BEGIN_QUOTE
+    Red-black trees are also particularly valuable in functional
+    programming, where they are one of the most common persistent data
+    structures, used to construct associative arrays and sets which
+    can retain previous versions after mutations. The persistent
+    version of red-black trees requires O(log n) space for each
+    insertion or deletion, in addition to time.
+    #+END_QUOTE
+    Save for problem 13-1.
+
+    When searching for an appropriate leaf to insert $z$, construct a
+    stack of ancestors; pass the stack to =rb-insert-fixup=.
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
@@ -583,4 +597,8 @@
            ((7 . black) (#f . black) ((8 . red) (#f . black) (#f . black)))
            ((14 . black) (#f . black) ((15 . red) (#f . black) (#f . black)))))
         (tree->pre-order-key-color-list root)))
+   #+END_SRC
+** TODO parentless-insert
+   #+BEGIN_SRC scheme
+
    #+END_SRC
