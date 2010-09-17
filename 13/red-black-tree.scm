@@ -23,7 +23,8 @@
   insert!
   insert-fixup!
   red?
-  black?)
+  black?
+  node?)
 
  (import scheme
          chicken
