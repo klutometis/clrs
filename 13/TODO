@@ -1,4 +1,8 @@
 # -*- mode: org; -*-
+* TODO stack-based (parentless) red-black-insert!
+  instead of passing the parent stack around for manipulation, take
+  charge of it in =fixup!=; passing only parents, etc. to right and
+  left rotate.
 * TODO TODOs
   let's take the TODOs out of the notes into the TODO file? nah, it's
   compact; and if we really want to publish, we're going to have to go
