@@ -21,16 +21,39 @@
   - black-height of root at least $h/2$; thus: $n \geq 2^{h/2} - 1$
 ** Exercises
 *** 13.1-1
-    See [[../13.1/13.1-3a.dot]], [[../13.1/13.1-3a.png]], [[../13.1/13.1-3b.dot]],
-    [[../13.1/13.1-3b.png]].
+    See [[fig:13.1-1a][13.1-1a]], [[fig:13.1-1b][13.1-1b]], [[fig:13.1-1c][13.1-1c]].
+#+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 2
+#+LABEL: fig:13.1-1a
+#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+    [[./13.1-1a.png]]
+#+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 3
+#+LABEL: fig:13.1-1b
+#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+    [[./13.1-1b.png]]
+#+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 4
+#+LABEL: fig:13.1-1c
+#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+    [[./13.1-1c.png]]
 *** 13.1-2
-    See [[../13.1/13.1-2.dot]], [[../13.1/13.1-2.png]], [[../13.1/13.1-2.txt]].
+    If 36 is colored black, it is no longer a red-black tree; since
+    uniform black-height is violated. 36 may be colored red, however,
+    since it has two nil children that are black.
+
+    See [[fig:13.1-2][13.1-2]].
+#+CAPTION: \texttt{tree-insert} with 36
+#+LABEL: fig:13.1-2
+#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+    [[./13.1-2.png]]
 *** 13.1-3
-    See [[../13.1/13.1-3.txt]].
+    Yes; the black height is still uniform, and there are no
+    constraints on a black node as regards its children.
 *** 13.1-4
-    See [[../13.1/13.1-4.txt]].
+    2 if both children are black; 3 if one of them is red (and the
+    other black); 4 if both the children are red. The resultant height
+    of the tree is its black height: all depths are the same.
 *** 13.1-5
-    See [[../13.1/13.1-5.txt]].
+    Longest: every other node is black; shortest: every node
+    black. Same black height: 2x.
 *** 13.1-6
     $h \geq 2\lg(n + 1)$; how does h relate to bh, though?
     #+BEGIN_QUOTE
@@ -66,8 +89,9 @@
     $2^k - 1 \leq n \leq 2^{2k} - 1$
     #+END_QUOTE
 *** 13.1-7
-    See [[../13.1/13.1-7.txt]].
+    0:1, 2:5, 10:21, ...
 
+    $\sum_{n = 1}^{h(T)/2} 2^{2n - 1} : \sum_{n = 1}^{h(T)/2} 2^{2n}$
 * 13.2
   - =tree-insert= and =tree-delete= take O(lg n); because they modify
     the tree, they may violate the red-black properties: must restore
@@ -280,18 +304,18 @@
     paths from the node to descendant leaves contain the same number
     of black nodes."
 
-    See [[fib:13.3-3a][13.3-a]], [[fib:13.3-3b][13.3-b]], [[fib:13.3-3c][13.3-3c]].
+    See [[fig:13.3-3a][13.3-a]], [[fig:13.3-3b][13.3-b]], [[fig:13.3-3c][13.3-3c]].
 
 #+CAPTION: Case 1 of \texttt{rb-insert} maintains black-height when $z$ is a right child.
-#+LABEL: fib:13.3-3a
+#+LABEL: fig:13.3-3a
 #+ATTR_LaTeX: width=\textwidth
     [[./13.3-3a.png]]
 #+CAPTION: Case 1 of \texttt{rb-insert} maintains black-height when $z$ is a left child.
-#+LABEL: fib:13.3-3b
+#+LABEL: fig:13.3-3b
 #+ATTR_LaTeX: width=\textwidth
     [[./13.3-3b.png]]
 #+CAPTION: Cases 2 and 3 of \texttt{rb-insert} maintain black-height.
-#+LABEL: fib:13.3-3a
+#+LABEL: fig:13.3-3a
 #+ATTR_LaTeX: width=\textwidth
     [[./13.3-3c.png]]
 *** 13.3-4
@@ -336,7 +360,7 @@
     When searching for an appropriate leaf to insert $z$, construct a
     stack of ancestors; pass the stack to =rb-insert-fixup=.
 
-#+INCLUDE: "13.3-2.scm" src scheme
+#+INCLUDE: "13.3-6.scm" src scheme
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
@@ -792,6 +816,4 @@
            ((7 . black) (#f . black) ((8 . red) (#f . black) (#f . black)))
            ((14 . black) (#f . black) ((15 . red) (#f . black) (#f . black)))))
         (tree->pre-order-key-color-list root)))
-     
-     ;;; rotate is never being called!
    #+END_SRC

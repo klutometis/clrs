@@ -1,3 +1,0 @@
-If 36 is colored black, it is no longer a red-black tree; since
-uniform black-height is violated. 36 may be colored red, however,
-since it has two nil children that are black.

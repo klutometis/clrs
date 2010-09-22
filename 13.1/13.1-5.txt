@@ -1,2 +1,0 @@
-Longest: every other node is black; shortest: every node black. Same
-black height: 2x.

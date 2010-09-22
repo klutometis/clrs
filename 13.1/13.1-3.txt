@@ -1,2 +1,0 @@
-Yes; the black height is still uniform, and there are no constraints
-on a black node as regards its children.

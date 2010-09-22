@@ -1,4 +1,17 @@
 # -*- mode: org; -*-
+* TODO let's take time off and do a CLRS book
+  must be clean-room, though, and pass muster (difficult: give
+  yourself a year or so).
+* TODO images
+  let's export from dot to say, pdf; so that we can have vectorized
+  images (png has scaling artifacts).
+* TODO grouping
+  it's a pain in the ass, by the way, to have to read through notes
+  until you get to the exercises; solution: exercises, notes,
+  implementation.
+
+  equally distracting are TODO and DONE in exercise numbers; leave
+  these, rather, for the TODO file.
 * TODO implementation
   let's have running implementation notes just like with did with
   simR; as opposed to expungible test-files. if we want, we can have
