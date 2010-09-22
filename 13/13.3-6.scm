@@ -1,0 +1,20 @@
+(load "red-black-tree.scm")
+(use red-black-tree test)
+
+(let* ((root nil)
+       (root (insert/parents! root (make-node key: 41)))
+       (root (insert/parents! root (make-node key: 38)))
+       (root (insert/parents! root (make-node key: 31)))
+       (root (insert/parents! root (make-node key: 12)))
+       (root (insert/parents! root (make-node key: 19)))
+       (root (insert/parents! root (make-node key: 8))))
+  (test
+   "insertion of successive keys with a parent stack"
+   '((38 . black)
+     ((19 . red)
+      ((12 . black)
+       ((8 . red) (#f . black) (#f . black))
+       (#f . black))
+      ((31 . black) (#f . black) (#f . black)))
+     ((41 . black) (#f . black) (#f . black)))
+   (tree->pre-order-key-color-list root)))
