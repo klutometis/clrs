@@ -115,7 +115,8 @@
  (define node-right-uncle (compose node-right node-grand-parent))
 
  (define (insert-fixup! root fixandum)
-   (let resolve-upward-until-black-parent ((fixandum fixandum))
+   (let resolve-upward-until-black-parent ((root root)
+                                           (fixandum fixandum))
      (let ((parent (node-parent fixandum))
            (grand-parent (node-grand-parent fixandum)))
        (if (red? parent)
@@ -126,17 +127,18 @@
                        (node-color-set! parent 'black)
                        (node-color-set! uncle 'black)
                        (node-color-set! grand-parent 'red)
-                       (resolve-upward-until-black-parent grand-parent))
-                     (let ((fixandum (if (eq? fixandum (node-right parent))
-                                         (begin
-                                           (set! root (left-rotate! root parent))
-                                           parent)
-                                         fixandum)))
+                       (resolve-upward-until-black-parent root grand-parent))
+                     (let-values (((root fixandum)
+                                   (if (eq? fixandum (node-right parent))
+                                       (values (left-rotate! root parent) parent)
+                                       (values root fixandum))))
                        ;; have to revert to node-parent, etc. here
                        ;; because fixandum may have changed.
                        (node-color-set! (node-parent fixandum) 'black)
                        (node-color-set! (node-grand-parent fixandum) 'red)
-                       (set! root (right-rotate! root (node-grand-parent fixandum))))))
+                       (resolve-upward-until-black-parent
+                        (right-rotate! root (node-grand-parent fixandum))
+                        fixandum))))
                (let ((uncle (node-left-uncle fixandum)))
                  (if (red? uncle)
                      (begin
@@ -144,18 +146,19 @@
                        (node-color-set! uncle 'black)
                        (node-color-set! grand-parent 'red)
                        (resolve-upward-until-black-parent grand-parent))
-                     (let ((fixandum (if (eq? fixandum (node-left parent))
-                                         (begin
-                                           (set! root (right-rotate! root parent))
-                                           parent)
-                                         fixandum)))
+                     (let-values (((root fixandum)
+                                   (if (eq? fixandum (node-left parent))
+                                       (values (right-rotate! root parent) parent)
+                                       (values root fixandum))))
                        ;; have to revert to node-parent, etc. here
                        ;; because fixandum may have changed.
                        (node-color-set! (node-parent fixandum) 'black)
                        (node-color-set! (node-grand-parent fixandum) 'red)
-                       (set! root (left-rotate! root (node-grand-parent fixandum))))))))))
-   (node-color-set! root 'black)
-   root)
+                       (resolve-upward-until-black-parent
+                        (left-rotate! root (node-grand-parent fixandum))
+                        fixandum)))))
+           (begin (node-color-set! root 'black)
+                  root)))))
 
  (define (insert! root inserendum)
    (let-values
