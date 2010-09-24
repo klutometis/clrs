@@ -304,7 +304,7 @@
     paths from the node to descendant leaves contain the same number
     of black nodes."
 
-    See [[fig:13.3-3a][13.3-a]], [[fig:13.3-3b][13.3-b]], [[fig:13.3-3c][13.3-3c]].
+    See [[fig:13.3-3a][13.3-3a]], [[fig:13.3-3b][13.3-3b]], [[fig:13.3-3c][13.3-3c]].
 
 #+CAPTION: Case 1 of \texttt{rb-insert} maintains black-height when $z$ is a right child.
 #+LABEL: fig:13.3-3a
@@ -361,6 +361,73 @@
     stack of ancestors; pass the stack to =rb-insert-fixup=.
 
 #+INCLUDE: "13.3-6.scm" src scheme
+* 13.4
+  - deletion takes $O(\lg n)$
+  - splice out node; call fixup.
+    - bst-splice: no children: parent \to =nil=; single child: splice;
+      two children: replace with successor
+  - differences from bst-splice
+    - =nil= replaced by =nil=-sentinel;
+    - $p[x]$ \gets $p[y]$ performed unconditionally (setting the
+      sentinel once in a while);
+    - =rb-delete-fixup= if $y$ is black (if $y$ is red: black-height
+      hasn't changed; no red nodes have become adjacent; root remains
+      black).
+    #+BEGIN_SRC org
+      ,- rb-delete-fixup(T, x)
+      ,  - while x != root and color[x] = black
+      ,    - do 
+      ,      - if x = left[p[x]]
+      ,        - then
+      ,          - w = right[p[x]]
+      ,          - if color[w] = red
+      ,            - then 
+      ,              - color[w] = black
+      ,              - color[p[x]] = red
+      ,              - left-rotate(p[x])
+      ,              - w = right[p[x]]
+      ,          - if color[left[w]] = black and color[right[w]] = black
+      ,            - then
+      ,              - color[w] = red
+      ,              - x = p[x]
+      ,            - else
+      ,              - if color[right[w]] = black
+      ,                - then
+      ,                  - color[left[w]] = black
+      ,                  - color[w] = red
+      ,                  - right-rotate(T, w)
+      ,                  - w = right[p[x]]
+      ,              - color[w] = color[p[x]]
+      ,              - color[p[x]] = black
+      ,              - color[right[w]] = black
+      ,              - left-rotate(T, p[x])
+      ,              - x = root[T]
+      ,        - else
+      ,          - w = left[p[x]]
+      ,          - if color[w] = red
+      ,            - then 
+      ,              - color[w] = black
+      ,              - color[p[x]] = red
+      ,              - right-rotate(p[x])
+      ,              - w = left[p[x]]
+      ,          - if color[right[w]] = black and color[left[w]] = black
+      ,            - then
+      ,              - color[w] = red
+      ,              - x = p[x]
+      ,            - else
+      ,              - if color[left[w]] = black
+      ,                - then
+      ,                  - color[right[w]] = black
+      ,                  - color[w] = red
+      ,                  - left-rotate(T, w)
+      ,                  - w = left[p[x]]
+      ,              - color[w] = color[p[x]]
+      ,              - color[p[x]] = black
+      ,              - color[left[w]] = black
+      ,              - right-rotate(T, p[x])
+      ,              - x = root[T]
+      ,  - color[x] = black
+    #+END_SRC
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]

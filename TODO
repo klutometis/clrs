@@ -1,4 +1,30 @@
 # -*- mode: org; -*-
+* TODO flat vs. nested directories
+  one advantage of nested is per-chapter TODO files, unless we feel
+  like TODO-[1..] or one big-ass TODO; per-chapters TODOs are
+  interesting to see the development of the implementation, though.
+* TODO optimize for pdf?
+  a lot of the tricks we're using (=\texttt= in captions, LaTeX-style
+  references (=\ref{...}=), etc.) are pdf-specific and don't propagate
+  well to text or html.
+** TODO references
+   using [[13.1-1a]] style works for html, visual pdf and (to a certain
+   extent) text; it doesn't work for print pdf, though, unless we
+   modify the figure number or include it somewhere in the
+   caption. including it in the caption might be good
+
+   using \ref{fig:13.1-1a} works for pdf but not html, text
+
+   (blockquote doesn't work for text, either, by the way; so full
+   cross-medium compatibility is probably out of the
+   question. post-processing?)
+** TODO images
+   let's try pdf for better scaling in the pdf; might screw up html,
+   though.
+
+   wow: pdf works for neither latex nor html; ps? nope. gif and jpg
+   look equally shitty when scaled to linewidth, too. what controls
+   the image width: latex or org?
 * TODO let's take time off and do a CLRS book
   must be clean-room, though, and pass muster (difficult: give
   yourself a year or so).
@@ -26,6 +52,10 @@
 
   why not? probably because i don't feel like it; i like the
   implementation being one artifically continuous narrative.
+
+  let's keep the incremental TODOs of the implementation in TODO; the
+  implementation at the end can be a listing of the modules, if need
+  be.
 * TODO unified org
   if we want a universal org file that bundles the chapters into one
   book, we might have to handle the relative paths in images, links,
