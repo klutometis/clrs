@@ -428,6 +428,9 @@
       ,              - x = root[T]
       ,  - color[x] = black
     #+END_SRC
+    - "in other words, the extra black on a node is reflected in x's
+      pointing to the node rather than in the color attribute:" what a
+      bizarre and awkward notion!
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
