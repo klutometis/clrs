@@ -24,15 +24,15 @@
     See [[fig:13.1-1a][13.1-1a]], [[fig:13.1-1b][13.1-1b]], [[fig:13.1-1c][13.1-1c]].
 #+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 2
 #+LABEL: fig:13.1-1a
-#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+#+ATTR_LaTeX: width=\textwidth
     [[./13.1-1a.png]]
 #+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 3
 #+LABEL: fig:13.1-1b
-#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+#+ATTR_LaTeX: width=\textwidth
     [[./13.1-1b.png]]
 #+CAPTION: BST on ${1, 2, ..., 15}$ with black-height 4
 #+LABEL: fig:13.1-1c
-#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+#+ATTR_LaTeX: width=\textwidth
     [[./13.1-1c.png]]
 *** 13.1-2
     If 36 is colored black, it is no longer a red-black tree; since
@@ -42,7 +42,7 @@
     See [[fig:13.1-2][13.1-2]].
 #+CAPTION: \texttt{tree-insert} with 36
 #+LABEL: fig:13.1-2
-#+ATTR_LaTeX: width=\textwidth,placement=[h!]
+#+ATTR_LaTeX: width=\textwidth
     [[./13.1-2.png]]
 *** 13.1-3
     Yes; the black height is still uniform, and there are no
@@ -290,6 +290,7 @@
     meant 12, i believe.
 
 #+CAPTION: Red-black tree after inserting 41, 38, 31, 12, 19, 8
+#+ATTR_LaTeX: width=\textwidth
 #+LABEL: fig:13.3-2
     [[./13.3-2.png]]
 #+INCLUDE: "13.3-2.scm" src scheme
@@ -368,66 +369,79 @@
       two children: replace with successor
   - differences from bst-splice
     - =nil= replaced by =nil=-sentinel;
-    - $p[x]$ \gets $p[y]$ performed unconditionally (setting the
+    - $p[x] \gets p[y]$ performed unconditionally (setting the
       sentinel once in a while);
     - =rb-delete-fixup= if $y$ is black (if $y$ is red: black-height
       hasn't changed; no red nodes have become adjacent; root remains
       black).
-    #+BEGIN_SRC org
-      ,- rb-delete-fixup(T, x)
-      ,  - while x != root and color[x] = black
-      ,    - do 
-      ,      - if x = left[p[x]]
-      ,        - then
-      ,          - w = right[p[x]]
-      ,          - if color[w] = red
-      ,            - then 
-      ,              - color[w] = black
-      ,              - color[p[x]] = red
-      ,              - left-rotate(p[x])
-      ,              - w = right[p[x]]
-      ,          - if color[left[w]] = black and color[right[w]] = black
-      ,            - then
-      ,              - color[w] = red
-      ,              - x = p[x]
-      ,            - else
-      ,              - if color[right[w]] = black
-      ,                - then
-      ,                  - color[left[w]] = black
-      ,                  - color[w] = red
-      ,                  - right-rotate(T, w)
-      ,                  - w = right[p[x]]
-      ,              - color[w] = color[p[x]]
-      ,              - color[p[x]] = black
-      ,              - color[right[w]] = black
-      ,              - left-rotate(T, p[x])
-      ,              - x = root[T]
-      ,        - else
-      ,          - w = left[p[x]]
-      ,          - if color[w] = red
-      ,            - then 
-      ,              - color[w] = black
-      ,              - color[p[x]] = red
-      ,              - right-rotate(p[x])
-      ,              - w = left[p[x]]
-      ,          - if color[right[w]] = black and color[left[w]] = black
-      ,            - then
-      ,              - color[w] = red
-      ,              - x = p[x]
-      ,            - else
-      ,              - if color[left[w]] = black
-      ,                - then
-      ,                  - color[right[w]] = black
-      ,                  - color[w] = red
-      ,                  - left-rotate(T, w)
-      ,                  - w = left[p[x]]
-      ,              - color[w] = color[p[x]]
-      ,              - color[p[x]] = black
-      ,              - color[left[w]] = black
-      ,              - right-rotate(T, p[x])
-      ,              - x = root[T]
-      ,  - color[x] = black
-    #+END_SRC
+  #+BEGIN_SRC org
+    ,- rb-delete-fixup(T, x)
+    ,  - while x != root and color[x] = black
+    ,    - do 
+    ,      - if x = left[p[x]]
+    ,        - then
+    ,          - w = right[p[x]]
+    ,          - if color[w] = red
+    ,            # case 1: x's sibling is red. switch the colors of w and
+    ,            p[x] and then perform a left-rotation on p[x]; convert
+    ,            case 1 into case 2.
+    ,            - then
+    ,              - color[w] = black
+    ,              - color[p[x]] = red
+    ,              - left-rotate(p[x])
+    ,              - w = right[p[x]]
+    ,          - if color[left[w]] = black and color[right[w]] = black
+    ,            # case 2: x's sibling w is black; both of w's children
+    ,            are black. take one black off x and w; repeat the while
+    ,            loop with p[x], adding an extra black to p[x]. if we
+    ,            entered through case 1, x is red and the loop terminates.
+    ,            - then
+    ,              - color[w] = red
+    ,              - x = p[x]
+    ,            - else
+    ,              - if color[right[w]] = black
+    ,                # case 3: w is black, left[w] is red, 
+    ,                right[w] is black. switch the colors of w and left[w],
+    ,                right-rotate w; transforming case 3 into case 4.
+    ,                - then
+    ,                  - color[left[w]] = black
+    ,                  - color[w] = red
+    ,                  - right-rotate(T, w)
+    ,                  - w = right[p[x]]
+    ,                    # case 4: w is black, right[w] is red. remove the
+    ,                    extra black on x; setting x to be the root causes
+    ,                    the while loop to terminate.
+    ,              - color[w] = color[p[x]]
+    ,              - color[p[x]] = black
+    ,              - color[right[w]] = black
+    ,              - left-rotate(T, p[x])
+    ,              - x = root[T]
+    ,        - else
+    ,          - w = left[p[x]]
+    ,          - if color[w] = red
+    ,            - then 
+    ,              - color[w] = black
+    ,              - color[p[x]] = red
+    ,              - right-rotate(p[x])
+    ,              - w = left[p[x]]
+    ,          - if color[right[w]] = black and color[left[w]] = black
+    ,            - then
+    ,              - color[w] = red
+    ,              - x = p[x]
+    ,            - else
+    ,              - if color[left[w]] = black
+    ,                - then
+    ,                  - color[right[w]] = black
+    ,                  - color[w] = red
+    ,                  - left-rotate(T, w)
+    ,                  - w = left[p[x]]
+    ,              - color[w] = color[p[x]]
+    ,              - color[p[x]] = black
+    ,              - color[left[w]] = black
+    ,              - right-rotate(T, p[x])
+    ,              - x = root[T]
+    ,  - color[x] = black
+  #+END_SRC
     - "in other words, the extra black on a node is reflected in x's
       pointing to the node rather than in the color attribute:" what a
       bizarre and awkward notion!
