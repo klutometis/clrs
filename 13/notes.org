@@ -445,6 +445,17 @@
     - "in other words, the extra black on a node is reflected in x's
       pointing to the node rather than in the color attribute:" what a
       bizarre and awkward notion!
+** Exercises
+*** 13.4-1
+    The =while= loop in =rb-delete-fixup= ascends the tree until it
+    finds the root or a red node. If it finds the root, it will color
+    it black; regardless of whether the root had been reddened by
+    splicing from =rb-delete= or rotation by case 4.
+
+    If the =while= loop encounters a red node before it reaches the
+    root, the root will have been unmodifiedly black; since
+    =rb-delete-fixup= only proceeds root-wise from the highest
+    modified node in =rb-delete=.
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
