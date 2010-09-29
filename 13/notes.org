@@ -456,6 +456,24 @@
     root, the root will have been unmodifiedly black; since
     =rb-delete-fixup= only proceeds root-wise from the highest
     modified node in =rb-delete=.
+*** 13.4-2
+    If $x$ is red, then $y$ (i.e. $x$'s parent, and $z$ or $z$'s
+    successor) has at least one non-=nil= child ($x$) and is not red
+    (otherwise, $x$ would be black); therefore =rb-delete-fixup= is
+    called on $x$. $y$ also has a black sibling.
+
+    $y$ ever has only one child $x$: $x$ is either a left or right
+    child if $y$ is the self-same as $z$ (in which case, $z$ has only
+    one child); or $x$ is a right child if $y$ is $z$'s successor (in
+    which case, $z$ has two children). The cases are symmetrical;
+    let's take the case in which $x$ is $left[y]$.
+
+    The result, depending on whether $x$'s sibling $w$ has two black
+    children or not, is formerly case 2; and, latterly, a case 3 ->
+    case 4 transformation. Both of which result in a restoration of
+    property 4.
+
+    [See figures.]
 * Implementation
 ** DONE rotation
    CLOSED: [2010-08-31 Tue 19:10]
